@@ -27,18 +27,21 @@ import pandas as pd
 import psycopg
 from psycopg import sql
 
-from . import analytics, events, greeks, premiums, store
-from .ingest import ALL_DATASETS
+from . import analytics, events, greeks, premiums, stocks, store
 from .store import Manifest
 
 log = logging.getLogger(__name__)
 
+# Per-day downloaded datasets -> table. Stock datasets come from `niftyquant stocks`, the rest from ingest.
 TABLES = {
     "fo_bhavcopy": "fo_eod",
     "index_close": "index_eod",
     "participant_oi": "participant_oi",
     "participant_vol": "participant_vol",
+    stocks.CM: "stock_eod",
+    stocks.FO_STOCK: "stock_fo_eod",
 }
+PG_DATASETS = tuple(TABLES)
 GREEKS_TABLE = "option_greeks"  # per-day derived files, versioned by file time
 DERIVED = {"daily_market": analytics.DAILY_MARKET, "participants_daily": analytics.PARTICIPANTS,
            "iv_daily": analytics.IV_DAILY, "moneyness_daily": premiums.FILE,
@@ -155,11 +158,12 @@ def pending_days(versions: dict[date, datetime], loaded: dict) -> list[tuple]:
 
 def load_dataset(conn: psycopg.Connection, dataset: str, table: str, versions: dict[date, datetime],
                  read_day: Callable[[date], pd.DataFrame], reload: bool = False) -> int:
-    """Send pending days for one dataset, one transaction per year. Returns days loaded."""
+    """Send pending days for one dataset, one transaction per month (a dropped connection loses at
+    most that month, which the next run re-sends). Returns days loaded."""
     loaded = {} if reload else dict(conn.execute(
         "select trade_date, source_fetched_at from load_log where dataset = %s", (dataset,)).fetchall())
     todo = pending_days(versions, loaded)
-    for year, group in groupby(todo, key=lambda x: x[0].year):
+    for month, group in groupby(todo, key=lambda x: x[0].strftime("%Y-%m")):
         days = list(group)
         frames = [read_day(d) for d, _ in days]
         df = pd.concat(frames, ignore_index=True)
@@ -175,7 +179,7 @@ def load_dataset(conn: psycopg.Connection, dataset: str, table: str, versions: d
                        set rows = excluded.rows, source_fetched_at = excluded.source_fetched_at,
                            loaded_at = now()""",
                     [(dataset, d, len(f), fetched) for (d, fetched), f in zip(days, frames)])
-        log.info("%s: %d: loaded %d days, %d rows", table, year, len(days), len(df))
+        log.info("%s: %s: loaded %d days, %d rows", table, month, len(days), len(df))
     return len(todo)
 
 
@@ -196,7 +200,7 @@ def replace_table(conn: psycopg.Connection, table: str, df: pd.DataFrame) -> Non
     log.info("%s: replaced, %d rows", table, len(df))
 
 
-def load_all(s: PgSettings, datasets=ALL_DATASETS, reload: bool = False) -> dict[str, int]:
+def load_all(s: PgSettings, datasets=PG_DATASETS, reload: bool = False) -> dict[str, int]:
     """Full loader run: per-day datasets (downloaded, then Greeks), then calendar and derived tables."""
     manifest = Manifest().frame()
     with tunnel(s), connect(s) as conn:

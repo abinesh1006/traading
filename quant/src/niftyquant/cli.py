@@ -1,4 +1,4 @@
-"""Command line: niftyquant backfill | update | premiums | fiidii | macro | fpi | status | quality | derive | stocks | pg-load | pg-status | serve"""
+"""Command line: niftyquant backfill | update | premiums | fiidii | macro | fpi | status | quality | derive | stocks | results | pg-load | pg-status | serve"""
 
 import argparse
 import json
@@ -9,7 +9,10 @@ import pandas as pd
 
 from . import config, quality
 from .ingest import ALL_DATASETS, ingest_range
+from .stocks import DATASETS as STOCK_DATASETS
 from .store import Manifest
+
+PG_DATASETS = (*ALL_DATASETS, *STOCK_DATASETS)  # per-day datasets pg-load sends (pgload.TABLES)
 
 
 def _date(s: str) -> date:
@@ -57,7 +60,7 @@ def cmd_update(a) -> None:
     if PgSettings.from_env() is None:
         print("\nPostgres not configured (PG_DB/PG_USER in .env): skipping pg-load")
         return
-    a.datasets, a.reload = list(ALL_DATASETS), False
+    a.datasets, a.reload = list(PG_DATASETS), False
     try:
         print()
         cmd_pg_load(a)
@@ -72,6 +75,24 @@ def cmd_stocks(a) -> None:
     res = stocks.fetch(a.stock_datasets or stocks.DATASETS, start=a.start, end=a.end, force=a.force)
     if not res.empty:
         print(res.groupby(["dataset", "result"]).size().unstack(fill_value=0).to_string())
+
+
+def cmd_results(a) -> None:
+    """Quarterly results of the heavyweights: refresh stock IV and the result table, print a summary."""
+    from . import analytics, results, stockiv
+    analytics.write_derived(stockiv.FILE, stockiv.build(a.full))
+    ev = results.build()
+    analytics.write_derived(results.FILE, ev)
+    summary = results.summarize(ev)
+    analytics.write_derived(results.SUMMARY_FILE, summary)
+    print(f"{len(ev)} announcements, {ev['reaction_session'].min()} -> {ev['reaction_session'].max()}")
+    print(ev["source"].value_counts().to_string())
+    print()
+    print(summary.to_string(index=False, float_format=lambda v: f"{v:.2f}"))
+    print()
+    v = results.validate(ev)
+    print(f"inferred session matches the confirmed one in {int(v['match'].sum())} of {len(v)}:")
+    print(v.to_string(index=False))
 
 
 def cmd_macro(a) -> None:
@@ -229,12 +250,16 @@ def main(argv: list[str] | None = None) -> None:
     st.add_argument("--start", type=_date, default=date(2018, 1, 1))
     st.add_argument("--end", type=_date, default=None)
     st.add_argument("--datasets", dest="stock_datasets", nargs="+", default=None,
-                    choices=["cm_bhavcopy", "fo_stock"])
+                    choices=STOCK_DATASETS)
     st.add_argument("--force", action="store_true", help="re-download days already done")
     st.set_defaults(func=cmd_stocks)
 
+    rs = sub.add_parser("results", help="quarterly results of the heavyweights: implied vs actual moves")
+    rs.add_argument("--full", action="store_true", help="recompute stock IV for every day")
+    rs.set_defaults(func=cmd_results)
+
     pl = sub.add_parser("pg-load", help="copy new or re-fetched days and derived tables into Postgres")
-    pl.add_argument("--datasets", nargs="+", default=list(ALL_DATASETS), choices=ALL_DATASETS)
+    pl.add_argument("--datasets", nargs="+", default=list(PG_DATASETS), choices=PG_DATASETS)
     pl.add_argument("--reload", action="store_true", help="re-send every day, not just new ones")
     pl.set_defaults(func=cmd_pg_load)
 

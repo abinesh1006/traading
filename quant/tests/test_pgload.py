@@ -1,7 +1,9 @@
 """Loader logic that needs no database: settings, what to send, calendar, CSV encoding."""
 
 import io
+import re
 from datetime import date, datetime, timezone
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -71,3 +73,36 @@ def test_copy_csv_encodes_missing_as_null():
     lines = buf.getvalue().splitlines()
     assert lines[0] == ",,65,25032.4"          # empty unquoted field = NULL in COPY csv
     assert lines[1] == "25000.0,CE,,0.30000000000000004"  # full float precision round-trips
+
+
+MIGRATIONS = Path(__file__).resolve().parents[2] / "backend" / "src" / "main" / "resources" / "db" / "migration"
+
+
+def _created_tables() -> dict[str, str]:
+    """Table name -> body of its `create table` statement, across all Flyway migrations."""
+    out = {}
+    for f in sorted(MIGRATIONS.glob("V*__*.sql")):
+        for m in re.finditer(r"create table (\w+) \((.*?)\);", f.read_text(encoding="utf-8"), re.S):
+            out[m.group(1)] = m.group(2)
+    return out
+
+
+def test_every_loaded_table_has_a_migration():
+    created = _created_tables()
+    wanted = [*pgload.TABLES.values(), pgload.GREEKS_TABLE, *pgload.DERIVED, "trading_calendar", "load_log"]
+    assert [t for t in wanted if t not in created] == []
+
+
+def test_stock_tables_match_parquet_columns():
+    from niftyquant.nse import parsers
+    body = _created_tables()["stock_eod"]
+    cols = [line.split()[0] for line in body.splitlines()
+            if line.strip() and not line.strip().startswith("primary key")]
+    assert cols == parsers.CM_COLUMNS
+    # stock_fo_eod is `like fo_eod`, so the stock F&O frame must have fo_eod's columns.
+    assert "like fo_eod including all" in _created_tables()["stock_fo_eod"]
+
+
+def test_cli_pg_datasets_match_loader():
+    from niftyquant import cli
+    assert set(cli.PG_DATASETS) == set(pgload.PG_DATASETS)

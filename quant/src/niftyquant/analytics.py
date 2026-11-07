@@ -187,8 +187,6 @@ def build_iv(full: bool = False) -> pd.DataFrame:
 
 
 def build_derived(full: bool = False) -> dict[str, int]:
-    out_dir = derived_dir()
-    out_dir.mkdir(parents=True, exist_ok=True)
     result = {}
     builders = ((DAILY_MARKET, lambda: build_daily_market(full)), (PARTICIPANTS, build_participants),
                 (IV_DAILY, lambda: build_iv(full)))
@@ -196,14 +194,22 @@ def build_derived(full: bool = False) -> dict[str, int]:
     builders += ((events.FILE, events.build), (events.IMPACT_FILE, lambda: events.category_impact(events.build())))
     from . import premiums  # needs the option_greeks files written by build_iv
     builders += ((premiums.FILE, lambda: premiums.build(full)),)
+    from . import results, stockiv  # stock IV from the stock F&O files; results need it and iv_daily
+    builders += ((stockiv.FILE, lambda: stockiv.build(full)), (results.FILE, results.build),
+                 (results.SUMMARY_FILE, lambda: results.summarize(load_derived(results.FILE))))
     for name, builder in builders:
-        df = builder()
-        tmp = out_dir / (name + ".tmp")
-        df.to_parquet(tmp, index=False)
-        tmp.replace(out_dir / name)
-        result[name] = len(df)
-        log.info("wrote %s (%d rows)", name, len(df))
+        result[name] = write_derived(name, builder())
     return result
+
+
+def write_derived(name: str, df: pd.DataFrame) -> int:
+    out_dir = derived_dir()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    tmp = out_dir / (name + ".tmp")
+    df.to_parquet(tmp, index=False)
+    tmp.replace(out_dir / name)
+    log.info("wrote %s (%d rows)", name, len(df))
+    return len(df)
 
 
 def load_derived(name: str) -> pd.DataFrame:
