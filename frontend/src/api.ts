@@ -131,6 +131,39 @@ export interface PostgresStatus {
   datasets: PostgresDataset[]
 }
 
+export type EventCategory =
+  'rbi_policy' | 'fomc' | 'us_cpi' | 'union_budget' | 'election' | 'special_session' | 'expiry' | 'market_shock'
+
+/** One market event with Nifty's move on the first NSE session that could react. */
+export interface MarketEvent {
+  event_date: string
+  event_time_ist: string | null
+  category: EventCategory
+  name: string
+  after_close: boolean
+  verified: boolean
+  change_bp: number | null
+  reaction_session: string | null
+  nifty_move_pct: number | null
+  vix_change_pct: number | null
+  expected_move_pct: number | null
+  vix_close: number | null
+  surprise: number | null
+}
+
+export interface EventImpact {
+  category: EventCategory | 'all_days'
+  label: string
+  events: number
+  median_abs_move_pct: number | null
+  mean_abs_move_pct: number | null
+  p90_abs_move_pct: number | null
+  share_up_pct: number | null
+  median_surprise: number | null
+  median_vix_change_pct: number | null
+  move_vs_normal: number | null
+}
+
 export class ApiError extends Error {
   readonly status: number
 
@@ -169,6 +202,8 @@ export const api = {
   daily: () => getJson<DailyMarket[]>('/api/market/daily'),
   participants: () => getJson<ParticipantPosition[]>('/api/market/participants'),
   iv: () => getJson<IvDaily[]>('/api/market/iv'),
+  events: () => getJson<MarketEvent[]>('/api/market/events'),
+  eventImpact: () => getJson<EventImpact[]>('/api/market/events/impact'),
   chain: (date: string, expiry?: string) => getJson<OptionChain>('/api/market/chain', { date, expiry }),
   dataStatus: () => getJson<DataStatus>('/api/data/status'),
   postgres: () => getJson<PostgresStatus>('/api/data/postgres'),

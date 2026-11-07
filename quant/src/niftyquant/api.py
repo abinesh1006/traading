@@ -25,6 +25,8 @@ def _clean(value):
         return None if math.isnan(value) else float(value)
     if isinstance(value, np.integer):
         return int(value)
+    if isinstance(value, pd.Timestamp) and value.tzinfo is not None:
+        return value.isoformat()  # a real moment in time (e.g. event_time_ist): keep time and offset
     if isinstance(value, (pd.Timestamp, date)):
         return value.isoformat()[:10]
     return value
@@ -74,6 +76,30 @@ def market_iv(start: date | None = None, end: date | None = None) -> list[dict]:
     if df.empty:
         raise HTTPException(503, "IV not built; run `niftyquant derive`")
     return _records(_between(df, start, end))
+
+
+@app.get("/market/events")
+def market_events(start: date | None = None, end: date | None = None, category: str | None = None) -> list[dict]:
+    """Event calendar with Nifty's reaction (see events.py)."""
+    from . import events
+    df = analytics.load_derived(events.FILE)
+    if df.empty:
+        raise HTTPException(503, "events not built; run `niftyquant derive`")
+    df = df.rename(columns={"event_date": "trade_date"})
+    df = _between(df, start, end).rename(columns={"trade_date": "event_date"})
+    if category:
+        df = df[df["category"] == category]
+    return _records(df)
+
+
+@app.get("/market/events/impact")
+def market_event_impact() -> list[dict]:
+    """Per event category: Nifty's move on reaction sessions against all sessions."""
+    from . import events
+    df = analytics.load_derived(events.IMPACT_FILE)
+    if df.empty:
+        raise HTTPException(503, "events not built; run `niftyquant derive`")
+    return _records(df)
 
 
 @app.get("/market/chain")

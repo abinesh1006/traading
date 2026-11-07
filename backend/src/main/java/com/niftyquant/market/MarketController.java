@@ -46,6 +46,20 @@ public class MarketController {
         return quant.iv(from, to);
     }
 
+    @GetMapping("/events")
+    public List<MarketEvent> events(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+            @RequestParam(required = false) String category) {
+        checkRange(from, to);
+        return quant.events(from, to, category);
+    }
+
+    @GetMapping("/events/impact")
+    public List<EventImpact> eventImpact() {
+        return quant.eventImpact();
+    }
+
     @GetMapping("/chain")
     public OptionChain chain(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,

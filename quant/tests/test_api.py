@@ -105,3 +105,17 @@ def test_iv_daily_and_chain_greeks(client):
     assert abs(chain["forward"] / 25030.35 - 1) < 0.005
     traded = [r for r in chain["rows"] if (r["ce_volume_contracts"] or 0) > 0 and r["ce_iv_pct"] is not None]
     assert traded and all(0 < r["ce_delta"] < 1 and r["ce_theta"] < 0 for r in traded)
+
+
+def test_events_endpoints(client):
+    ev = client.get("/market/events").json()
+    cats = {e["category"] for e in ev}
+    assert {"rbi_policy", "fomc", "us_cpi", "union_budget", "expiry"} <= cats
+    fomc = next(e for e in ev if e["category"] == "fomc" and e["event_date"] == "2026-10-28")
+    assert fomc["event_time_ist"] == "2026-10-28T23:30:00+05:30" and fomc["after_close"] is True
+    # Only one session of market data in the fixture: events after it have no reaction yet.
+    assert all(e["reaction_session"] in (None, "2026-11-06") for e in ev)
+    rbi = client.get("/market/events", params={"category": "rbi_policy", "start": "2026-01-01"}).json()
+    assert [e["event_date"] for e in rbi][:2] == ["2026-02-06", "2026-04-08"]
+    impact = client.get("/market/events/impact").json()
+    assert any(r["category"] == "all_days" for r in impact)

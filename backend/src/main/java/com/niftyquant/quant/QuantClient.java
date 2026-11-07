@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.niftyquant.data.DataStatus;
 import com.niftyquant.market.DailyMarket;
+import com.niftyquant.market.EventImpact;
 import com.niftyquant.market.IvDaily;
+import com.niftyquant.market.MarketEvent;
 import com.niftyquant.market.OptionChain;
 import com.niftyquant.market.ParticipantPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,20 @@ public class QuantClient {
 
     public List<IvDaily> iv(LocalDate from, LocalDate to) {
         return get(b -> range(b.path("/market/iv"), from, to).build(), new TypeReference<>() {});
+    }
+
+    public List<MarketEvent> events(LocalDate from, LocalDate to, String category) {
+        return get(b -> {
+            range(b.path("/market/events"), from, to);
+            if (category != null) {
+                b.queryParam("category", category);
+            }
+            return b.build();
+        }, new TypeReference<>() {});
+    }
+
+    public List<EventImpact> eventImpact() {
+        return get(b -> b.path("/market/events/impact").build(), new TypeReference<>() {});
     }
 
     public OptionChain chain(LocalDate date, LocalDate expiry) {

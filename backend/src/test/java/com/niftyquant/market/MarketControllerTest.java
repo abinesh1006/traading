@@ -61,6 +61,19 @@ class MarketControllerTest {
     }
 
     @Test
+    void eventsKeepTimeAndOffset() throws Exception {
+        var day = LocalDate.of(2026, 10, 28);
+        var at = java.time.OffsetDateTime.of(2026, 10, 28, 23, 30, 0, 0, java.time.ZoneOffset.ofHoursMinutes(5, 30));
+        given(quant.events(null, null, "fomc")).willReturn(List.of(new MarketEvent(day, at, "fomc", "FOMC decision",
+                true, true, null, day.plusDays(1), 1.05, -2.0, 0.7, 12.0, 1.5)));
+        mvc.perform(get("/api/market/events").param("category", "fomc"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].event_time_ist").value("2026-10-28T23:30:00+05:30"))
+                .andExpect(jsonPath("$[0].reaction_session").value("2026-10-29"))
+                .andExpect(jsonPath("$[0].after_close").value(true));
+    }
+
+    @Test
     void invertedRangeIs400() throws Exception {
         mvc.perform(get("/api/market/daily").param("from", "2026-11-06").param("to", "2026-11-01"))
                 .andExpect(status().isBadRequest())

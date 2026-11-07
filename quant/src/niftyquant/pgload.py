@@ -27,7 +27,7 @@ import pandas as pd
 import psycopg
 from psycopg import sql
 
-from . import analytics, greeks, premiums, store
+from . import analytics, events, greeks, premiums, store
 from .ingest import ALL_DATASETS
 from .store import Manifest
 
@@ -41,7 +41,8 @@ TABLES = {
 }
 GREEKS_TABLE = "option_greeks"  # per-day derived files, versioned by file time
 DERIVED = {"daily_market": analytics.DAILY_MARKET, "participants_daily": analytics.PARTICIPANTS,
-           "iv_daily": analytics.IV_DAILY, "moneyness_daily": premiums.FILE}
+           "iv_daily": analytics.IV_DAILY, "moneyness_daily": premiums.FILE,
+           "market_events": events.FILE, "event_impact": events.IMPACT_FILE}
 COPY_CHUNK = 200_000
 
 

@@ -192,6 +192,8 @@ def build_derived(full: bool = False) -> dict[str, int]:
     result = {}
     builders = ((DAILY_MARKET, lambda: build_daily_market(full)), (PARTICIPANTS, build_participants),
                 (IV_DAILY, lambda: build_iv(full)))
+    from . import events  # reads daily_market and iv_daily written just above
+    builders += ((events.FILE, events.build), (events.IMPACT_FILE, lambda: events.category_impact(events.build())))
     from . import premiums  # needs the option_greeks files written by build_iv
     builders += ((premiums.FILE, lambda: premiums.build(full)),)
     for name, builder in builders:
