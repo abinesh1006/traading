@@ -44,6 +44,7 @@ DEADLINE_EXCEPTIONS = {date(2020, 3, 31): date(2020, 7, 31),   # COVID-19 relaxa
                        date(2020, 6, 30): date(2020, 9, 15)}
 DEADLINE_SLACK_DAYS = 4    # a filing after the close on the deadline, then a weekend
 CRUSH_MIN_DAYS = 7         # measure the IV drop on the first expiry at least this far out
+MARKET_SHOCK = 0.20        # sessions where the market's 30-day IV moved more than this share are skipped
 BETA_SESSIONS, BETA_GAP, BETA_MIN = 250, 5, 120
 
 # Reaction sessions confirmed from news reports of the announcement (searched 2026-11-07). They
@@ -58,7 +59,12 @@ CONFIRMED = {
     ("ICICIBANK", "Q1 FY24"): (date(2023, 7, 24), "Saturday 22 Jul 2023"),
     ("RELIANCE", "Q2 FY24"): (date(2023, 10, 30), "Friday 27 Oct 2023, after the close"),
     ("LT", "Q2 FY24"): (date(2023, 11, 1), "31 Oct 2023, after the close"),
+    ("HDFCBANK", "Q4 FY22"): (date(2022, 4, 18), "Saturday 16 Apr 2022"),
+    ("HDFCBANK", "Q2 FY23"): (date(2022, 10, 17), "Saturday 15 Oct 2022"),
+    ("HDFCBANK", "Q4 FY23"): (date(2023, 4, 17), "Saturday 15 Apr 2023"),
     ("HDFCBANK", "Q3 FY24"): (date(2024, 1, 17), "16 Jan 2024; fell 8.5% on 17 Jan"),
+    ("HDFCBANK", "Q1 FY25"): (date(2024, 7, 22), "Saturday 20 Jul 2024"),
+    ("HDFCBANK", "Q4 FY25"): (date(2025, 4, 21), "Saturday 19 Apr 2025 (Friday was Good Friday)"),
     ("BAJFINANCE", "Q3 FY24"): (date(2024, 1, 30), "29 Jan 2024, after market hours"),
     ("BHARTIARTL", "Q3 FY24"): (date(2024, 2, 6), "5 Feb 2024, after the close"),
     ("KOTAKBANK", "Q4 FY24"): (date(2024, 5, 6), "Saturday 4 May 2024"),
@@ -71,7 +77,9 @@ COLUMNS = ["symbol", "quarter", "quarter_end", "reaction_session", "pre_session"
            "inferred_session", "iv_drop_pts", "market_iv_drop_pts", "idio_iv_drop_pts", "detect_score", "detect_margin",
            "pre_close", "gap_pct", "return_pct", "drift_3d_pct", "pre_drift_5d_pct",
            "implied_move_pct", "straddle_pct", "surprise", "iv_pre", "iv_post",
-           "beta", "nifty_return_pct", "abnormal_return_pct", "volume_ratio", "nifty_iv30_change"]
+           "beta", "nifty_return_pct", "abnormal_return_pct", "volume_ratio", "nifty_iv30_change",
+           "nifty_weight_pct", "nifty_move_points", "nifty_points", "nifty_abnormal_points",
+           "share_of_nifty_move_pct"]
 
 
 def quarter_label(qe: date) -> str:
@@ -97,13 +105,16 @@ def quarter_ends(start: date, end: date) -> list[date]:
 
 # --- daily stock panel ---------------------------------------------------------------------
 
-def stock_returns(cm: pd.DataFrame) -> pd.DataFrame:
-    """Daily return, gap and volume per symbol from the cash market (series EQ), adjusted by NSE's prev_close."""
-    eq = cm[cm["series"] == "EQ"][["trade_date", "symbol", "open", "close", "prev_close", "volume_shares"]].copy()
+def stock_returns(cm: pd.DataFrame, market_return_pct: pd.Series | None = None) -> pd.DataFrame:
+    """Daily return, gap and volume per symbol from the cash market (series EQ), against the
+    previous close adjusted for splits and bonuses (stocks.adjust; NSE's own prev_close is not)."""
+    eq = cm[cm["series"] == "EQ"][["trade_date", "symbol", "open", "close", "prev_close", "volume_shares"]]
+    eq = stocks.adjust(eq, market_return_pct if market_return_pct is not None else pd.Series(dtype=float))
     eq["symbol"] = eq["symbol"].astype(object)
+    eq["prev_close"] = eq["adj_prev_close"]
     eq["return_pct"] = (eq["close"] / eq["prev_close"] - 1) * 100
     eq["gap_pct"] = (eq["open"] / eq["prev_close"] - 1) * 100
-    return eq.sort_values(["symbol", "trade_date"]).reset_index(drop=True)
+    return eq.drop(columns=["adj_prev_close"]).sort_values(["symbol", "trade_date"]).reset_index(drop=True)
 
 
 def iv_drops(iv: pd.DataFrame, market_iv: pd.Series) -> pd.DataFrame:
@@ -126,6 +137,9 @@ def iv_drops(iv: pd.DataFrame, market_iv: pd.Series) -> pd.DataFrame:
     out = out.merge(mk, left_on="trade_date", right_index=True, how="left")
     out["market_iv_drop_pts"] = (out["market_drop"] * out["iv_pre"] / out["market_pre"]).fillna(0)
     out["idio_iv_drop_pts"] = out["iv_drop_pts"] - out["market_iv_drop_pts"]
+    # On a market-wide volatility shock (7 Apr 2025: India VIX +50%) every stock's IV moves by its
+    # own amount, and the difference says nothing about a result; such sessions are not read.
+    out["market_shock"] = (out["market_drop"].abs() / out["market_pre"]) > MARKET_SHOCK
     return (out.drop(columns=["market_drop", "market_pre"])
             .rename(columns={"trade_date": "reaction_session"}).reset_index(drop=True))
 
@@ -149,6 +163,7 @@ def infer_calendar(drops: pd.DataFrame, start: date, end: date) -> pd.DataFrame:
         w = drops[(drops["reaction_session"] >= lo) & (drops["reaction_session"] <= hi)]
         for sym, g in w.groupby("symbol"):
             g = g.dropna(subset=["idio_iv_drop_pts"])
+            g = g[~g["market_shock"]] if "market_shock" in g else g
             if len(g) < 10:
                 continue
             z = _robust_z(g["idio_iv_drop_pts"]).sort_values(ascending=False)
@@ -192,9 +207,15 @@ def _compound(r: pd.Series) -> float:
 
 
 def measure(cal: pd.DataFrame, rets: pd.DataFrame, iv: pd.DataFrame, dm: pd.DataFrame,
-            market_iv: pd.Series) -> pd.DataFrame:
-    """Add the reaction measures to a calendar (symbol, quarter, quarter_end, reaction_session, source)."""
+            market_iv: pd.Series, weights: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Add the reaction measures to a calendar (symbol, quarter, quarter_end, reaction_session, source).
+    weights (nifty_weights.build) adds the Nifty impact: the stock's index weight at the pre_session
+    close, the Nifty points it contributed on the reaction session (all of it, and the part from its
+    abnormal move), and that contribution as a share of the Nifty's move that day."""
     nifty = dm.set_index("trade_date")["spot_return_pct"]
+    level = dm.set_index("trade_date")["spot_close"]
+    wt = (weights.set_index(["trade_date", "symbol"]) if weights is not None and not weights.empty
+          else pd.DataFrame(columns=["weight_pct", "points"]))
     sessions = sorted(dm["trade_date"])
     pos = {d: i for i, d in enumerate(sessions)}
     by_sym = {s: g.set_index("trade_date") for s, g in rets.groupby("symbol")}
@@ -237,6 +258,14 @@ def measure(cal: pd.DataFrame, rets: pd.DataFrame, iv: pd.DataFrame, dm: pd.Data
             "volume_ratio": float(day["volume_shares"] / vol_hist.median()) if len(vol_hist) >= 10 else np.nan,
             "nifty_iv30_change": float(market_iv.get(t, np.nan) - market_iv.get(pre, np.nan)),
         }
+        w_pre = float(wt["weight_pct"].get((pre, r.symbol), np.nan))
+        pts = float(wt["points"].get((t, r.symbol), np.nan))
+        move = float(level.get(t, np.nan) - level.get(pre, np.nan))
+        row |= {
+            "nifty_weight_pct": w_pre, "nifty_move_points": move, "nifty_points": pts,
+            "nifty_abnormal_points": w_pre / 100 * row["abnormal_return_pct"] / 100 * float(level.get(pre, np.nan)),
+            "share_of_nifty_move_pct": 100 * pts / move if move and np.isfinite(move) and abs(move) > 1e-9 else np.nan,
+        }
         out.append(row)
     return pd.DataFrame(out).reindex(columns=COLUMNS)
 
@@ -258,6 +287,9 @@ def summarize(ev: pd.DataFrame) -> pd.DataFrame:
             "median_iv_drop_pts": ok["iv_drop_pts"].median(),
             "up_share": (ok["return_pct"] > 0).mean() if len(ok) else np.nan,
             "drift_follows_share": (np.sign(ok["drift_3d_pct"]) == np.sign(ok["return_pct"]))[ok["drift_3d_pct"].notna()].mean(),
+            "median_abs_nifty_points": ok["nifty_points"].abs().median(),
+            "max_abs_nifty_points": ok["nifty_points"].abs().max(),
+            "median_nifty_weight_pct": ok["nifty_weight_pct"].median(),
         }
     rows = [{"symbol": s, **agg(g)} for s, g in ev.groupby("symbol")]
     rows.append({"symbol": "ALL", **agg(ev)})
@@ -274,10 +306,12 @@ def build() -> pd.DataFrame:
     ivd = analytics.load_derived(analytics.IV_DAILY)
     market_iv = ivd.set_index("trade_date")["iv_30d"]
     start, end = min(iv["trade_date"]), max(iv["trade_date"])
-    rets = stock_returns(stocks.read_cm(start - timedelta(days=500), end, symbols=list(stocks.UNIVERSE)))
+    rets = stock_returns(stocks.read_cm(start - timedelta(days=500), end, symbols=list(stocks.UNIVERSE)),
+                         dm.set_index("trade_date")["spot_return_pct"])
     drops = iv_drops(iv, market_iv)
     cal = apply_confirmed(infer_calendar(drops, start, end), drops)
-    ev = measure(cal, rets, iv, dm, market_iv)
+    from . import nifty_weights
+    ev = measure(cal, rets, iv, dm, market_iv, analytics.load_derived(nifty_weights.FILE))
     return ev.sort_values(["reaction_session", "symbol"]).reset_index(drop=True)
 
 

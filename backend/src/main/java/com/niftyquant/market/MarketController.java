@@ -60,6 +60,21 @@ public class MarketController {
         return quant.eventImpact();
     }
 
+    /** Heavyweight quarterly results by reaction session; symbol filters to one stock (e.g. HDFCBANK). */
+    @GetMapping("/results")
+    public List<ResultEvent> results(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+            @RequestParam(required = false) String symbol) {
+        checkRange(from, to);
+        return quant.results(from, to, symbol);
+    }
+
+    @GetMapping("/results/summary")
+    public List<ResultSummary> resultSummary() {
+        return quant.resultSummary();
+    }
+
     @GetMapping("/chain")
     public OptionChain chain(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,

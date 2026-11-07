@@ -74,6 +74,23 @@ class MarketControllerTest {
     }
 
     @Test
+    void resultsUseSnakeCaseIncludingDigits() throws Exception {
+        var day = LocalDate.of(2024, 1, 17);
+        var ev = new ResultEvent("HDFCBANK", "Q3 FY24", LocalDate.of(2023, 12, 31), day, day.minusDays(1),
+                "confirmed", null, -7.55, -1.5, -6.06, null, null, 1678.95, -3.1, -8.44, -2.0, 1.2, 3.57, 4.1,
+                2.36, 30.08, 37.63, 1.1, -2.09, -6.02, 3.9, 1.6, 13.2, -460.35, -245.41, -175.0, 53.3);
+        given(quant.results(null, null, "HDFCBANK")).willReturn(List.of(ev));
+        mvc.perform(get("/api/market/results").param("symbol", "HDFCBANK"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].reaction_session").value("2024-01-17"))
+                .andExpect(jsonPath("$[0].drift_3d_pct").value(-2.0))
+                .andExpect(jsonPath("$[0].pre_drift_5d_pct").value(1.2))
+                .andExpect(jsonPath("$[0].nifty_iv30_change").value(1.6))
+                .andExpect(jsonPath("$[0].nifty_points").value(-245.41))
+                .andExpect(jsonPath("$[0].inferred_session").value(org.hamcrest.Matchers.nullValue()));
+    }
+
+    @Test
     void invertedRangeIs400() throws Exception {
         mvc.perform(get("/api/market/daily").param("from", "2026-11-06").param("to", "2026-11-01"))
                 .andExpect(status().isBadRequest())

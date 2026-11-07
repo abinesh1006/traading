@@ -1,14 +1,17 @@
 """Stock-level end-of-day data for result and event studies.
 
 Two datasets, both from NSE's public archive (nsearchives.nseindia.com), one file per trading day:
-- cm_bhavcopy: cash-market close for every NSE equity (series EQ and BE). NSE's prev_close is
-  adjusted for corporate actions on the ex-date, so close / prev_close - 1 is a clean daily return
-  even across bonuses and splits (Reliance 1:1 in 2017 and 2024, HDFC Bank 1:1 in 2025).
+- cm_bhavcopy: cash-market close for every NSE equity (series EQ and BE). NSE's prev_close is the
+  previous session's close as traded: it is NOT adjusted on split or bonus ex-dates (HDFC Bank's
+  1:1 bonus shows as 1964.10 -> 973.40 on 2025-08-26), though it is on demergers, where NSE
+  discovers the ex-price in a special session (Reliance / Jio Financial, 2023-07-20). Use
+  adjust() before computing returns.
 - fo_stock: stock futures and options for UNIVERSE only, taken from the same F&O bhavcopy as the
   Nifty data (the Nifty pipeline keeps index contracts only). Same columns as fo_bhavcopy.
 
-Days are the F&O sessions already in the store (so holidays are never requested), from START.
-Fetch status is kept in the shared manifest, so failed days are retried on the next run.
+Days are the trading sessions already in the store (index-close files, so holidays are never
+requested), from START. Fetch status is kept in the shared manifest, so failed days are retried
+on the next run.
 """
 
 from __future__ import annotations
@@ -16,6 +19,7 @@ from __future__ import annotations
 import logging
 from datetime import date, timedelta
 
+import numpy as np
 import pandas as pd
 
 from . import config
@@ -37,10 +41,43 @@ UNIVERSE = ("HDFCBANK", "ICICIBANK", "RELIANCE", "INFY", "BHARTIARTL", "TCS", "L
 
 
 def sessions(start: date = START, end: date | None = None) -> list[date]:
-    """Trading sessions we hold Nifty F&O files for."""
-    files = (config.CURATED_DIR / "nse" / "fo_bhavcopy").glob("year=*/*.parquet")
-    days = sorted(date.fromisoformat(p.stem) for p in files)
-    return [d for d in days if d >= start and (end is None or d <= end)]
+    """Trading sessions in the store: days with an index-close or Nifty F&O file. (NSE's archive
+    lacks the F&O file for 2021-03-30, a trading day; the index-close file exists.)"""
+    days = set()
+    for ds in ("index_close", "fo_bhavcopy"):
+        days |= {date.fromisoformat(p.stem) for p in (config.CURATED_DIR / "nse" / ds).glob("year=*/*.parquet")}
+    return sorted(d for d in days if d >= start and (end is None or d <= end))
+
+
+# Price ratios of splits and bonuses: 1:1 bonus or a 2-for-1 split = 1/2, 1:2 bonus = 2/3, a face
+# value cut from 10 to 1 = 1/10; consolidations the other way.
+SPLIT_RATIOS = (1 / 2, 1 / 3, 2 / 3, 1 / 4, 1 / 5, 1 / 10, 2, 3, 4, 5, 10)
+SPLIT_MOVE = (0.7, 1.6)      # market-adjusted close / prev_close outside this range is examined
+SPLIT_TOLERANCE = 0.12       # the move left after taking out the ratio must be under 12%
+
+
+def adjust(cm: pd.DataFrame, market_return_pct: pd.Series) -> pd.DataFrame:
+    """Add ca_factor (the split/bonus price ratio on its ex-date, else 1) and adj_prev_close
+    (prev_close x ca_factor), so close / adj_prev_close - 1 is the day's real return.
+
+    A split is found where the move, after taking out the market's move that day, is too big to be
+    a trading move but matches a standard ratio: the 2020-03-23 crash (Axis Bank -28% with Nifty
+    -13%) is not a split; HDFC Bank -50% on 2025-08-26 with Nifty flat is. A real -30% crash in a
+    quiet market that happens to sit near 2/3 would be misread; none occurs in UNIVERSE since 2018."""
+    out = cm.copy()
+    m = 1 + out["trade_date"].map(market_return_pct).fillna(0.0) / 100
+    rr = (out["close"] / out["prev_close"]) / m
+    factor = np.ones(len(out))
+    cand = ((rr < SPLIT_MOVE[0]) | (rr > SPLIT_MOVE[1])).to_numpy() & np.isfinite(rr.to_numpy())
+    if cand.any():
+        ratios = np.array(SPLIT_RATIOS)
+        x = rr.to_numpy()[cand][:, None]
+        best = ratios[np.argmin(np.abs(np.log(x / ratios)), axis=1)]
+        ok = np.abs(x[:, 0] / best - 1) < SPLIT_TOLERANCE
+        factor[np.flatnonzero(cand)[ok]] = best[ok]
+    out["ca_factor"] = factor
+    out["adj_prev_close"] = out["prev_close"] * factor
+    return out
 
 
 def _fetch_cm(client, d: date) -> tuple[pd.DataFrame | None, str]:

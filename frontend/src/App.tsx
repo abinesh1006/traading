@@ -8,6 +8,7 @@ import { DataHealthPage } from './pages/DataHealthPage'
 import { EventsPage } from './pages/EventsPage'
 import { MarketPage } from './pages/MarketPage'
 import { ParticipantsPage } from './pages/ParticipantsPage'
+import { ResultsPage } from './pages/ResultsPage'
 import { applyTheme, loadTheme, type ThemeChoice } from './theme'
 
 const NEXT: Record<ThemeChoice, ThemeChoice> = { dark: 'light', light: 'system', system: 'dark' }
@@ -32,6 +33,7 @@ const ICON: Record<string, ReactElement> = {
   '/chain': <svg {...svg}><rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 10h18M3 15h18M12 4v16" /></svg>,
   '/positioning': <svg {...svg}><path d="M5 20V10M12 20V4M19 20v-7" /></svg>,
   '/events': <svg {...svg}><rect x="3" y="5" width="18" height="16" rx="1" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
+  '/results': <svg {...svg}><path d="M4 20h16" /><rect x="5" y="11" width="3" height="6" rx="0.5" /><rect x="10.5" y="7" width="3" height="10" rx="0.5" /><rect x="16" y="13" width="3" height="4" rx="0.5" /><path d="M5 7l4-3 4 2 6-3" /></svg>,
   '/data': <svg {...svg}><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" /></svg>,
 }
 
@@ -40,6 +42,7 @@ const NAV = [
   { to: '/chain', label: 'Option chain' },
   { to: '/positioning', label: 'Positioning' },
   { to: '/events', label: 'Events' },
+  { to: '/results', label: 'Results' },
   { to: '/data', label: 'Data health' },
 ]
 
@@ -120,6 +123,7 @@ export default function App() {
             <Route path="/chain" element={<ChainPage />} />
             <Route path="/positioning" element={<ParticipantsPage />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/results" element={<ResultsPage />} />
             <Route path="/data" element={<DataHealthPage />} />
             <Route path="*" element={<Navigate to="/market" replace />} />
           </Routes>

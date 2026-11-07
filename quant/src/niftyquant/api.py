@@ -102,6 +102,30 @@ def market_event_impact() -> list[dict]:
     return _records(df)
 
 
+@app.get("/market/results")
+def market_results(start: date | None = None, end: date | None = None, symbol: str | None = None) -> list[dict]:
+    """Quarterly results of the heavyweights, by reaction session (see results.py)."""
+    from . import results
+    df = analytics.load_derived(results.FILE)
+    if df.empty:
+        raise HTTPException(503, "results not built; run `niftyquant results` or `niftyquant derive`")
+    df = df.rename(columns={"reaction_session": "trade_date"})
+    df = _between(df, start, end).rename(columns={"trade_date": "reaction_session"})
+    if symbol:
+        df = df[df["symbol"] == symbol.upper()]
+    return _records(df)
+
+
+@app.get("/market/results/summary")
+def market_results_summary() -> list[dict]:
+    """Per heavyweight (and ALL): results moves against what options priced in, and Nifty impact."""
+    from . import results
+    df = analytics.load_derived(results.SUMMARY_FILE)
+    if df.empty:
+        raise HTTPException(503, "results not built; run `niftyquant results` or `niftyquant derive`")
+    return _records(df)
+
+
 @app.get("/market/chain")
 def market_chain(trade_date: date = Query(alias="date"), expiry: date | None = None) -> dict:
     try:

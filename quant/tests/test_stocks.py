@@ -70,3 +70,9 @@ def test_fetch_writes_days_and_records_missing(tmp_path, monkeypatch):
     again = stocks.fetch([stocks.CM], start=date(2026, 11, 1), client=client, manifest=manifest,
                          today=date(2026, 12, 1))
     assert again["trade_date"].tolist() == [date(2026, 11, 5)]
+
+
+def test_legacy_dates_with_two_digit_year():
+    # NSE's 2020-07-13 cash-market file stamps its rows 13-Jul-20, unlike every other legacy file.
+    assert parsers._legacy_date("13-Jul-20") == date(2020, 7, 13)
+    assert parsers._legacy_date(" 05-JAN-2018 ") == JAN5

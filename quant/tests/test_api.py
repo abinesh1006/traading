@@ -3,6 +3,7 @@
 from datetime import date
 from pathlib import Path
 
+import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
@@ -119,3 +120,27 @@ def test_events_endpoints(client):
     assert [e["event_date"] for e in rbi][:2] == ["2026-02-06", "2026-04-08"]
     impact = client.get("/market/events/impact").json()
     assert any(r["category"] == "all_days" for r in impact)
+
+
+def test_results_endpoints(client):
+    from niftyquant import results
+    # The fixture has no stock data, so the study is empty until it is built.
+    assert client.get("/market/results").status_code == 503
+    ev = pd.DataFrame([
+        {"symbol": "TCS", "quarter": "Q1 FY25", "reaction_session": date(2024, 7, 12), "source": "confirmed",
+         "return_pct": 6.63, "implied_move_pct": 3.8, "nifty_points": 61.6},
+        {"symbol": "INFY", "quarter": "Q1 FY25", "reaction_session": date(2024, 7, 19), "source": "confirmed",
+         "return_pct": 1.99, "implied_move_pct": float("nan"), "nifty_points": 30.1},
+    ]).reindex(columns=results.COLUMNS)
+    analytics.write_derived(results.FILE, ev)
+    analytics.write_derived(results.SUMMARY_FILE, results.summarize(ev))
+    try:
+        got = client.get("/market/results", params={"symbol": "tcs"}).json()
+        assert [(r["symbol"], r["reaction_session"], r["return_pct"]) for r in got] == [("TCS", "2024-07-12", 6.63)]
+        assert len(client.get("/market/results", params={"start": "2024-07-15"}).json()) == 1
+        assert client.get("/market/results").json()[1]["implied_move_pct"] is None  # NaN -> null
+        summary = client.get("/market/results/summary").json()
+        assert summary[-1]["symbol"] == "ALL" and summary[-1]["announcements"] == 2
+    finally:  # leave the module's data dir as the other tests expect it
+        for name in (results.FILE, results.SUMMARY_FILE):
+            (analytics.derived_dir() / name).unlink()

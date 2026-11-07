@@ -10,6 +10,8 @@ import com.niftyquant.market.IvDaily;
 import com.niftyquant.market.MarketEvent;
 import com.niftyquant.market.OptionChain;
 import com.niftyquant.market.ParticipantPosition;
+import com.niftyquant.market.ResultEvent;
+import com.niftyquant.market.ResultSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
@@ -76,6 +78,20 @@ public class QuantClient {
 
     public List<EventImpact> eventImpact() {
         return get(b -> b.path("/market/events/impact").build(), new TypeReference<>() {});
+    }
+
+    public List<ResultEvent> results(LocalDate from, LocalDate to, String symbol) {
+        return get(b -> {
+            range(b.path("/market/results"), from, to);
+            if (symbol != null) {
+                b.queryParam("symbol", symbol);
+            }
+            return b.build();
+        }, new TypeReference<>() {});
+    }
+
+    public List<ResultSummary> resultSummary() {
+        return get(b -> b.path("/market/results/summary").build(), new TypeReference<>() {});
     }
 
     public OptionChain chain(LocalDate date, LocalDate expiry) {

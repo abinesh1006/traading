@@ -194,8 +194,14 @@ def build_derived(full: bool = False) -> dict[str, int]:
     builders += ((events.FILE, events.build), (events.IMPACT_FILE, lambda: events.category_impact(events.build())))
     from . import premiums  # needs the option_greeks files written by build_iv
     builders += ((premiums.FILE, lambda: premiums.build(full)),)
-    from . import results, stockiv  # stock IV from the stock F&O files; results need it and iv_daily
-    builders += ((stockiv.FILE, lambda: stockiv.build(full)), (results.FILE, results.build),
+    from . import nifty_weights, results, stockiv  # results need stock IV, Nifty weights and iv_daily
+
+    def weights() -> pd.DataFrame:
+        df, fits = nifty_weights.build()
+        write_derived(nifty_weights.FIT_FILE, fits)
+        return df
+    builders += ((stockiv.FILE, lambda: stockiv.build(full)), (nifty_weights.FILE, weights),
+                 (results.FILE, results.build),
                  (results.SUMMARY_FILE, lambda: results.summarize(load_derived(results.FILE))))
     for name, builder in builders:
         result[name] = write_derived(name, builder())

@@ -27,7 +27,7 @@ import pandas as pd
 import psycopg
 from psycopg import sql
 
-from . import analytics, events, greeks, premiums, stocks, store
+from . import analytics, events, greeks, nifty_weights, premiums, results, stockiv, stocks, store
 from .store import Manifest
 
 log = logging.getLogger(__name__)
@@ -45,7 +45,10 @@ PG_DATASETS = tuple(TABLES)
 GREEKS_TABLE = "option_greeks"  # per-day derived files, versioned by file time
 DERIVED = {"daily_market": analytics.DAILY_MARKET, "participants_daily": analytics.PARTICIPANTS,
            "iv_daily": analytics.IV_DAILY, "moneyness_daily": premiums.FILE,
-           "market_events": events.FILE, "event_impact": events.IMPACT_FILE}
+           "market_events": events.FILE, "event_impact": events.IMPACT_FILE,
+           "stock_iv": stockiv.FILE, "nifty_weights": nifty_weights.FILE,
+           "nifty_weight_fits": nifty_weights.FIT_FILE, "result_events": results.FILE,
+           "result_summary": results.SUMMARY_FILE}
 COPY_CHUNK = 200_000
 
 

@@ -84,16 +84,39 @@ def test_measure_returns_and_abnormal_move():
     rets = results.stock_returns(pd.DataFrame({
         "trade_date": sessions, "symbol": "TCS", "series": "EQ", "open": prev * 1.01, "close": close,
         "prev_close": prev, "volume_shares": 1000}))
-    dm = pd.DataFrame({"trade_date": sessions, "spot_return_pct": nifty})
+    level = 20000 * np.cumprod(1 + nifty / 100)
+    dm = pd.DataFrame({"trade_date": sessions, "spot_return_pct": nifty, "spot_close": level})
     cal = pd.DataFrame([{"symbol": "TCS", "quarter": "Q1 FY24", "quarter_end": date(2023, 6, 30),
                          "reaction_session": t, "source": "test"}])
-    ev = results.measure(cal, rets, pd.DataFrame(columns=stockiv.COLUMNS), dm, pd.Series(dtype=float)).iloc[0]
+    # A 5% weight at the pre-session close: the stock adds weight x return x level to the index.
+    weights = pd.DataFrame({"trade_date": [sessions[299], t], "symbol": "TCS", "weight_pct": [5.0, 5.2],
+                            "points": [0.0, 0.05 * stock[300] / 100 * level[299]]})
+    ev = results.measure(cal, rets, pd.DataFrame(columns=stockiv.COLUMNS), dm, pd.Series(dtype=float),
+                         weights).iloc[0]
     assert ev["pre_session"] == sessions[299]
     assert ev["return_pct"] == pytest.approx(stock[300])
     assert ev["gap_pct"] == pytest.approx(1.0)
     assert ev["beta"] == pytest.approx(1.5, abs=0.1)
     assert ev["abnormal_return_pct"] == pytest.approx(6.0, abs=0.3)
     assert ev["drift_3d_pct"] == pytest.approx((np.prod(1 + stock[301:304] / 100) - 1) * 100)
+    assert ev["nifty_weight_pct"] == 5.0
+    assert ev["nifty_move_points"] == pytest.approx(level[300] - level[299])
+    assert ev["nifty_points"] == pytest.approx(0.05 * stock[300] / 100 * level[299])
+    assert ev["nifty_abnormal_points"] == pytest.approx(0.05 * ev["abnormal_return_pct"] / 100 * level[299])
+    assert ev["share_of_nifty_move_pct"] == pytest.approx(100 * ev["nifty_points"] / ev["nifty_move_points"])
+
+
+def test_split_detected_but_crash_is_not():
+    from niftyquant import stocks
+    cm = pd.DataFrame({"trade_date": [date(2025, 8, 26), date(2020, 3, 23), date(2026, 1, 14), date(2024, 1, 17)],
+                       "symbol": ["HDFCBANK", "AXISBANK", "KOTAKBANK", "HDFCBANK"],
+                       "close": [973.40, 308.65, 421.00, 1536.90], "prev_close": [1964.10, 428.15, 2132.60, 1678.95]})
+    market = pd.Series({date(2025, 8, 26): -0.1, date(2020, 3, 23): -12.98, date(2026, 1, 14): 0.2,
+                        date(2024, 1, 17): -2.1})
+    out = stocks.adjust(cm, market)
+    # 1:1 bonus; Covid-crash day (a real -28% with the market -13%); 5-for-1 split; a real -8.5% day.
+    assert out["ca_factor"].tolist() == [0.5, 1.0, 0.2, 1.0]
+    assert out["adj_prev_close"].iloc[0] == pytest.approx(982.05)
 
 
 def test_atm_iv_reused_from_greeks():

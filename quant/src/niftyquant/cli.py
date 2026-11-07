@@ -79,8 +79,11 @@ def cmd_stocks(a) -> None:
 
 def cmd_results(a) -> None:
     """Quarterly results of the heavyweights: refresh stock IV and the result table, print a summary."""
-    from . import analytics, results, stockiv
+    from . import analytics, nifty_weights, results, stockiv
     analytics.write_derived(stockiv.FILE, stockiv.build(a.full))
+    weights, fits = nifty_weights.build()
+    analytics.write_derived(nifty_weights.FILE, weights)
+    analytics.write_derived(nifty_weights.FIT_FILE, fits)
     ev = results.build()
     analytics.write_derived(results.FILE, ev)
     summary = results.summarize(ev)

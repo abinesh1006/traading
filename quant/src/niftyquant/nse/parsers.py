@@ -98,10 +98,19 @@ def parse_fo_udiff(raw: bytes, trade_date: date, symbols: tuple[str, ...], kind:
     return _finish_fo(out, trade_date)
 
 
+def _legacy_date(text: str) -> date:
+    """TIMESTAMP of the legacy bhavcopies: 05-JAN-2018, but some files use a 2-digit year (13-Jul-20)."""
+    t = text.strip()
+    try:
+        return datetime.strptime(t, "%d-%b-%Y").date()
+    except ValueError:
+        return datetime.strptime(t, "%d-%b-%y").date()
+
+
 def parse_fo_legacy(raw: bytes, trade_date: date, symbols: tuple[str, ...], kind: str = "index") -> pd.DataFrame:
     _, _, fut, opt = FO_KINDS[kind]
     df = _read_zipped_csv(raw)
-    dates = {datetime.strptime(t.strip(), "%d-%b-%Y").date() for t in df["TIMESTAMP"].unique()}
+    dates = {_legacy_date(t) for t in df["TIMESTAMP"].unique()}
     if dates != {trade_date}:
         raise ParseError(f"file trade dates {dates} != requested {trade_date}")
     df = df[df["INSTRUMENT"].isin([fut, opt]) & df["SYMBOL"].isin(symbols)]
@@ -164,7 +173,7 @@ def parse_cm_udiff(raw: bytes, trade_date: date) -> pd.DataFrame:
 def parse_cm_legacy(raw: bytes, trade_date: date) -> pd.DataFrame:
     """Cash-market bhavcopy, legacy cmDDMONYYYYbhav format (until 2024-07-05)."""
     df = _read_zipped_csv(raw)
-    dates = {datetime.strptime(t.strip(), "%d-%b-%Y").date() for t in df["TIMESTAMP"].unique()}
+    dates = {_legacy_date(t) for t in df["TIMESTAMP"].unique()}
     if dates != {trade_date}:
         raise ParseError(f"file trade dates {dates} != requested {trade_date}")
     out = pd.DataFrame({

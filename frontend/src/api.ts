@@ -164,6 +164,54 @@ export interface EventImpact {
   move_vs_normal: number | null
 }
 
+/** One heavyweight quarterly result (results.py). Percentages in %, Nifty impact in index points. */
+export interface ResultEvent {
+  symbol: string
+  quarter: string
+  quarter_end: string
+  reaction_session: string
+  pre_session: string | null
+  source: 'confirmed' | 'inferred'
+  inferred_session: string | null
+  iv_drop_pts: number | null
+  idio_iv_drop_pts: number | null
+  detect_score: number | null
+  detect_margin: number | null
+  gap_pct: number | null
+  return_pct: number | null
+  drift_3d_pct: number | null
+  pre_drift_5d_pct: number | null
+  implied_move_pct: number | null
+  straddle_pct: number | null
+  surprise: number | null
+  iv_pre: number | null
+  iv_post: number | null
+  beta: number | null
+  nifty_return_pct: number | null
+  abnormal_return_pct: number | null
+  volume_ratio: number | null
+  nifty_weight_pct: number | null
+  nifty_move_points: number | null
+  nifty_points: number | null
+  nifty_abnormal_points: number | null
+  share_of_nifty_move_pct: number | null
+}
+
+export interface ResultSummary {
+  symbol: string
+  announcements: number
+  median_abs_move_pct: number | null
+  median_implied_move_pct: number | null
+  beat_implied_share: number | null
+  median_abs_abnormal_pct: number | null
+  median_iv_drop_pts: number | null
+  up_share: number | null
+  drift_follows_share: number | null
+  median_abs_nifty_points: number | null
+  max_abs_nifty_points: number | null
+  median_nifty_weight_pct: number | null
+}
+
 export class ApiError extends Error {
   readonly status: number
 
@@ -204,6 +252,8 @@ export const api = {
   iv: () => getJson<IvDaily[]>('/api/market/iv'),
   events: () => getJson<MarketEvent[]>('/api/market/events'),
   eventImpact: () => getJson<EventImpact[]>('/api/market/events/impact'),
+  results: () => getJson<ResultEvent[]>('/api/market/results'),
+  resultSummary: () => getJson<ResultSummary[]>('/api/market/results/summary'),
   chain: (date: string, expiry?: string) => getJson<OptionChain>('/api/market/chain', { date, expiry }),
   dataStatus: () => getJson<DataStatus>('/api/data/status'),
   postgres: () => getJson<PostgresStatus>('/api/data/postgres'),
