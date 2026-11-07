@@ -14,8 +14,19 @@ const NAME: Record<string, string> = {
 }
 const name = (s: string) => NAME[s] ?? s
 
-/** An inferred session is a less certain pick when its IV drop barely stands out or barely beats the runner-up. */
-const unclear = (r: ResultEvent) => r.source === 'inferred' && ((r.detect_score ?? 0) < 3 || (r.detect_margin ?? 0) < 1)
+/** How often the IV-drop inference found the confirmed session, per stock and overall. */
+function inferenceCheck(rows: ResultEvent[]) {
+  const conf = rows.filter((r) => r.source === 'confirmed')
+  const hit = (r: ResultEvent) => r.inferred_session === r.reaction_session
+  const bySymbol = new Map<string, { n: number; hits: number }>()
+  for (const r of conf) {
+    const x = bySymbol.get(r.symbol) ?? { n: 0, hits: 0 }
+    bySymbol.set(r.symbol, { n: x.n + 1, hits: x.hits + (hit(r) ? 1 : 0) })
+  }
+  // A stock whose own confirmed dates the inference mostly misses (HDFC Bank: its IV barely reacts).
+  const weak = new Set([...bySymbol].filter(([, x]) => x.n >= 3 && x.hits / x.n < 0.8).map(([s]) => s))
+  return { n: conf.length, hits: conf.filter(hit).length, weak }
+}
 
 const points = (v: number | null | undefined) => (v == null ? '—' : `${v > 0 ? '+' : ''}${num(v, 0)} pts`)
 
@@ -33,6 +44,12 @@ export function ResultsPage() {
   const overall = (summary.data ?? []).find((r) => r.symbol === 'ALL')
   const confirmed = all.filter((r) => r.source === 'confirmed').length
   const biggest = useMemo(() => [...all].sort((a, b) => Math.abs(b.nifty_points ?? 0) - Math.abs(a.nifty_points ?? 0))[0], [all])
+  const check = useMemo(() => inferenceCheck(all), [all])
+  // An inferred session is a less certain pick when its IV drop barely stands out, barely beats the
+  // runner-up, or the stock's confirmed dates show the inference does not work for it.
+  const unclear = (r: ResultEvent) => r.source === 'inferred'
+    && (check.weak.has(r.symbol) || (r.detect_score ?? 0) < 3 || (r.detect_margin ?? 0) < 1)
+  const weakNames = [...check.weak].map(name).join(' and ')
 
   const moveBars = [...perStock]
     .map((r) => ({ ...r, short: name(r.symbol) }))
@@ -154,7 +171,7 @@ export function ResultsPage() {
           <Panel w={24} flush title="Results"
                  info={<>
                    <p>Move: reacting-session close against the previous close (adjusted for splits and bonuses). Priced ±: the one-day move options priced the evening before. Surprise = |move| ÷ priced move. Beyond Nifty: the move minus what the stock's beta to Nifty explains.</p>
-                   <p>Date: Confirmed from news reports; Inferred from the IV collapse (finds 16 of 20 confirmed sessions; HDFC Bank's small IV moves make its inferred dates unreliable); Unclear when the pick barely stands out.</p>
+                   <p>Date: Confirmed from news reports; Inferred from the IV collapse, which finds {check.hits} of {check.n} confirmed sessions; Unclear when the pick barely stands out{weakNames ? `, and for every inferred ${weakNames} result: its IV barely reacts to results, so the inference misses most of its confirmed dates` : ''}.</p>
                  </>}
                  right={
                    <div className="filters">

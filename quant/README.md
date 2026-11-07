@@ -23,6 +23,10 @@ niftyquant premiums [--date D] [--steps 5]            # ITM/ATM/OTM call and put
 niftyquant status                                     # what is downloaded, what is pending/missing
 niftyquant quality                                    # data checks; report in data/reports/
 niftyquant derive [--full]                            # rebuild summary tables for the API (incremental)
+niftyquant stocks [--start 2018-01-01]                # stock closes (all NSE equities) + heavyweight stock F&O, resumable (also run by update)
+niftyquant results [--full]                           # stock IV, Nifty weights and the quarterly results study; prints a summary
+niftyquant pg-load [--datasets ...] [--reload]        # copy new or re-fetched days and derived tables into Postgres (also run by update)
+niftyquant pg-status                                  # what is loaded in Postgres
 niftyquant serve                                      # research API on 127.0.0.1:8001 for the backend
 ```
 
@@ -91,6 +95,31 @@ evening. An evening the PC is off is lost for good, and `quality` lists such day
 - **All of this is end of day** (closing prices). Premiums at a time of day need minute-level option
   history (Fyers).
 
+## Events, stocks and quarterly results
+
+- **Events** (`events.py`, `derived/market_events.parquet`, `event_impact.parquet`): RBI policy, FOMC,
+  US CPI, budgets, elections, special sessions, expiries and big-move days since 2015, each with the
+  first NSE session that could react (`reaction_session`; US events land after the Indian close) and
+  Nifty's move against the one-day move options priced the session before. `event_time_ist` is the
+  scheduled time where it is fixed by rule (FOMC 14:00 New York, in IST through US daylight saving).
+- **Stocks** (`stocks.py`): `cm_bhavcopy` is the cash-market close of every NSE equity (series EQ/BE)
+  and `fo_stock` the stock futures and options of the 15 heavyweights in `stocks.UNIVERSE`, both
+  since 2018 from the same NSE archive. Compute returns with `stocks.adjust()` (see below).
+- **Stock IV** (`stockiv.py`, `derived/stock_iv.parquet`): ATM IV, parity forward and ATM straddle per
+  heavyweight and expiry, first three expiries, by the same method as the Nifty Greeks.
+- **Nifty weights** (`nifty_weights.py`, `derived/nifty_weights.parquet`, fit quality in
+  `nifty_weight_fits.parquet`): estimated from prices alone. The index's daily change in points is a
+  fixed combination of its members' price changes between reconstitutions, so a non-negative least
+  squares fit per half-year recovers each member's weight; it reproduces the index within about a
+  point a day. `points` is the Nifty points a stock added that day.
+- **Quarterly results** (`results.py`, `derived/result_events.parquet`, `result_summary.parquet`):
+  one row per heavyweight result. The reaction session is confirmed from news reports where checked
+  (`results.CONFIRMED`), else inferred from the collapse in the stock's ATM IV inside the SEBI
+  reporting window (`results.validate()` scores it against the confirmed ones; it does not work for
+  HDFC Bank, whose IV barely reacts). Per result: the move options priced the evening before
+  (two-expiry term structure), the actual gap, move and 3-day drift, the move beyond Nifty (beta),
+  the IV crush, and the Nifty points it moved the index. No consensus estimates: those need a paid feed.
+
 ## Things that are easy to get wrong
 
 - **Units.** `volume_contracts` is contracts; `oi_units` is units, not contracts. `turnover_inr` for
@@ -104,3 +133,10 @@ evening. An evening the PC is off is lost for good, and `quality` lists such day
 - **Trading calendar comes from the data.** A day is a trading day if NSE published its files,
   which also catches special weekend sessions.
 - **Every file's own date is checked** against the requested date, so a wrong file is never stored.
+- **NSE's prev_close is not adjusted for splits and bonuses** in the cash-market bhavcopy (HDFC Bank
+  1964.10 -> 973.40 on its 2025-08-26 bonus ex-date), though it is for demergers. `stocks.adjust()`
+  finds split/bonus days and gives `adj_prev_close`; never compute stock returns from `prev_close`.
+- **NSE's archive has no F&O bhavcopy for 2021-03-30**, a trading day (the index-close file exists),
+  so trading days come from the index-close files, not the F&O files.
+- **Stock F&O is not Nifty F&O.** `fo_bhavcopy` keeps index contracts only; stock contracts are in
+  `fo_stock`, for `stocks.UNIVERSE` only.
