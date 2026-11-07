@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 
 export const RANGES = ['1M', '3M', '6M', '1Y', '3Y', '5Y', 'All'] as const
 export type Range = (typeof RANGES)[number]
@@ -50,13 +50,46 @@ export function filterRange<R extends { trade_date: string }>(rows: R[], range: 
   return start ? rows.filter((r) => r.trade_date >= start) : rows
 }
 
+export const RANGE_LABEL: Record<Range, string> = {
+  '1M': 'Last 1 month', '3M': 'Last 3 months', '6M': 'Last 6 months', '1Y': 'Last 1 year',
+  '3Y': 'Last 3 years', '5Y': 'Last 5 years', All: 'All data (since 2015)',
+}
+
+/** Grafana-style time picker: a button showing the range, opening a list of quick ranges. */
 export function RangeFilter() {
   const { range, setRange } = useRange()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!open) return
+    const close = (e: MouseEvent | KeyboardEvent) => {
+      if (e instanceof KeyboardEvent ? e.key === 'Escape' : !ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', close)
+    document.addEventListener('keydown', close)
+    return () => {
+      document.removeEventListener('mousedown', close)
+      document.removeEventListener('keydown', close)
+    }
+  }, [open])
+  const svg = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
   return (
-    <div className="seg" role="group" aria-label="Date range">
-      {RANGES.map((r) => (
-        <button key={r} aria-pressed={range === r} onClick={() => setRange(r)}>{r}</button>
-      ))}
+    <div className="timepicker" ref={ref}>
+      <button className="icon-btn" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen(!open)} title="Time range">
+        <svg {...svg}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+        {RANGE_LABEL[range]}
+        <svg {...svg} className="chev"><path d="M6 9l6 6 6-6" /></svg>
+      </button>
+      {open && (
+        <div className="timepicker-menu" role="menu">
+          <div className="head">Quick ranges (to the latest session)</div>
+          {RANGES.map((r) => (
+            <button key={r} role="menuitemradio" aria-checked={range === r} onClick={() => { setRange(r); setOpen(false) }}>
+              {RANGE_LABEL[r]}{range === r && <span>✓</span>}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

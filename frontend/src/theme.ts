@@ -6,9 +6,9 @@ const KEY = 'niftyquant.theme'
 export function loadTheme(): ThemeChoice {
   try {
     const v = localStorage.getItem(KEY)
-    return v === 'light' || v === 'dark' ? v : 'system'
+    return v === 'light' || v === 'dark' || v === 'system' ? v : 'dark'
   } catch {
-    return 'system'
+    return 'dark'
   }
 }
 
@@ -32,6 +32,12 @@ export interface ChartColors {
   grid: string
   axis: string
   surface: string
+  accent: string
+  up: string
+  down: string
+  good: string
+  warning: string
+  critical: string
 }
 
 function read(): ChartColors {
@@ -45,6 +51,12 @@ function read(): ChartColors {
     grid: v('--grid'),
     axis: v('--axis'),
     surface: v('--surface-1'),
+    accent: v('--accent'),
+    up: v('--up'),
+    down: v('--down'),
+    good: v('--status-good'),
+    warning: v('--status-warning'),
+    critical: v('--status-critical'),
   }
 }
 

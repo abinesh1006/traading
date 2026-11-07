@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { api, type ClientType, type ParticipantPosition } from '../api'
 import { TimeSeriesChart } from '../components/charts'
-import { ChartCard, Legend, QueryState, StatTile, type Column } from '../components/ui'
+import { Change, ChartCard, DashRow, EmptyState, Legend, PageHeader, QueryState, Stat, type Column } from '../components/ui'
 import { date, num, pct } from '../format'
 import { filterRange, RangeFilter, useRange } from '../range'
 import { useChartColors } from '../theme'
@@ -30,13 +30,17 @@ function pivot(rows: ParticipantPosition[]): WideRow[] {
   return [...byDate.values()].sort((a, b) => a.trade_date.localeCompare(b.trade_date))
 }
 
+const signed = (v: number | null) => (v == null ? '—' : `${v > 0 ? '+' : ''}${num(v)}`)
+
 export function ParticipantsPage() {
   const q = useQuery({ queryKey: ['participants'], queryFn: api.participants })
   const daily = useQuery({ queryKey: ['daily'], queryFn: api.daily })
   const { range } = useRange()
   const c = useChartColors()
-  const wide = filterRange(pivot(q.data ?? []), range)
-  const last = wide[wide.length - 1]
+  const allWide = pivot(q.data ?? [])
+  const wide = filterRange(allWide, range)
+  const last = allWide[allWide.length - 1]
+  const prev = allWide[allWide.length - 2]
 
   // Lot-size changes make contract counts jump; mark them on the net-position chart.
   const lotChanges: Array<{ trade_date: string; from: number; to: number }> = []
@@ -58,39 +62,63 @@ export function ParticipantsPage() {
 
   return (
     <>
-      <h1 className="page-title">Positioning</h1>
-      <p className="page-sub">Index futures positions by participant type, from NSE's daily participant-wise OI file.</p>
-      <div className="filters"><RangeFilter /></div>
+      <PageHeader
+        title="Positioning"
+        sub={<>Index futures by participant, from NSE's participant-wise OI file{last ? <> · as of <strong>{date(last.trade_date)}</strong></> : null}</>}
+        actions={<RangeFilter />}
+      />
       <QueryState error={q.error} isLoading={q.isLoading}>
-        {last && (
-          <div className="tiles">
-            {PARTICIPANTS.map((p) => (
-              <StatTile key={p} label={`${NAMES[p]} long %`} value={pct(last.long_pct[p] ?? null, 1)}
-                        note={`Net ${num(last.net[p] ?? null)} contracts · ${date(last.trade_date)}`} />
-            ))}
-          </div>
+        {last ? (
+          <DashRow title={`Latest session · ${date(last.trade_date)}`}>
+            {PARTICIPANTS.map((p, i) => {
+              const lp = last.long_pct[p] ?? null
+              const n = last.net[p] ?? null
+              const pn = prev?.net[p] ?? null
+              const dn = n != null && pn != null ? n - pn : null
+              const side = n == null ? null : n >= 0 ? 'long' : 'short'
+              return (
+                <Stat key={p} w={6} label={NAMES[p]} value={signed(n)}
+                      tone={side === 'long' ? 'good' : side === 'short' ? 'critical' : undefined}
+                      sub={<>Net {side ?? '—'} · <Change value={dn} text={`${signed(dn)} d/d`} /></>}
+                      spark={wide.map((w) => w.net[p] ?? null)} sparkColor={c.series[i]}
+                      info="Net index futures (long − short contracts). Sparkline: net position over the selected range.">
+                  <div className="split" role="img" aria-label={`${NAMES[p]}: ${pct(lp, 1)} long`}>
+                    <span className="l" style={{ width: `${lp ?? 0}%` }} />
+                    <span className="s" style={{ width: lp == null ? 0 : `${100 - lp}%` }} />
+                  </div>
+                  <div className="split-legend">
+                    <span>Long {pct(lp, 1)}</span><span>Short {lp == null ? '—' : pct(100 - lp, 1)}</span>
+                  </div>
+                </Stat>
+              )
+            })}
+          </DashRow>
+        ) : (
+          <EmptyState title="No participant data" detail="Run the NSE download to fetch participant-wise OI." />
         )}
-        <div className={`stack ${q.isFetching ? 'loading-frame' : ''}`}>
-          <ChartCard
-            title="Index futures: long share by participant"
-            subtitle="Long ÷ (long + short) contracts. A ratio, so comparable across lot-size changes."
+        <DashRow title="History">
+          <ChartCard w={12}
+            title="Long share by participant"
+            subtitle="Long ÷ (long + short) index futures. A ratio, so comparable across lot-size changes."
             legend={legend}
             table={{ columns: tableCols(longPct, (v) => pct(v, 1)), rows: [...wide].reverse() }}>
-            <TimeSeriesChart rows={wide} series={series(longPct)} format={(v) => pct(v, 1)}
+            <TimeSeriesChart rows={wide} series={series(longPct)} format={(v) => pct(v, 1)} axisFormat={(v) => pct(v, 0)}
                              referenceY={{ y: 50, label: '50%' }} height={300} endLabels syncId="pos" />
           </ChartCard>
           <ChartCard
-            title="Index futures: net position by participant"
-            subtitle="Long − short, in contracts"
+            title="Net position by participant"
+            subtitle="Long − short index futures, contracts"
             legend={legend}
             note={lotChanges.length
               ? `Contract counts jump when NSE changes the lot size: ${lotChanges.map((l) => `${date(l.trade_date)} (${l.from}→${l.to})`).join(', ')}.`
               : undefined}
+            w={12}
             table={{ columns: tableCols(net, (v) => num(v)), rows: [...wide].reverse() }}>
             <TimeSeriesChart rows={wide} series={series(net)} format={(v) => num(v)}
+                             axisFormat={(v) => `${num(v / 1000)}K`}
                              referenceY={{ y: 0 }} height={300} endLabels syncId="pos" />
           </ChartCard>
-        </div>
+        </DashRow>
       </QueryState>
     </>
   )
