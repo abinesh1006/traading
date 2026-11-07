@@ -138,6 +138,25 @@ def fit_window(cm: pd.DataFrame, nifty: pd.Series, candidates: int = CANDIDATES)
     return coef, w, stats
 
 
+def carry_forward(prev: tuple[date, pd.Series], lo: date, hi: date, nifty: pd.Series):
+    """The previous window's coefficients applied to [lo, hi], with the same fit stats."""
+    start, coef = prev
+    w = _price_changes(stocks.read_cm(start, hi), nifty.pct_change() * 100)  # prices in that window's units
+    w = w[w["trade_date"] >= lo]
+    X = w.pivot(index="trade_date", columns="symbol", values="dP").reindex(columns=coef.index).fillna(0.0)
+    dI = nifty.diff().reindex(X.index)
+    ok = dI.notna()
+    res = dI[ok].to_numpy() - X[ok].to_numpy() @ coef.to_numpy()
+    last = X.index[-1]
+    p_last = w[w["trade_date"] == last].set_index("symbol")["P"].reindex(coef.index).fillna(0)
+    stats = {"obs": int(ok.sum()), "outlier_days": 0, "candidates": len(coef),
+             "members_found": int((coef > 0).sum()),
+             "residual_sd_points": float(res.std()) if len(res) > 1 else np.nan,
+             "max_abs_residual_points": float(np.abs(res).max()) if len(res) else np.nan,
+             "weight_sum_pct": float((coef * p_last).sum() / nifty.get(last, np.nan) * 100)}
+    return coef, w, stats
+
+
 def build(symbols=stocks.UNIVERSE) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Daily weight and points contribution for `symbols`, plus one row of fit stats per window."""
     dm = analytics.load_derived(analytics.DAILY_MARKET)
@@ -149,15 +168,24 @@ def build(symbols=stocks.UNIVERSE) -> tuple[pd.DataFrame, pd.DataFrame]:
     if not cm_days:
         return pd.DataFrame(columns=COLUMNS), pd.DataFrame()
     out, fits = [], []
+    prev = None  # (window start, coefficients) of the last fitted window
     for lo, hi in windows(cm_days[0], cm_days[-1]):
         cm = stocks.read_cm(lo, hi)
         if cm.empty:
             continue
         r = fit_window(cm, nifty)
-        if r is None:
+        if r is None and prev is None:
             log.info("nifty weights: %s - %s too short, skipped", lo, hi)
             continue
-        coef, w, stats = r
+        if r is None:
+            # Too few sessions yet to fit (the half-year in progress): carry the last window's
+            # coefficients forward on current prices, in that window's units, and report how well
+            # they still reproduce the index.
+            coef, w, stats = carry_forward(prev, lo, hi, nifty)
+            log.info("nifty weights %s - %s: carried from the window starting %s", lo, hi, prev[0])
+        else:
+            coef, w, stats = r
+            prev = (lo, coef)
         fits.append({"window_start": lo, "window_end": hi, **stats})
         u = w[w["symbol"].isin(symbols)].copy()
         u["c"] = u["symbol"].map(coef).fillna(0.0)
