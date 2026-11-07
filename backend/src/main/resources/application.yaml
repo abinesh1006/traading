@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: niftyquant-backend
+  config:
+    # PG_* settings and secrets live in the repo's gitignored .env (KEY=VALUE, read as properties).
+    import: optional:file:../.env[.properties]
+  datasource:
+    # Postgres listens only on the server's localhost; dev.ps1 opens an SSH tunnel to this port.
+    url: jdbc:postgresql://127.0.0.1:${PG_LOCAL_PORT:15432}/${PG_DB:niftyquant}?sslmode=${PG_SSLMODE:prefer}&ApplicationName=niftyquant-backend
+    username: ${PG_USER:}
+    password: ${PG_PASSWORD:}
+    hikari:
+      maximum-pool-size: 5
+  flyway:
+    # Schema migrations: src/main/resources/db/migration. The Python loader only writes rows.
+    locations: classpath:db/migration
+  jackson:
+    # Python research API and the React app both use snake_case JSON.
+    property-naming-strategy: SNAKE_CASE
+
+server:
+  port: 8080
+
+quant:
+  service:
+    url: http://127.0.0.1:8001
+    connect-timeout: 2s
+    read-timeout: 30s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

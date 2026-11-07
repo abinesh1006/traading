@@ -1,0 +1,1 @@
+"""Nifty quant research package."""
