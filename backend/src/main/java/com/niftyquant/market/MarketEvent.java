@@ -13,7 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public record MarketEvent(
         /** Date in the event's own time zone (US date for FOMC and CPI). */
         LocalDate eventDate,
-        /** Scheduled time in IST where fixed by rule; null where it varied or is unknown. */
+        /**
+         * Scheduled instant where fixed by rule; null where it varied or is unknown. Jackson normalises
+         * it to UTC on the way through, so clients must convert to Asia/Kolkata for display.
+         */
         OffsetDateTime eventTimeIst,
         String category,
         String name,

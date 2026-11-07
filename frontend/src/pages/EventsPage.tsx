@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Cell, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { api, type EventCategory, type EventImpact, type MarketEvent } from '../api'
 import { ChartTooltip } from '../components/charts'
-import { Change, ChartCard, DataTable, PageHeader, QueryState, Stat, StatStrip, StatusBadge, type Column } from '../components/ui'
+import { Card, Change, ChartCard, DataTable, PageHeader, QueryState, Stat, StatStrip, StatusBadge, type Column } from '../components/ui'
 import { date, num, pct } from '../format'
 import { useChartColors } from '../theme'
 
@@ -19,9 +19,19 @@ const CATEGORIES: Array<{ key: EventCategory; label: string }> = [
 ]
 const LABEL: Record<string, string> = Object.fromEntries(CATEGORIES.map((c) => [c.key, c.label]))
 
-/** "2026-10-28T23:30:00+05:30" -> "23:30 IST" (the date is shown separately). */
-function istTime(iso: string | null): string {
-  return iso ? `${iso.slice(11, 16)} IST` : '—'
+const IST_PARTS = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+})
+
+/** An instant (any offset, e.g. "2026-12-09T19:00:00Z") as IST clock time; flags a later IST date
+ *  than the event's own date (a Fed decision on a US date lands after midnight in India). */
+function istTime(iso: string | null, eventDate?: string): string {
+  if (!iso) return '—'
+  const parts = IST_PARTS.formatToParts(new Date(iso))
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? ''
+  const ymd = `${get('year')}-${get('month')}-${get('day')}`
+  return `${get('hour')}:${get('minute')} IST${eventDate && ymd !== eventDate ? ' (next day)' : ''}`
 }
 
 export function EventsPage() {
@@ -30,9 +40,9 @@ export function EventsPage() {
   const [category, setCategory] = useState<EventCategory | 'all'>('rbi_policy')
   const c = useChartColors()
 
-  const today = new Date().toISOString().slice(0, 10)
   const all = useMemo(() => events.data ?? [], [events.data])
-  const upcoming = (cat: EventCategory) => all.find((e) => e.category === cat && e.event_date >= today && e.reaction_session == null)
+  // Upcoming = not yet traded: no session after it in the data.
+  const upcoming = (cat: EventCategory) => all.find((e) => e.category === cat && e.reaction_session == null)
   const rows = useMemo(() => all.filter((e) => category === 'all' || e.category === category).reverse(), [all, category])
 
   const imp = (impact.data ?? []).filter((r) => r.category !== 'market_shock')
@@ -53,7 +63,7 @@ export function EventsPage() {
 
   const eventCols: Column<MarketEvent>[] = [
     { label: 'Date', value: (e) => date(e.event_date), align: 'left' },
-    { label: 'Time', value: (e) => istTime(e.event_time_ist), align: 'left' },
+    { label: 'Time', value: (e) => istTime(e.event_time_ist, e.event_date), align: 'left' },
     { label: 'Event', value: (e) => e.name, align: 'left' },
     { label: 'Source check', align: 'left', value: (e) => e.verified
         ? <StatusBadge kind="good" label={e.category === 'market_shock' ? 'Cause known' : 'Verified'} />
@@ -76,7 +86,7 @@ export function EventsPage() {
             const e = upcoming(cat)
             return (
               <Stat key={cat} label={`Next ${LABEL[cat]}`} value={e ? date(e.event_date) : '—'}
-                    sub={e ? `${e.name}${e.event_time_ist ? ` · ${istTime(e.event_time_ist)}` : ''}` : 'None scheduled in the data'} />
+                    sub={e ? `${e.name}${e.event_time_ist ? ` · ${istTime(e.event_time_ist, e.event_date)}` : ''}` : 'None scheduled in the data'} />
             )
           })}
         </StatStrip>
@@ -85,7 +95,7 @@ export function EventsPage() {
                    note={baseline ? `Line: an ordinary session (median ${pct(baseline.median_abs_move_pct, 2)}). Elections move the market most; on US CPI days Nifty moves less than usual.` : undefined}
                    table={{ columns: impactCols, rows: impact.data ?? [] }}>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={bars} layout="vertical" margin={{ top: 8, right: 24, bottom: 0, left: 8 }}>
+            <BarChart data={bars} layout="vertical" margin={{ top: 24, right: 24, bottom: 0, left: 8 }}>
               <CartesianGrid stroke={c.grid} horizontal={false} />
               <XAxis type="number" stroke={c.axis} tickLine={false} tick={{ fill: c.muted, fontSize: 11 }}
                      tickFormatter={(v: number) => pct(v, 1)} />
@@ -104,28 +114,18 @@ export function EventsPage() {
           </ResponsiveContainer>
         </ChartCard>
 
-        <section className="card">
-          <div className="card-head">
-            <div>
-              <div className="card-title">Event list</div>
-              <div className="card-sub">
-                Surprise = Nifty's move ÷ the one-day move options priced the session before (about 0.6 on an ordinary day).
-                US events reach India after the close, so the next session reacts.
-              </div>
-            </div>
-          </div>
-          <div className="filters">
-            <div className="seg" role="group" aria-label="Event type">
-              {CATEGORIES.map((x) => (
-                <button key={x.key} aria-pressed={category === x.key} onClick={() => setCategory(x.key)}>{x.label}</button>
-              ))}
-              <button aria-pressed={category === 'all'} onClick={() => setCategory('all')}>All</button>
-            </div>
-          </div>
-          <div className="table-wrap" style={{ maxHeight: 560 }}>
-            <DataTable columns={eventCols} rows={rows} />
-          </div>
-        </section>
+        <Card title="Event list" className="flush"
+              subtitle="Surprise = Nifty's move ÷ the one-day move options priced the session before (about 0.6 on an ordinary day). US events reach India after the close, so the next session reacts."
+              actions={
+                <div className="seg" role="group" aria-label="Event type">
+                  {CATEGORIES.map((x) => (
+                    <button key={x.key} aria-pressed={category === x.key} onClick={() => setCategory(x.key)}>{x.label}</button>
+                  ))}
+                  <button aria-pressed={category === 'all'} onClick={() => setCategory('all')}>All</button>
+                </div>
+              }>
+          <DataTable columns={eventCols} rows={rows} maxHeight={560} bare />
+        </Card>
       </QueryState>
     </>
   )
