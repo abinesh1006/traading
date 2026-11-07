@@ -1,4 +1,4 @@
-"""Command line: niftyquant backfill | update | premiums | fiidii | macro | fpi | status | quality | derive | pg-load | pg-status | serve"""
+"""Command line: niftyquant backfill | update | premiums | fiidii | macro | fpi | status | quality | derive | stocks | pg-load | pg-status | serve"""
 
 import argparse
 import json
@@ -42,6 +42,13 @@ def cmd_update(a) -> None:
         cmd_fpi(a)
     except Exception as e:
         logging.getLogger("niftyquant").error("NSDL FPI download failed: %s", e)
+    try:
+        print()
+        a.start, a.end, a.force = date.today() - timedelta(days=a.days), None, False
+        a.stock_datasets = None
+        cmd_stocks(a)
+    except Exception as e:  # missing days are retried on the next run
+        logging.getLogger("niftyquant").error("NSE stock bhavcopy download failed: %s", e)
     a.full = False
     cmd_derive(a)
     a.start = a.end = None
@@ -57,6 +64,14 @@ def cmd_update(a) -> None:
     except Exception as e:  # files and derived tables are updated; report the load failure
         logging.getLogger("niftyquant").error("pg-load failed: %s", e)
         raise SystemExit(1) from e
+
+
+def cmd_stocks(a) -> None:
+    """Stock closes (all NSE equities) and stock F&O for the heavyweight universe, from NSE archives."""
+    from . import stocks
+    res = stocks.fetch(a.stock_datasets or stocks.DATASETS, start=a.start, end=a.end, force=a.force)
+    if not res.empty:
+        print(res.groupby(["dataset", "result"]).size().unstack(fill_value=0).to_string())
 
 
 def cmd_macro(a) -> None:
@@ -209,6 +224,14 @@ def main(argv: list[str] | None = None) -> None:
     dv = sub.add_parser("derive", help="update derived daily tables for the API (incremental)")
     dv.add_argument("--full", action="store_true", help="recompute every day")
     dv.set_defaults(func=cmd_derive)
+
+    st = sub.add_parser("stocks", help="download stock closes (all NSE equities) and heavyweight stock F&O")
+    st.add_argument("--start", type=_date, default=date(2018, 1, 1))
+    st.add_argument("--end", type=_date, default=None)
+    st.add_argument("--datasets", dest="stock_datasets", nargs="+", default=None,
+                    choices=["cm_bhavcopy", "fo_stock"])
+    st.add_argument("--force", action="store_true", help="re-download days already done")
+    st.set_defaults(func=cmd_stocks)
 
     pl = sub.add_parser("pg-load", help="copy new or re-fetched days and derived tables into Postgres")
     pl.add_argument("--datasets", nargs="+", default=list(ALL_DATASETS), choices=ALL_DATASETS)

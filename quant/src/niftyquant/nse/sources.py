@@ -23,6 +23,21 @@ def fo_bhavcopy_candidates(d: date) -> list[tuple[str, str]]:
     return [udiff, legacy] if d >= UDIFF_START else [legacy, udiff]
 
 
+def cm_bhavcopy_udiff(d: date) -> str:
+    return f"{ARCHIVE}/content/cm/BhavCopy_NSE_CM_0_0_0_{d:%Y%m%d}_F_0000.csv.zip"
+
+
+def cm_bhavcopy_legacy(d: date) -> str:
+    mon = d.strftime("%b").upper()
+    return f"{ARCHIVE}/content/historical/EQUITIES/{d.year}/{mon}/cm{d:%d}{mon}{d.year}bhav.csv.zip"
+
+
+def cm_bhavcopy_candidates(d: date) -> list[tuple[str, str]]:
+    """(format, url) pairs to try in order; the cash market switched to UDiFF on the same day as F&O."""
+    udiff, legacy = ("udiff", cm_bhavcopy_udiff(d)), ("legacy", cm_bhavcopy_legacy(d))
+    return [udiff, legacy] if d >= UDIFF_START else [legacy, udiff]
+
+
 def participant_oi(d: date) -> str:
     return f"{ARCHIVE}/content/nsccl/fao_participant_oi_{d:%d%m%Y}.csv"
 

@@ -15,8 +15,9 @@ if ($envFile['PG_SSH_HOST']) {
     $pgHost = if ($envFile['PG_HOST']) { $envFile['PG_HOST'] } else { 'localhost' }
     $pgPort = if ($envFile['PG_PORT']) { $envFile['PG_PORT'] } else { '5432' }
     $forward = "${local}:${pgHost}:${pgPort}"
+    # Reconnects by itself: the server occasionally resets idle SSH connections.
     Start-Process powershell -ArgumentList '-NoExit', '-Command',
-        "Write-Host 'Postgres tunnel 127.0.0.1:$local -> $($envFile['PG_SSH_HOST']). Keep this window open.'; ssh -N -C -o ServerAliveInterval=30 -o ExitOnForwardFailure=yes -L $forward $($envFile['PG_SSH_HOST'])"
+        "Write-Host 'Postgres tunnel 127.0.0.1:$local -> $($envFile['PG_SSH_HOST']). Keep this window open.'; while (`$true) { ssh -N -C -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -L $forward $($envFile['PG_SSH_HOST']); Write-Host ((Get-Date).ToString('s') + ' tunnel dropped, reconnecting in 5 s'); Start-Sleep -Seconds 5 }"
     Start-Sleep -Seconds 3  # let the tunnel come up before the backend runs its migrations
 }
 

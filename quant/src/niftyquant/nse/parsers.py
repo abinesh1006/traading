@@ -68,15 +68,20 @@ def _finish_fo(out: pd.DataFrame, trade_date: date) -> pd.DataFrame:
     return out.reset_index(drop=True)
 
 
-def parse_fo_udiff(raw: bytes, trade_date: date, symbols: tuple[str, ...]) -> pd.DataFrame:
+# Instrument codes per contract kind: (UDiFF future, UDiFF option, legacy future, legacy option).
+FO_KINDS = {"index": ("IDF", "IDO", "FUTIDX", "OPTIDX"), "stock": ("STF", "STO", "FUTSTK", "OPTSTK")}
+
+
+def parse_fo_udiff(raw: bytes, trade_date: date, symbols: tuple[str, ...], kind: str = "index") -> pd.DataFrame:
+    fut, opt, _, _ = FO_KINDS[kind]
     df = _read_zipped_csv(raw)
     dates = set(df["TradDt"].unique())
     if dates != {trade_date.isoformat()}:
         raise ParseError(f"file trade dates {dates} != requested {trade_date}")
-    df = df[df["FinInstrmTp"].isin(["IDF", "IDO"]) & df["TckrSymb"].isin(symbols)]
+    df = df[df["FinInstrmTp"].isin([fut, opt]) & df["TckrSymb"].isin(symbols)]
     out = pd.DataFrame({
         "symbol": df["TckrSymb"],
-        "instrument": np.where(df["FinInstrmTp"] == "IDF", "FUT", "OPT"),
+        "instrument": np.where(df["FinInstrmTp"] == fut, "FUT", "OPT"),
         "expiry": pd.to_datetime(df["XpryDt"], format="%Y-%m-%d").dt.date,
         "strike": _num(df["StrkPric"]),
         "option_type": df["OptnTp"].str.strip().replace({"": None}),
@@ -93,13 +98,14 @@ def parse_fo_udiff(raw: bytes, trade_date: date, symbols: tuple[str, ...]) -> pd
     return _finish_fo(out, trade_date)
 
 
-def parse_fo_legacy(raw: bytes, trade_date: date, symbols: tuple[str, ...]) -> pd.DataFrame:
+def parse_fo_legacy(raw: bytes, trade_date: date, symbols: tuple[str, ...], kind: str = "index") -> pd.DataFrame:
+    _, _, fut, opt = FO_KINDS[kind]
     df = _read_zipped_csv(raw)
     dates = {datetime.strptime(t.strip(), "%d-%b-%Y").date() for t in df["TIMESTAMP"].unique()}
     if dates != {trade_date}:
         raise ParseError(f"file trade dates {dates} != requested {trade_date}")
-    df = df[df["INSTRUMENT"].isin(["FUTIDX", "OPTIDX"]) & df["SYMBOL"].isin(symbols)]
-    is_fut = df["INSTRUMENT"] == "FUTIDX"
+    df = df[df["INSTRUMENT"].isin([fut, opt]) & df["SYMBOL"].isin(symbols)]
+    is_fut = df["INSTRUMENT"] == fut
     out = pd.DataFrame({
         "symbol": df["SYMBOL"],
         "instrument": np.where(is_fut, "FUT", "OPT"),
@@ -118,6 +124,57 @@ def parse_fo_legacy(raw: bytes, trade_date: date, symbols: tuple[str, ...]) -> p
     })
     out = _finish_fo(out, trade_date)
     return derive_lot_sizes(out)
+
+
+CM_COLUMNS = ["trade_date", "symbol", "series", "isin", "open", "high", "low", "close", "last",
+              "prev_close", "volume_shares", "turnover_inr", "trades"]
+CM_SERIES = ("EQ", "BE")  # rolling settlement and trade-for-trade; other series are bonds, ETFs' units etc.
+
+
+def _finish_cm(out: pd.DataFrame, trade_date: date) -> pd.DataFrame:
+    out = out[out["series"].isin(CM_SERIES)].copy()
+    out["trade_date"] = trade_date
+    for c in ("symbol", "series", "isin"):
+        out[c] = out[c].str.strip().astype(STR_DTYPE)
+    for c in ("volume_shares", "trades"):
+        out[c] = out[c].round().astype("Int64")
+    if out.duplicated(["symbol", "series"]).any():
+        raise ParseError(f"duplicate symbol/series rows on {trade_date}")
+    return out[CM_COLUMNS].sort_values(["symbol", "series"]).reset_index(drop=True)
+
+
+def parse_cm_udiff(raw: bytes, trade_date: date) -> pd.DataFrame:
+    """Cash-market bhavcopy, UDiFF format (from 2024-07-08). prev_close is NSE's, adjusted for
+    corporate actions on the ex-date, so close / prev_close - 1 is a clean daily return."""
+    df = _read_zipped_csv(raw)
+    dates = set(df["TradDt"].unique())
+    if dates != {trade_date.isoformat()}:
+        raise ParseError(f"file trade dates {dates} != requested {trade_date}")
+    df = df[df["FinInstrmTp"] == "STK"]
+    out = pd.DataFrame({
+        "symbol": df["TckrSymb"], "series": df["SctySrs"], "isin": df["ISIN"],
+        "open": _num(df["OpnPric"]), "high": _num(df["HghPric"]), "low": _num(df["LwPric"]),
+        "close": _num(df["ClsPric"]), "last": _num(df["LastPric"]), "prev_close": _num(df["PrvsClsgPric"]),
+        "volume_shares": _num(df["TtlTradgVol"]), "turnover_inr": _num(df["TtlTrfVal"]),
+        "trades": _num(df["TtlNbOfTxsExctd"]),
+    })
+    return _finish_cm(out, trade_date)
+
+
+def parse_cm_legacy(raw: bytes, trade_date: date) -> pd.DataFrame:
+    """Cash-market bhavcopy, legacy cmDDMONYYYYbhav format (until 2024-07-05)."""
+    df = _read_zipped_csv(raw)
+    dates = {datetime.strptime(t.strip(), "%d-%b-%Y").date() for t in df["TIMESTAMP"].unique()}
+    if dates != {trade_date}:
+        raise ParseError(f"file trade dates {dates} != requested {trade_date}")
+    out = pd.DataFrame({
+        "symbol": df["SYMBOL"], "series": df["SERIES"], "isin": df["ISIN"],
+        "open": _num(df["OPEN"]), "high": _num(df["HIGH"]), "low": _num(df["LOW"]),
+        "close": _num(df["CLOSE"]), "last": _num(df["LAST"]), "prev_close": _num(df["PREVCLOSE"]),
+        "volume_shares": _num(df["TOTTRDQTY"]), "turnover_inr": _num(df["TOTTRDVAL"]),
+        "trades": _num(df["TOTALTRADES"]),
+    })
+    return _finish_cm(out, trade_date)
 
 
 def derive_lot_sizes(df: pd.DataFrame) -> pd.DataFrame:
