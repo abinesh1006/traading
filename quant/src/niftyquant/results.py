@@ -47,36 +47,67 @@ CRUSH_MIN_DAYS = 7         # measure the IV drop on the first expiry at least th
 MARKET_SHOCK = 0.20        # sessions where the market's 30-day IV moved more than this share are skipped
 BETA_SESSIONS, BETA_GAP, BETA_MIN = 250, 5, 120
 
-# Reaction sessions confirmed from news reports of the announcement (searched 2026-11-07). They
-# replace the inferred session for that quarter, and measure how often the inference is right.
-# (symbol, quarter) -> (reaction session, announcement as reported)
+# Announcements confirmed from news reports (searched 2026-11-07): (symbol, quarter) ->
+# (announcement date, released during market hours?, note). The reaction session is that day if
+# released during market hours, else the next trading session (so a Saturday release followed by a
+# Monday holiday reacts on Tuesday: HDFC Bank, 19-22 Oct 2019). They replace the inferred session
+# for that quarter and measure how often the inference is right.
+MARKET_HOURS, AFTER = True, False
 CONFIRMED = {
-    ("TCS", "Q3 FY18"): (date(2018, 1, 12), "11 Jan 2018, after the close"),
-    ("AXISBANK", "Q4 FY19"): (date(2019, 4, 26), "25 Apr 2019, after market hours"),
-    ("ITC", "Q3 FY21"): (date(2021, 2, 12), "11 Feb 2021; fell in early trade on Friday"),
-    ("INFY", "Q2 FY23"): (date(2022, 10, 14), "13 Oct 2022 (with Rs 9,300 cr buyback); rose next day"),
-    ("SBIN", "Q4 FY23"): (date(2023, 5, 18), "18 May 2023, during market hours"),
-    ("ICICIBANK", "Q1 FY24"): (date(2023, 7, 24), "Saturday 22 Jul 2023"),
-    ("RELIANCE", "Q2 FY24"): (date(2023, 10, 30), "Friday 27 Oct 2023, after the close"),
-    ("LT", "Q2 FY24"): (date(2023, 11, 1), "31 Oct 2023, after the close"),
-    ("HDFCBANK", "Q3 FY19"): (date(2019, 1, 21), "Saturday 19 Jan 2019"),
-    ("HDFCBANK", "Q1 FY20"): (date(2019, 7, 22), "Saturday 20 Jul 2019"),
-    ("HDFCBANK", "Q3 FY20"): (date(2020, 1, 20), "Saturday 18 Jan 2020"),
-    ("HDFCBANK", "Q2 FY21"): (date(2020, 10, 19), "Saturday 17 Oct 2020"),
-    ("HDFCBANK", "Q3 FY22"): (date(2022, 1, 17), "Saturday 15 Jan 2022"),
-    ("HDFCBANK", "Q4 FY22"): (date(2022, 4, 18), "Saturday 16 Apr 2022"),
-    ("HDFCBANK", "Q2 FY23"): (date(2022, 10, 17), "Saturday 15 Oct 2022"),
-    ("HDFCBANK", "Q4 FY23"): (date(2023, 4, 17), "Saturday 15 Apr 2023"),
-    ("HDFCBANK", "Q3 FY24"): (date(2024, 1, 17), "16 Jan 2024; fell 8.5% on 17 Jan"),
-    ("HDFCBANK", "Q1 FY25"): (date(2024, 7, 22), "Saturday 20 Jul 2024"),
-    ("HDFCBANK", "Q4 FY25"): (date(2025, 4, 21), "Saturday 19 Apr 2025 (Friday was Good Friday)"),
-    ("BAJFINANCE", "Q3 FY24"): (date(2024, 1, 30), "29 Jan 2024, after market hours"),
-    ("BHARTIARTL", "Q3 FY24"): (date(2024, 2, 6), "5 Feb 2024, after the close"),
-    ("KOTAKBANK", "Q4 FY24"): (date(2024, 5, 6), "Saturday 4 May 2024"),
-    ("TCS", "Q1 FY25"): (date(2024, 7, 12), "11 Jul 2024, after the close"),
-    ("INFY", "Q1 FY25"): (date(2024, 7, 19), "18 Jul 2024, after the close"),
-    ("RELIANCE", "Q1 FY25"): (date(2024, 7, 22), "Friday 19 Jul 2024, after the close"),
+    ("TCS", "Q3 FY18"): (date(2018, 1, 11), AFTER, "after the close"),
+    ("AXISBANK", "Q4 FY19"): (date(2019, 4, 25), AFTER, "after market hours"),
+    ("ITC", "Q3 FY21"): (date(2021, 2, 11), AFTER, "fell in early trade the next day"),
+    ("INFY", "Q2 FY23"): (date(2022, 10, 13), AFTER, "with a Rs 9,300 cr buyback; rose next day"),
+    ("SBIN", "Q4 FY23"): (date(2023, 5, 18), MARKET_HOURS, "shares closed 2% lower that day"),
+    ("ICICIBANK", "Q1 FY24"): (date(2023, 7, 22), AFTER, "Saturday"),
+    ("RELIANCE", "Q2 FY24"): (date(2023, 10, 27), AFTER, "Friday, after the close"),
+    ("LT", "Q2 FY24"): (date(2023, 10, 31), AFTER, "after the close"),
+    ("BAJFINANCE", "Q3 FY24"): (date(2024, 1, 29), AFTER, "after market hours"),
+    ("BHARTIARTL", "Q3 FY24"): (date(2024, 2, 5), AFTER, "after the close; rose next morning"),
+    ("KOTAKBANK", "Q4 FY24"): (date(2024, 5, 4), AFTER, "Saturday"),
+    ("TCS", "Q1 FY25"): (date(2024, 7, 11), AFTER, "after the close"),
+    ("INFY", "Q1 FY25"): (date(2024, 7, 18), AFTER, "after the close"),
+    ("RELIANCE", "Q1 FY25"): (date(2024, 7, 19), AFTER, "Friday, after the close"),
+    # HDFC Bank mostly reports on Saturdays; its IV barely reacts, so its dates are confirmed one by one.
+    ("HDFCBANK", "Q1 FY19"): (date(2018, 7, 21), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY19"): (date(2018, 10, 20), AFTER, "Saturday"),
+    ("HDFCBANK", "Q3 FY19"): (date(2019, 1, 19), AFTER, "Saturday"),
+    ("HDFCBANK", "Q4 FY19"): (date(2019, 4, 20), AFTER, "Saturday"),
+    ("HDFCBANK", "Q1 FY20"): (date(2019, 7, 20), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY20"): (date(2019, 10, 19), AFTER, "Saturday; Monday was a market holiday"),
+    ("HDFCBANK", "Q3 FY20"): (date(2020, 1, 18), AFTER, "Saturday"),
+    ("HDFCBANK", "Q4 FY20"): (date(2020, 4, 18), AFTER, "Saturday"),
+    ("HDFCBANK", "Q1 FY21"): (date(2020, 7, 18), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY21"): (date(2020, 10, 17), AFTER, "Saturday"),
+    ("HDFCBANK", "Q3 FY21"): (date(2021, 1, 16), AFTER, "Saturday"),
+    ("HDFCBANK", "Q1 FY22"): (date(2021, 7, 17), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY22"): (date(2021, 10, 16), AFTER, "Saturday"),
+    ("HDFCBANK", "Q3 FY22"): (date(2022, 1, 15), AFTER, "Saturday"),
+    ("HDFCBANK", "Q4 FY22"): (date(2022, 4, 16), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY23"): (date(2022, 10, 15), AFTER, "Saturday"),
+    ("HDFCBANK", "Q4 FY23"): (date(2023, 4, 15), AFTER, "Saturday"),
+    ("HDFCBANK", "Q3 FY24"): (date(2024, 1, 16), AFTER, "closed higher that day, fell 8.5% the next"),
+    ("HDFCBANK", "Q4 FY24"): (date(2024, 4, 20), AFTER, "Saturday"),
+    ("HDFCBANK", "Q1 FY25"): (date(2024, 7, 20), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY25"): (date(2024, 10, 19), AFTER, "Saturday"),
+    ("HDFCBANK", "Q3 FY25"): (date(2025, 1, 22), MARKET_HOURS, "shares rose the same day"),
+    ("HDFCBANK", "Q4 FY25"): (date(2025, 4, 19), AFTER, "Saturday (Friday was Good Friday)"),
+    ("HDFCBANK", "Q1 FY26"): (date(2025, 7, 19), AFTER, "Saturday, with a 1:1 bonus"),
+    ("HDFCBANK", "Q2 FY26"): (date(2025, 10, 18), AFTER, "Saturday"),
+    ("HDFCBANK", "Q2 FY27"): (date(2026, 10, 17), AFTER, "Saturday"),
 }
+
+
+def confirmed_sessions(sessions: list[date], confirmed: dict | None = None) -> dict:
+    """(symbol, quarter) -> reaction session of each confirmed announcement on this trading calendar."""
+    confirmed = CONFIRMED if confirmed is None else confirmed
+    out = {}
+    for key, (announced, in_hours, _) in confirmed.items():
+        later = [d for d in sessions if (d >= announced if in_hours else d > announced)]
+        if later and (not in_hours or later[0] == announced):
+            out[key] = later[0]
+    return out
+
 
 COLUMNS = ["symbol", "quarter", "quarter_end", "reaction_session", "pre_session", "source",
            "inferred_session", "iv_drop_pts", "market_iv_drop_pts", "idio_iv_drop_pts", "detect_score", "detect_margin",
@@ -314,7 +345,8 @@ def build() -> pd.DataFrame:
     rets = stock_returns(stocks.read_cm(start - timedelta(days=500), end, symbols=list(stocks.UNIVERSE)),
                          dm.set_index("trade_date")["spot_return_pct"])
     drops = iv_drops(iv, market_iv)
-    cal = apply_confirmed(infer_calendar(drops, start, end), drops)
+    known = {k: d for k, d in confirmed_sessions(sorted(dm["trade_date"])).items() if start <= d <= end}
+    cal = apply_confirmed(infer_calendar(drops, start, end), drops, known)
     from . import nifty_weights
     ev = measure(cal, rets, iv, dm, market_iv, analytics.load_derived(nifty_weights.FILE))
     return ev.sort_values(["reaction_session", "symbol"]).reset_index(drop=True)
@@ -326,14 +358,14 @@ def quarter_end_of(label: str) -> date:
     return {1: date(fy - 1, 6, 30), 2: date(fy - 1, 9, 30), 3: date(fy - 1, 12, 31), 4: date(fy, 3, 31)}[q]
 
 
-def apply_confirmed(cal: pd.DataFrame, drops: pd.DataFrame, confirmed: dict | None = None) -> pd.DataFrame:
-    """Use confirmed reaction sessions where known; keep the inferred one in inferred_session."""
-    confirmed = CONFIRMED if confirmed is None else confirmed
+def apply_confirmed(cal: pd.DataFrame, drops: pd.DataFrame, confirmed: dict) -> pd.DataFrame:
+    """Use confirmed reaction sessions ((symbol, quarter) -> session, from confirmed_sessions) where
+    known; keep the inferred one in inferred_session."""
     cal = cal.assign(inferred_session=cal["reaction_session"]) if len(cal) else \
         pd.DataFrame(columns=[*cal.columns, "inferred_session"])
     stats = ["iv_drop_pts", "market_iv_drop_pts", "idio_iv_drop_pts"]
     at = drops.set_index(["symbol", "reaction_session"])[stats]
-    for (sym, q), (sess, _) in confirmed.items():
+    for (sym, q), sess in confirmed.items():
         m = (cal["symbol"] == sym) & (cal["quarter"] == q)
         if not m.any():
             cal = pd.concat([cal, pd.DataFrame([{"symbol": sym, "quarter": q, "quarter_end": quarter_end_of(q),

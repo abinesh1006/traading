@@ -144,3 +144,15 @@ def test_results_check_lists_dates_to_confirm_for_weak_stocks():
     ev["detect_score"] = 4.0
     todo = results.check(ev)["result_dates_to_confirm"]
     assert todo[["symbol", "quarter"]].values.tolist() == [["HDFCBANK", "Q4 FY24"]]
+
+
+def test_confirmed_sessions_follow_the_trading_calendar():
+    # HDFC Bank's Saturday 19 Oct 2019 release: Monday 21 Oct was a market holiday, so Tuesday reacts.
+    sessions = [date(2019, 10, 18), date(2019, 10, 22), date(2019, 10, 23)]
+    conf = {("HDFCBANK", "Q2 FY20"): (date(2019, 10, 19), False, ""),
+            ("SBIN", "Q2 FY20"): (date(2019, 10, 22), True, ""),      # in market hours: same day
+            ("TCS", "Q2 FY20"): (date(2019, 10, 22), False, ""),      # after the close: next session
+            ("ITC", "Q2 FY20"): (date(2019, 10, 20), True, "")}       # "market hours" on a Sunday: dropped
+    assert results.confirmed_sessions(sessions, conf) == {
+        ("HDFCBANK", "Q2 FY20"): date(2019, 10, 22), ("SBIN", "Q2 FY20"): date(2019, 10, 22),
+        ("TCS", "Q2 FY20"): date(2019, 10, 23)}
