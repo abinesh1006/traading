@@ -242,3 +242,26 @@ def greeks_path(d: date) -> Path:
 def read_day(d: date) -> pd.DataFrame | None:
     p = greeks_path(d)
     return pd.read_parquet(p) if p.exists() else None
+
+
+def check(iv: pd.DataFrame, fo_days: list[date], start: date | None = None,
+          end: date | None = None) -> dict[str, pd.DataFrame]:
+    """Quality checks on the IV summary. `fo_days`: days with an F&O file (each needs Greeks)."""
+    days = [d for d in fo_days if (start is None or d >= start) and (end is None or d <= end)]
+    if iv.empty:
+        return {"iv_summary_missing": pd.DataFrame({"message": ["no iv_daily; run `niftyquant derive`"]})}
+    iv = iv[iv["trade_date"].isin(days)]
+    no_files = [d for d in days if not greeks_path(d).exists()]
+    no_summary = sorted(set(days) - set(iv["trade_date"]))
+    gap = iv["vix_close"] - iv["iv_30d"]
+    return {
+        "greeks_missing_days": pd.DataFrame({"trade_date": sorted(set(no_files) | set(no_summary))}),
+        "iv_atm_missing": iv[iv["near_atm_iv"].isna() | iv["iv_30d"].isna()][["trade_date"]],
+        # Normally VIX runs 0-4 points over 30-day ATM IV. Flag big gaps: a bad forward, stale
+        # prices, or a real extreme (March 2020: ATM IV 10-14 points over VIX). Verify, may be real.
+        "iv_30d_vs_vix_gap": iv[gap.abs() > np.maximum(6, 0.15 * iv["vix_close"])]
+                             [["trade_date", "iv_30d", "vix_close"]],
+        # Wings priced under ATM: not a real smile, usually stale prices on thin strikes.
+        "iv_smile_implausible": iv[iv["bf_25d"] < -1][["trade_date", "skew_expiry", "iv_25d_put",
+                                                       "skew_atm_iv", "iv_25d_call", "bf_25d"]],
+    }

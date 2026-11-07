@@ -105,3 +105,20 @@ def test_summary_ignores_illiquid_wing(nov6):
     # Corrupting the thin strikes' IV leaves ATM IV unchanged.
     bad = gv.assign(iv_pct=gv["iv_pct"].mask(gv.index.isin(thin_traded.index), 1.0))
     assert greeks.summarize_iv(bad, d)["near_atm_iv"] == pytest.approx(greeks.summarize_iv(gv, d)["near_atm_iv"])
+
+
+def test_quality_checks_flag_gaps_and_bad_smiles(tmp_path, monkeypatch):
+    from niftyquant import config
+    monkeypatch.setattr(config, "DATA_DIR", tmp_path)
+    d1, d2, d3 = date(2026, 11, 4), date(2026, 11, 5), date(2026, 11, 6)
+    for d in (d1, d2):
+        greeks.greeks_path(d).parent.mkdir(parents=True, exist_ok=True)
+        greeks.greeks_path(d).write_bytes(b"")
+    iv = pd.DataFrame({"trade_date": [d1, d2], "near_atm_iv": [15.0, 16.0], "iv_30d": [14.0, 30.0],
+                       "vix_close": [15.5, 17.0], "skew_expiry": [d3, d3], "iv_25d_put": [16.0, 13.0],
+                       "skew_atm_iv": [14.0, 16.0], "iv_25d_call": [13.5, 12.0], "bf_25d": [0.75, -3.5]})
+    r = greeks.check(iv, [d1, d2, d3])
+    assert r["greeks_missing_days"]["trade_date"].tolist() == [d3]
+    assert r["iv_atm_missing"].empty
+    assert r["iv_30d_vs_vix_gap"]["trade_date"].tolist() == [d2]
+    assert r["iv_smile_implausible"]["trade_date"].tolist() == [d2]

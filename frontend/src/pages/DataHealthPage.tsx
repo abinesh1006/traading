@@ -22,6 +22,10 @@ const CHECK_LABELS: Record<string, string> = {
   underlying_vs_index_gt_0_1pct: 'Bhavcopy underlying vs index close > 0.1%',
   spot_daily_move_gt_8pct: 'Nifty daily move > 8% (verify, may be real)',
   participant_oi_long_ne_short: 'Participant OI: total long ≠ total short',
+  greeks_missing_days: 'F&O day without IV/Greeks',
+  iv_atm_missing: 'Day without ATM implied volatility',
+  iv_30d_vs_vix_gap: '30-day ATM IV far from India VIX (verify, may be real)',
+  iv_smile_implausible: 'IV smile wings below ATM (stale prices?)',
 }
 
 const problems = (t: Record<string, number>) => (t.missing ?? 0) + (t.error ?? 0)

@@ -82,6 +82,9 @@ def run(start: date | None = None, end: date | None = None,
     if not fo.empty:
         results |= check_fo(fo, idx)
     results |= check_participants(poi)
+    from . import analytics, greeks  # IV and Greeks (derived; checks owned by greeks.py)
+    fo_days = sorted(date.fromisoformat(p.stem) for p in analytics._fo_files())
+    results |= greeks.check(analytics.load_derived(analytics.IV_DAILY), fo_days, start, end)
     from . import fiidii, macro, nsdl
     results |= macro.check(macro.read())
     sessions = idx["trade_date"].unique() if not idx.empty else None
