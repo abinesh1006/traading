@@ -350,3 +350,18 @@ def validate(ev: pd.DataFrame) -> pd.DataFrame:
     c = ev[ev["source"] == "confirmed"][["symbol", "quarter", "reaction_session", "inferred_session"]].copy()
     c["match"] = c["reaction_session"] == c["inferred_session"]
     return c.reset_index(drop=True)
+
+
+WEAK_ACCURACY, WEAK_MIN_CONFIRMED = 0.8, 3
+
+
+def check(ev: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """Inferred result dates that need confirming: those of stocks whose confirmed dates the
+    inference mostly misses (HDFC Bank). Confirm them from news and add them to CONFIRMED."""
+    if ev.empty:
+        return {"results_missing": pd.DataFrame({"message": ["no results; run `niftyquant results`"]})}
+    v = validate(ev)
+    acc = v.groupby("symbol")["match"].agg(["mean", "size"])
+    weak = acc[(acc["size"] >= WEAK_MIN_CONFIRMED) & (acc["mean"] < WEAK_ACCURACY)].index
+    todo = ev[(ev["source"] == "inferred") & ev["symbol"].isin(weak)]
+    return {"result_dates_to_confirm": todo[["symbol", "quarter", "reaction_session", "detect_score"]]}

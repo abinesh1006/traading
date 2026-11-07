@@ -170,3 +170,16 @@ def build(symbols=stocks.UNIVERSE) -> tuple[pd.DataFrame, pd.DataFrame]:
                  lo, hi, stats["residual_sd_points"], stats["weight_sum_pct"])
     df = pd.concat(out, ignore_index=True) if out else pd.DataFrame(columns=COLUMNS)
     return df.sort_values(["trade_date", "symbol"]).reset_index(drop=True), pd.DataFrame(fits)
+
+
+FIT_RESIDUAL_MAX = 3.0     # index points per day
+FIT_SUM_TOLERANCE = 5.0    # percentage points around 100%
+
+
+def check(fits: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """Fit windows whose weights reproduce the index poorly (a member or share change mid-window)."""
+    if fits.empty:
+        return {"nifty_weights_missing": pd.DataFrame({"message": ["no weight fits; run `niftyquant derive`"]})}
+    bad = fits[(fits["residual_sd_points"] > FIT_RESIDUAL_MAX)
+               | ((fits["weight_sum_pct"] - 100).abs() > FIT_SUM_TOLERANCE)]
+    return {"nifty_weight_fit_poor": bad}

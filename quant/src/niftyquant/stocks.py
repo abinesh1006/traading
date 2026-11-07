@@ -151,3 +151,16 @@ def read_fo_stock(start: date | None = None, end: date | None = None) -> pd.Data
 
 def has_day(dataset: str, d: date) -> bool:
     return day_path(dataset, d).exists()
+
+
+def check(manifest: pd.DataFrame, start: date | None = None, end: date | None = None) -> dict[str, pd.DataFrame]:
+    """Sessions since START with no file for a stock dataset: never fetched, failed, or not yet
+    published (status from the manifest; blank = never attempted). NSE lacks the F&O file for
+    2021-03-30, so fo_stock is always missing that day."""
+    days = sessions(max(start or START, START), end)
+    df = pd.DataFrame([(ds, d) for ds in DATASETS for d in days if not has_day(ds, d)],
+                      columns=["dataset", "trade_date"])
+    if not df.empty and not manifest.empty:
+        m = manifest[manifest["dataset"].isin(DATASETS)].assign(trade_date=lambda x: x["trade_date"].dt.date)
+        df = df.merge(m[["dataset", "trade_date", "status", "message"]], on=["dataset", "trade_date"], how="left")
+    return {"stock_days_missing": df}

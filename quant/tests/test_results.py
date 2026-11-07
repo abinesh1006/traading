@@ -125,3 +125,22 @@ def test_atm_iv_reused_from_greeks():
                       "option_type": ["PE", "PE", "PE", "CE", "CE", "CE"], "iv_pct": [30, 25, 0, 0, 24, 22.0],
                       "volume_contracts": [100] * 6})
     assert greeks.atm_iv(e) == pytest.approx(24.0)
+
+
+def test_weight_fit_check_flags_poor_windows():
+    from niftyquant import nifty_weights
+    fits = pd.DataFrame({"window_start": [date(2024, 4, 1), date(2024, 10, 1), date(2025, 4, 1)],
+                         "residual_sd_points": [1.3, 9.7, 0.8], "weight_sum_pct": [100.0, 99.8, 108.4]})
+    bad = nifty_weights.check(fits)["nifty_weight_fit_poor"]
+    assert bad["window_start"].tolist() == [date(2024, 10, 1), date(2025, 4, 1)]
+
+
+def test_results_check_lists_dates_to_confirm_for_weak_stocks():
+    rows = [("HDFCBANK", f"Q{i} FY24", "confirmed", date(2024, i, 10), date(2024, i, 20)) for i in (1, 2, 3)]
+    rows += [("TCS", f"Q{i} FY24", "confirmed", date(2024, i, 12), date(2024, i, 12)) for i in (1, 2, 3)]
+    rows += [("HDFCBANK", "Q4 FY24", "inferred", date(2024, 4, 22), date(2024, 4, 22)),
+             ("TCS", "Q4 FY24", "inferred", date(2024, 4, 12), date(2024, 4, 12))]
+    ev = pd.DataFrame(rows, columns=["symbol", "quarter", "source", "reaction_session", "inferred_session"])
+    ev["detect_score"] = 4.0
+    todo = results.check(ev)["result_dates_to_confirm"]
+    assert todo[["symbol", "quarter"]].values.tolist() == [["HDFCBANK", "Q4 FY24"]]
