@@ -3,10 +3,12 @@
 #
 # Everything lives under ~/niftyquant and listens on 127.0.0.1 only: reach it through an SSH tunnel
 # (scripts\deploy_refinepoint.ps1 prints the command). Nothing system-wide is installed or changed:
-# no sudo, no systemd unit, no nginx site. A user crontab @reboot line restarts it after a reboot.
+# no sudo, no systemd unit, no nginx site. It does not restart after a server reboot unless you opt in
+# with `server.sh enable-boot` (a user crontab @reboot line; undo with `disable-boot`).
 #
 #   server.sh install   unpack incoming/{src,web}.tar.gz, update the venv, build the backend jar
 #   server.sh start | stop | restart | status
+#   server.sh enable-boot | disable-boot   opt-in restart after a server reboot
 #
 # Layout: app.jar, web/ (built React app), venv/ (research API), data/ (Parquet copy), env (PG_*,
 # chmod 600), logs/. The backend reads Postgres on this machine with Flyway disabled: migrations and
@@ -47,11 +49,19 @@ do_install() {
   mv app.jar.new app.jar
   # `command`: run the coreutils binary, not a shell function of the same name.
   command install -m 755 src/scripts/refinepoint/server.sh "$ROOT/server.sh"
+  log "installed (no auto-start after a server reboot unless you run: server.sh enable-boot)"
+}
 
-  # Restart after a reboot (user crontab; idempotent).
+# Opt-in: restart the app after a server reboot through a user crontab @reboot line.
+do_enable_boot() {
   local line="@reboot $ROOT/server.sh start >> $ROOT/logs/cron.log 2>&1"
   ( crontab -l 2>/dev/null | grep -vF "$ROOT/server.sh start" ; echo "$line" ) | crontab -
-  log "installed"
+  log "enabled: starts after a reboot"
+}
+
+do_disable_boot() {
+  ( crontab -l 2>/dev/null | grep -vF "$ROOT/server.sh start" ) | crontab -
+  log "disabled auto-start after a reboot"
 }
 
 running() { [ -f "$1" ] && kill -0 "$(cat "$1")" 2>/dev/null; }
@@ -121,5 +131,7 @@ case "${1:-status}" in
   stop) do_stop ;;
   restart) do_stop; do_start ;;
   status) do_status ;;
-  *) echo "usage: server.sh install|start|stop|restart|status"; exit 2 ;;
+  enable-boot) do_enable_boot ;;
+  disable-boot) do_disable_boot ;;
+  *) echo "usage: server.sh install|start|stop|restart|status|enable-boot|disable-boot"; exit 2 ;;
 esac
