@@ -12,6 +12,7 @@ import {
 import { date, num, pct, signClass } from '../format'
 import { filterRange, RangeFilter, useRange } from '../range'
 import { IntradayRow } from '../live'
+import { useStrategyChain } from '../useStrategyChain'
 import { useChartColors, type ChartColors } from '../theme'
 
 const signed = (v: number, digits: number) => `${v > 0 ? '+' : ''}${num(v, digits)}`
@@ -36,13 +37,7 @@ export function MarketPage() {
   const last = all[all.length - 1]
   const latest = last?.trade_date
 
-  // Chain for the strategy: nearest expiry, or the next one when the nearest is under 2 days away.
-  const c1 = useQuery({ queryKey: ['chain', latest, undefined], queryFn: () => api.chain(latest!), enabled: !!latest })
-  const nearDte = c1.data ? daysBetween(c1.data.trade_date, c1.data.expiry) : null
-  const nextExp = c1.data && nearDte != null && nearDte < 2
-    ? c1.data.expiries.find((e) => daysBetween(c1.data!.trade_date, e) >= 2) : undefined
-  const c2 = useQuery({ queryKey: ['chain', latest, nextExp], queryFn: () => api.chain(latest!, nextExp), enabled: !!nextExp })
-  const chain = nextExp ? c2.data : c1.data
+  const chain = useStrategyChain(latest)
 
   const computedAt = q.dataUpdatedAt ? new Date(q.dataUpdatedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : null
 

@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState, type ReactElement } from 'react'
-import { NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect, useState, type ReactElement } from 'react'
+import { NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { api } from './api'
+import { Brief } from './brief'
 import { LiveTicker, MarketStrip } from './live'
 import { useLive } from './useLive'
 import { date, num, pct, signClass } from './format'
@@ -108,6 +109,23 @@ function Ticker() {
 export default function App() {
   const [theme, setTheme] = useState<ThemeChoice>(loadTheme)
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const [briefOpen, setBriefOpen] = useState(false)
+  const showBrief = briefOpen || pathname === '/brief'
+  const closeBrief = () => {
+    setBriefOpen(false)
+    if (pathname === '/brief') navigate('/market')
+  }
+  // "B" opens the Market Brief from anywhere (not while typing in a field).
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null
+      if (e.ctrlKey || e.metaKey || e.altKey || (t && /^(input|select|textarea)$/i.test(t.tagName))) return
+      if (e.key.toLowerCase() === 'b') { e.preventDefault(); setBriefOpen(true) }
+    }
+    window.addEventListener('keydown', key)
+    return () => window.removeEventListener('keydown', key)
+  }, [])
   const here = NAV.find((n) => pathname.startsWith(n.to))?.label ?? 'Market overview'
   const cycle = () => {
     const next = NEXT[theme]
@@ -126,6 +144,10 @@ export default function App() {
         </nav>
         <div className="topbar-spacer" />
         <TopQuotes />
+        <button className="icon-btn brief-btn" onClick={() => setBriefOpen(true)} title="Market Brief: one-screen summary (B)">
+          <svg {...svg}><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4M7 12l3-3 2 2 4-4" /></svg>
+          Brief
+        </button>
         <button className="icon-btn ghost" onClick={cycle} aria-label={THEME_LABEL[theme]} title={THEME_LABEL[theme]}>
           {THEME_ICON[theme]}
         </button>
@@ -141,6 +163,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/market" replace />} />
             <Route path="/market" element={<MarketPage />} />
+            <Route path="/brief" element={<MarketPage />} />
             <Route path="/chain" element={<ChainPage />} />
             <Route path="/positioning" element={<ParticipantsPage />} />
             <Route path="/events" element={<EventsPage />} />
@@ -150,6 +173,7 @@ export default function App() {
           </Routes>
         </main>
       </div>
+      {showBrief && <Brief onClose={closeBrief} />}
     </div>
   )
 }
