@@ -6,6 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "pandas>=2.2",
     "pyarrow>=16",
+    "scipy>=1.13",
     "requests>=2.32",
     "fastapi>=0.115",
     "uvicorn>=0.30",
