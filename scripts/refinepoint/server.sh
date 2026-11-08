@@ -21,7 +21,7 @@ mkdir -p logs
 
 log() { echo "[$(date '+%F %T')] $*"; }
 
-install() {
+do_install() {
   log "unpacking source and web build"
   rm -rf src.new web.new && mkdir src.new web.new
   tar -xzf incoming/src.tar.gz -C src.new
@@ -45,7 +45,8 @@ install() {
   mv src.new src
   mv web.new web
   mv app.jar.new app.jar
-  install -m 755 src/scripts/refinepoint/server.sh "$ROOT/server.sh"
+  # `command`: run the coreutils binary, not a shell function of the same name.
+  command install -m 755 src/scripts/refinepoint/server.sh "$ROOT/server.sh"
 
   # Restart after a reboot (user crontab; idempotent).
   local line="@reboot $ROOT/server.sh start >> $ROOT/logs/cron.log 2>&1"
@@ -60,7 +61,7 @@ wait_http() {  # url, seconds
   return 1
 }
 
-start() {
+do_start() {
   [ -f env ] || { echo "missing $ROOT/env (PG_* settings)"; exit 1; }
   set -a; . "$ROOT/env"; set +a
 
@@ -93,7 +94,7 @@ start() {
   log "up: http://127.0.0.1:$BACKEND_PORT"
 }
 
-stop() {
+do_stop() {
   for p in backend.pid quant.pid; do
     if running "$p"; then
       kill "$(cat "$p")"
@@ -105,7 +106,7 @@ stop() {
   done
 }
 
-status() {
+do_status() {
   for svc in "research API|http://127.0.0.1:$QUANT_PORT/health" "backend|http://127.0.0.1:$BACKEND_PORT/actuator/health"; do
     name="${svc%%|*}"; url="${svc#*|}"
     if curl -fs -o /dev/null "$url"; then echo "$name: up ($url)"; else echo "$name: DOWN"; fi
@@ -115,10 +116,10 @@ status() {
 }
 
 case "${1:-status}" in
-  install) install ;;
-  start) start ;;
-  stop) stop ;;
-  restart) stop; start ;;
-  status) status ;;
+  install) do_install ;;
+  start) do_start ;;
+  stop) do_stop ;;
+  restart) do_stop; do_start ;;
+  status) do_status ;;
   *) echo "usage: server.sh install|start|stop|restart|status"; exit 2 ;;
 esac

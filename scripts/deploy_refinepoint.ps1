@@ -3,6 +3,7 @@ Deploy Nifty Quant to the RefinePoint dev server (the PG_SSH_HOST in .env).
 
   powershell -ExecutionPolicy Bypass -File scripts\deploy_refinepoint.ps1            # app + core data
   powershell -ExecutionPolicy Bypass -File scripts\deploy_refinepoint.ps1 -DataOnly  # refresh data only
+  powershell -ExecutionPolicy Bypass -File scripts\deploy_refinepoint.ps1 -SkipData  # app only
   ... -ChainYears 2024,2025,2026                                                     # option-chain days to copy
 
 What it does:
@@ -17,6 +18,7 @@ printed at the end. The server never migrates or loads Postgres: that stays with
 #>
 param(
     [switch]$DataOnly,
+    [switch]$SkipData,
     [int[]]$ChainYears = @((Get-Date).Year)
 )
 # Native tools (npm, git, ssh, scp, tar) write progress to stderr; failures are caught by exit code.
@@ -72,6 +74,7 @@ try {
         Invoke-Remote "cd ~/$remoteRoot && chmod 600 env.new && mv env.new env"
     }
 
+    if (-not $SkipData) {
     Write-Host "Packing data (chain years: $($ChainYears -join ', '))..."
     $data = "$root\data"
     $items = @('manifest.sqlite', 'reports') +
@@ -86,6 +89,7 @@ try {
     Write-Host ("Uploading data ({0:N1} MB)..." -f $mb)
     Send-File "$work\data.tar.gz" "$remoteRoot/incoming/data.tar.gz"
     Invoke-Remote "cd ~/$remoteRoot && tar -xzf incoming/data.tar.gz -C data && rm incoming/data.tar.gz"
+    }
 
     if ($DataOnly) {
         Invoke-Remote "~/$remoteRoot/server.sh status"
