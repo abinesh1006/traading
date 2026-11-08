@@ -97,11 +97,70 @@ def test_feed_keeps_latest_tick_and_builds_minute_bars():
     f.on_message({"type": "cn", "code": 200, "message": "Authentication done", "s": "ok"}, "t")
     snap = f.snapshot()
     assert snap["state"] == "live" and snap["ticks"]["NSE:NIFTY50-INDEX"]["ltp"] == 101.0
-    assert snap["bars"] == [[t0, 100.0, 103.0, 99.0, 99.0], [t0 + 60, 101.0, 101.0, 101.0, 101.0]]
+    assert snap["bars"]["NSE:NIFTY50-INDEX"] == [[t0, 100.0, 103.0, 99.0, 99.0, None, None],
+                                                 [t0 + 60, 101.0, 101.0, 101.0, 101.0, None, None]]
     f.on_message({"symbol": "NSE:NIFTY50-INDEX", "ltp": 1.0}, "old-token")  # from a replaced socket
     assert f.snapshot()["ticks"]["NSE:NIFTY50-INDEX"]["ltp"] == 101.0
     f.on_message({"type": "cn", "s": "error", "message": "Token is expired"}, "t")
     assert (f.snapshot()["state"], f.snapshot()["message"]) == ("error", "Token is expired")
+
+
+FUT = "NSE:NIFTY26NOVFUT"
+
+
+def _fut_ticks(f, t0):
+    # Cumulative volume 1000 -> 1600 inside the first minute, -> 1900 in the second.
+    for dt, px, vol, oi in [(1, 25000.0, 1000, 5_000_000), (30, 25010.0, 1400, 5_010_000),
+                            (59, 24995.0, 1600, 5_020_000), (61, 25005.0, 1750, 5_020_000),
+                            (90, 25020.0, 1900, 5_030_000)]:
+        f.on_message({"symbol": FUT, "ltp": px, "vol_traded_today": vol, "OI": oi, "exch_feed_time": t0 + dt}, "t")
+
+
+def test_future_bars_carry_minute_volume_and_oi():
+    f = live.Feed()
+    f.token = "t"
+    t0 = int(at(2026, 11, 9, 9, 15).timestamp())
+    _fut_ticks(f, t0)
+    assert f.snapshot()["bars"][FUT] == [[t0, 25000.0, 25010.0, 24995.0, 24995.0, 600.0, 5_020_000.0],
+                                         [t0 + 60, 25005.0, 25020.0, 25005.0, 25020.0, 300.0, 5_030_000.0]]
+
+
+def test_completed_minutes_are_recorded_and_restored(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CURATED_DIR", tmp_path)
+    f = live.Feed()
+    f.token = "t"
+    t0 = int(at(2026, 11, 9, 9, 15).timestamp())
+    _fut_ticks(f, t0)
+    assert f.flush(now=t0 + 95) == 1            # the 09:16 minute is still in progress
+    assert f.flush(now=t0 + 96) == 1            # still dirty: rewritten, same single row
+    assert f.flush(now=t0 + 130) == 2
+    assert f.flush(now=t0 + 140) == 0           # nothing new
+    df = live.read_bars(date(2026, 11, 9))
+    assert list(df.columns) == live.BAR_COLUMNS and len(df) == 2
+    assert df["minute"].iloc[0] == pd.Timestamp("2026-11-09 09:15", tz=IST) and df["volume"].tolist() == [600, 300]
+
+    g = live.Feed()                              # an API restart mid-session
+    g.restore(date(2026, 11, 9), [FUT, "NSE:NIFTY50-INDEX"])
+    assert g.snapshot()["bars"][FUT] == f.snapshot()["bars"][FUT]
+
+
+def test_history_candles_fill_minutes_before_the_feed(monkeypatch):
+    f = live.Feed()
+    f.token = "t"
+    t0 = int(datetime.now(IST).replace(second=0, microsecond=0).timestamp()) - 600
+    f._add_tick(FUT, t0 + 120, 101.0, 50, 7.0)   # a recorded bar for minute 2, with OI
+    asked = []
+
+    class R:
+        def json(self):
+            return {"s": "ok", "candles": [[t0, 100, 102, 99, 101, 10], [t0 + 120, 101, 103, 100, 102, 30],
+                                           [t0 + 600, 1, 1, 1, 1, 1]]}   # the minute in progress: skipped
+
+    monkeypatch.setattr(live.requests, "get", lambda url, headers, timeout, params: asked.append(params) or R())
+    f._backfill_bars(live.FyersSettings("APP-100", "sec"), "t", [FUT])
+    assert asked[0]["symbol"] == FUT and asked[0]["resolution"] == "1"
+    assert f.snapshot()["bars"][FUT] == [[t0, 100.0, 102.0, 99.0, 101.0, 10.0, None],
+                                         [t0 + 120, 101.0, 103.0, 100.0, 102.0, 30.0, 7.0]]
 
 
 def _dm():

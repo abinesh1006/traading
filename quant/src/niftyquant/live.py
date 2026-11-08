@@ -11,9 +11,12 @@ Fyers feed. Fyers issues an access token through a browser login, once a day; to
 kept in data/secrets (gitignored, never logged). Prices then stream over Fyers' data WebSocket,
 not the REST quotes API: the Standard plan allows 50 data requests a minute and 5,000 a day, and
 going over the per-minute limit more than 3 times blocks the account for the day, so polling
-would exhaust it within one session. REST is used once per feed start, to backfill today's
-1-minute Nifty bars. Without a token, each quote falls back to the last end-of-day close from
-daily_market, labelled as such.
+would exhaust it within one session. REST is used once per symbol per feed start, to backfill
+today's 1-minute candles. Without a token, each quote falls back to the last end-of-day close
+from daily_market, labelled as such.
+
+Recording. The feed builds 1-minute bars for every instrument and writes completed minutes to
+curated/fyers/bars_1m/ (see Feed), so intraday history accumulates from the first login day.
 """
 
 from __future__ import annotations
@@ -229,31 +232,74 @@ def instruments(dm: pd.DataFrame, today: date) -> list[tuple[str, str, str]]:
     return items
 
 
-class Feed:
-    """Latest tick per symbol and today's 1-minute Nifty bars from the Fyers data WebSocket.
-    One per API process; started by the first /live request that finds a valid token."""
+BAR_COLUMNS = ["trade_date", "symbol", "minute", "open", "high", "low", "close", "volume", "oi"]
+FLUSH_EVERY = 30  # seconds between writes of completed minutes
 
-    BAR_SYMBOL = "NSE:NIFTY50-INDEX"
+
+def bars_path(d: date):
+    """Recorded 1-minute bars of one day, all instruments (curated/fyers/bars_1m/year=YYYY/D.parquet)."""
+    return config.CURATED_DIR / "fyers" / "bars_1m" / f"year={d.year}" / f"{d.isoformat()}.parquet"
+
+
+def read_bars(d: date) -> pd.DataFrame:
+    p = bars_path(d)
+    return pd.read_parquet(p) if p.exists() else pd.DataFrame(columns=BAR_COLUMNS)
+
+
+def write_bars(d: date, rows: list[dict]) -> int:
+    """Merge rows into the day's file; a later row wins for the same symbol and minute (a Fyers
+    history candle replaces the bar built from ticks). Returns the rows stored for the day."""
+    new = pd.DataFrame(rows, columns=BAR_COLUMNS)
+    old = read_bars(d)
+    df = new if old.empty else pd.concat([old, new], ignore_index=True)
+    df = df.drop_duplicates(["symbol", "minute"], keep="last").sort_values(["symbol", "minute"])
+    p = bars_path(d)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_suffix(".tmp")
+    df.to_parquet(tmp, index=False)
+    tmp.replace(p)
+    return len(df)
+
+
+def _day(epoch: float) -> date:
+    return datetime.fromtimestamp(epoch, IST).date()
+
+
+class Feed:
+    """Latest tick and today's 1-minute bars per symbol from the Fyers data WebSocket. One per API
+    process, started by the first /live request (or the login callback) that finds a valid token.
+
+    Completed minutes are written to bars_path() every FLUSH_EVERY seconds, so intraday history
+    builds up from the first login day: live minutes nobody records are gone for good. A bar is
+    [minute epoch, open, high, low, close, volume, oi]; volume is the contracts traded in that minute
+    (from the cumulative vol_traded_today) and oi the last open interest, both None for an index."""
+
+    BAR_SYMBOL = "NSE:NIFTY50-INDEX"  # the one charted by /live
 
     def __init__(self):
         self._lock = threading.Lock()
         self._sock = None
+        self._recorder = None
         self.token: str | None = None
         self.symbols: list[str] = []
         self.state, self.message = "stopped", None
         self.ticks: dict[str, dict] = {}
-        self.bars: list[list[float]] = []  # [minute epoch, open, high, low, close]
+        self.bars: dict[str, list[list]] = {}
+        self._cum: dict[str, float] = {}   # last cumulative volume seen per symbol
+        self._base: dict[str, float] = {}  # cumulative volume when the current bar opened
+        self._dirty = False
         self.last_tick_at: float | None = None
         self._started_at = 0.0
 
     def snapshot(self) -> dict:
         with self._lock:
             return {"state": self.state, "message": self.message, "last_tick_at": self.last_tick_at,
-                    "ticks": {k: dict(v) for k, v in self.ticks.items()}, "bars": [list(b) for b in self.bars]}
+                    "ticks": {k: dict(v) for k, v in self.ticks.items()},
+                    "bars": {k: [list(b) for b in v] for k, v in self.bars.items()}}
 
     def start(self, s: FyersSettings, token: str, symbols: list[str]) -> None:
         """Connect, unless already running on this token and symbols. After an error, retry at
-        most once a minute: each start makes one REST call, and the dashboard polls often."""
+        most once a minute: each start makes a few REST calls, and the dashboard polls often."""
         with self._lock:
             if self.token == token and self.symbols == symbols and (
                     self.state != "error" or clock_time.time() - self._started_at < RESTART_AFTER_ERROR):
@@ -261,11 +307,15 @@ class Feed:
             self._close_locked()
             self._started_at = clock_time.time()
             self.token, self.symbols = token, list(symbols)
-            self.state, self.message, self.ticks, self.bars = "connecting", None, {}, []
+            self.state, self.message, self.ticks = "connecting", None, {}
+            if self._recorder is None:
+                self._recorder = threading.Thread(target=self._record_loop, daemon=True, name="fyers-recorder")
+                self._recorder.start()
         threading.Thread(target=self._run, args=(s, token, list(symbols)), daemon=True,
                          name="fyers-feed").start()
 
     def stop(self) -> None:
+        self.flush()
         with self._lock:
             self._close_locked()
             self.token, self.state, self.message = None, "stopped", None
@@ -284,7 +334,8 @@ class Feed:
                 self.state, self.message = state, message
 
     def _run(self, s: FyersSettings, token: str, symbols: list[str]) -> None:
-        self._backfill_bars(s, token)
+        self.restore(datetime.now(IST).date(), symbols)
+        self._backfill_bars(s, token, symbols)
         try:
             from fyers_apiv3.FyersWebsocket import data_ws
         except ImportError:
@@ -328,39 +379,104 @@ class Feed:
             self.last_tick_at = now
             if self.state != "live":
                 self.state, self.message = "live", None
-            if sym == self.BAR_SYMBOL:
-                self._add_bar(int(msg.get("exch_feed_time") or now), float(msg["ltp"]))
+            self._add_tick(sym, int(msg.get("exch_feed_time") or now), float(msg["ltp"]),
+                           msg.get("vol_traded_today"), msg.get("OI"))
 
-    def _add_bar(self, ts: int, price: float) -> None:
+    def _add_tick(self, sym: str, ts: int, price: float, cum_vol=None, oi=None) -> None:
         minute = ts - ts % 60
-        day = datetime.fromtimestamp(minute, IST).date()
-        if self.bars and datetime.fromtimestamp(self.bars[-1][0], IST).date() != day:
-            self.bars = []  # a new day
-        if self.bars and self.bars[-1][0] == minute:
-            b = self.bars[-1]
-            b[2], b[3], b[4] = max(b[2], price), min(b[3], price), price
-        elif not self.bars or minute > self.bars[-1][0]:
-            self.bars.append([minute, price, price, price, price])
+        bars = self.bars.setdefault(sym, [])
+        if bars and _day(bars[-1][0]) != _day(minute):  # a new day
+            bars.clear()
+            self._cum.pop(sym, None)
+            self._base.pop(sym, None)
+        if bars and minute < bars[-1][0]:
+            return  # a late tick for a minute already closed
+        if not bars or minute > bars[-1][0]:
+            if cum_vol is not None:
+                self._base[sym] = self._cum.get(sym, cum_vol)
+            bars.append([minute, price, price, price, price, None, None])
+        b = bars[-1]
+        b[2], b[3], b[4] = max(b[2], price), min(b[3], price), price
+        if cum_vol is not None:
+            self._cum[sym] = float(cum_vol)
+            b[5] = float(cum_vol) - self._base.get(sym, float(cum_vol))
+        if oi is not None:
+            b[6] = float(oi)
+        self._dirty = True
 
-    def _backfill_bars(self, s: FyersSettings, token: str) -> None:
-        """Today's 1-minute Nifty bars so far (one REST call), so a restart mid-session keeps the chart."""
-        today = datetime.now(IST).date().isoformat()
-        try:
-            r = requests.get(f"{FYERS_API}/data/history", headers=s.auth_header(token), timeout=20,
-                             params={"symbol": self.BAR_SYMBOL, "resolution": "1", "date_format": "1",
-                                     "range_from": today, "range_to": today, "cont_flag": "1"})
-            body = r.json()
-        except (requests.RequestException, ValueError) as e:
-            log.warning("fyers history backfill failed: %s", e)
-            return
-        if body.get("s") != "ok":
-            log.warning("fyers history backfill: %s", body.get("message"))
-            return
-        bars = [[int(c[0]), float(c[1]), float(c[2]), float(c[3]), float(c[4])] for c in body.get("candles") or []]
+    def flush(self, now: float | None = None) -> int:
+        """Write completed minutes (not the one in progress) to the day files. Returns rows written."""
+        now = clock_time.time() if now is None else now
+        current = now - now % 60
         with self._lock:
-            if self.token == token:
-                live = [b for b in self.bars if not bars or b[0] > bars[-1][0]]
-                self.bars = bars + live
+            if not self._dirty:
+                return 0
+            by_day: dict[date, list[dict]] = {}
+            for sym, bars in self.bars.items():
+                for m, o, h, lo, c, v, oi in bars:
+                    if m < current:
+                        d = _day(m)
+                        by_day.setdefault(d, []).append(
+                            {"trade_date": d, "symbol": sym, "minute": pd.Timestamp(m, unit="s", tz=IST),
+                             "open": o, "high": h, "low": lo, "close": c, "volume": v, "oi": oi})
+            self._dirty = any(b[-1][0] >= current for b in self.bars.values() if b)
+        for d, rows in by_day.items():
+            write_bars(d, rows)
+        return sum(len(r) for r in by_day.values())
+
+    def restore(self, d: date, symbols: list[str]) -> None:
+        """Load the day's recorded bars, so an API restart mid-session keeps the chart and the file."""
+        df = read_bars(d)
+        df = df[df["symbol"].isin(symbols)] if not df.empty else df
+        with self._lock:
+            for sym, g in df.groupby("symbol"):
+                rec = [[int(pd.Timestamp(r.minute).timestamp()), r.open, r.high, r.low, r.close,
+                        None if pd.isna(r.volume) else r.volume, None if pd.isna(r.oi) else r.oi]
+                       for r in g.sort_values("minute").itertuples()]
+                live = [b for b in self.bars.get(sym, []) if b[0] > rec[-1][0]]
+                self.bars[sym] = rec + live
+
+    def _record_loop(self) -> None:
+        while True:
+            clock_time.sleep(FLUSH_EVERY)
+            try:
+                self.flush()
+                if self.token is not None and load_token() is None:  # passed 06:30: Fyers ends it
+                    self.stop()
+            except Exception as e:  # keep recording; the next pass retries the write
+                log.warning("live bar recording failed: %s", e)
+
+    def _backfill_bars(self, s: FyersSettings, token: str, symbols: list[str]) -> None:
+        """Today's 1-minute candles so far from Fyers (one REST call per symbol), for the minutes
+        before the feed started. Candles replace bars built from ticks for completed minutes."""
+        today = datetime.now(IST).date().isoformat()
+        current = clock_time.time() - clock_time.time() % 60
+        for sym in symbols:
+            try:
+                r = requests.get(f"{FYERS_API}/data/history", headers=s.auth_header(token), timeout=20,
+                                 params={"symbol": sym, "resolution": "1", "date_format": "1",
+                                         "range_from": today, "range_to": today, "cont_flag": "1"})
+                body = r.json()
+            except (requests.RequestException, ValueError) as e:
+                log.warning("fyers history backfill %s failed: %s", sym, e)
+                continue
+            if body.get("s") != "ok":
+                log.warning("fyers history backfill %s: %s", sym, body.get("message"))
+                continue
+            candles = [[int(c[0]), float(c[1]), float(c[2]), float(c[3]), float(c[4]),
+                        float(c[5]) if len(c) > 5 and not sym.endswith("-INDEX") else None, None]
+                       for c in body.get("candles") or [] if int(c[0]) < current]
+            if not candles:
+                continue
+            with self._lock:
+                if self.token != token:
+                    return
+                kept = {b[0]: b for b in self.bars.get(sym, [])}
+                for c in candles:
+                    c[6] = kept.get(c[0], [None] * 7)[6]  # candles carry no OI: keep the recorded one
+                    kept[c[0]] = c
+                self.bars[sym] = [kept[m] for m in sorted(kept)]
+                self._dirty = True
 
 
 FEED = Feed()
@@ -443,6 +559,6 @@ def view(now: datetime | None = None, feed: Feed = FEED) -> dict:
                        "open": _num(q["open"]), "high": _num(q["high"]), "low": _num(q["low"]),
                        "volume": _num(q["volume"]), "oi": _num(q["oi"])})
     bars = [{"time": datetime.fromtimestamp(b[0], IST).isoformat(timespec="minutes"), "open": b[1], "high": b[2],
-             "low": b[3], "close": b[4]} for b in snap["bars"]
+             "low": b[3], "close": b[4]} for b in snap["bars"].get(Feed.BAR_SYMBOL, [])
             if datetime.fromtimestamp(b[0], IST).date() == now.date()]
     return {"market": market_clock(now), "feed": feed_info, "quotes": quotes, "bars": bars}

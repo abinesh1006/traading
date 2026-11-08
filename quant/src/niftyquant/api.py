@@ -5,7 +5,9 @@ Run: niftyquant serve  (defaults to http://127.0.0.1:8001)
 
 import html
 import json
+import logging
 import math
+from contextlib import asynccontextmanager
 from datetime import date
 
 import numpy as np
@@ -16,7 +18,21 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from . import analytics, config, live
 from .store import Manifest
 
-app = FastAPI(title="niftyquant research API", version="0.1.0")
+log = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def _lifespan(_app: FastAPI):
+    """Resume the Fyers feed if today's token is still valid, so bars are recorded after an API
+    restart even with no dashboard open."""
+    try:
+        live.view()
+    except Exception as e:  # the API must start even if the feed cannot
+        log.warning("live feed not resumed: %s", e)
+    yield
+
+
+app = FastAPI(title="niftyquant research API", version="0.1.0", lifespan=_lifespan)
 
 
 def _clean(value):
