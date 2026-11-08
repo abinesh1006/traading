@@ -614,3 +614,4 @@ table.legs tbody tr:hover td { background: transparent; }
 .why li::marker { color: var(--accent-text); }
 @media (max-width: 560px) { .rb-grid { grid-template-columns: 1fr; } }
 .sidenav-foot b.off::before { background: var(--status-critical); box-shadow: 0 0 0 3px var(--down-soft); }
+.sidenav-foot .foot-hint { display: block; margin-top: 6px; color: var(--status-warning); }

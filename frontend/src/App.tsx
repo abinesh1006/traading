@@ -49,13 +49,25 @@ const NAV = [
 /** Sidebar card: how fresh the data is (the dashboard is end-of-day until the intraday feed exists). */
 function SideStatus() {
   const q = useQuery({ queryKey: ['daily'], queryFn: api.daily })
+  const ev = useQuery({ queryKey: ['events'], queryFn: api.events })
+  const [today] = useState(todayIst)
   const last = q.data?.[q.data.length - 1]
+  // Today is a trading day if it is a weekday or a listed special session (e.g. Diwali Muhurat).
+  const weekday = ![0, 6].includes(new Date(`${today}T00:00:00Z`).getUTCDay())
+  const special = (ev.data ?? []).some((e) => e.category === 'special_session' && e.event_date === today)
+  const pending = last != null && last.trade_date < today && (weekday || special)
   return (
     <div className="sidenav-foot">
       <b className={q.error ? 'off' : undefined}>{q.error ? 'Backend offline' : 'End-of-day data'}</b>
-      {last ? `Through ${date(last.trade_date)} close · NSE` : 'Waiting for data…'}
+      {last ? `Data as of ${date(last.trade_date)} close · NSE` : 'Waiting for data…'}
+      {pending && <span className="foot-hint">Today's {special ? 'special session' : 'session'} loads after NSE publishes, about 20:00 IST.</span>}
     </div>
   )
+}
+
+/** Today's date in India (YYYY-MM-DD), whatever the viewer's clock zone. */
+function todayIst(): string {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date())
 }
 
 /** Nifty and VIX at the last close, always visible: the two numbers a trader checks first. */
