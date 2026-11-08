@@ -16,6 +16,11 @@ const LABELS: Record<string, string> = {
 const CHECK_LABELS: Record<string, string> = {
   calendar_gaps: 'Trading days with a missing or failed file',
   breadth_missing_days: 'Trading days without market breadth',
+  stock_days_missing: 'Stock data days missing',
+  nifty_weight_fit_poor: 'Nifty weight fit off by >3 pts/day',
+  result_dates_to_confirm: 'Result dates to confirm (HDFC Bank)',
+  nifty_weights_missing: 'Nifty weights not built yet',
+  results_missing: 'Results study not built yet',
   duplicate_contracts: 'Duplicate contracts',
   ohlc_inconsistent: 'OHLC inconsistent (e.g. close above high)',
   negative_values: 'Negative prices, volume or OI',
