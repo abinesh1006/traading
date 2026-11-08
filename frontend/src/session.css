@@ -1,0 +1,85 @@
+/* Pre / post market page (pages/SessionPage.tsx). Builds on the Midnight tokens in index.css. */
+
+/* ---------- Header controls ---------- */
+.sp-pick { display: inline-flex; align-items: stretch; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-1); overflow: hidden; }
+.sp-pick .lbl { display: inline-flex; align-items: center; padding: 0 10px; font-size: 12px; color: var(--text-secondary); background: var(--hover); border-right: 1px solid var(--border); }
+.sp-pick select { border: 0; background: transparent; color: var(--text-primary); font: inherit; font-size: 13px; padding: 0 8px; min-width: 170px; outline: none; }
+.sp-pick select:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.sp-step { border: 0; background: transparent; color: var(--text-secondary); width: 30px; font-size: 17px; cursor: pointer; }
+.sp-step:hover:not(:disabled) { background: var(--hover); color: var(--text-primary); }
+.sp-step:disabled { opacity: .35; cursor: default; }
+.seg button:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Stat tweaks ---------- */
+.stat-value.sm { font-size: clamp(16px, 9.5cqi, 24px); }
+.stat-value .unit { font-size: 13px; color: var(--text-muted); font-weight: 500; letter-spacing: 0; }
+
+/* ---------- Scenario cards ---------- */
+.sc-body { display: flex; flex-direction: column; gap: 10px; height: 100%; }
+.sc-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+.sc-pct { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.sc-n { font-size: 11.5px; color: var(--text-muted); margin-top: 5px; }
+.sc-glyph { width: 76px; height: 38px; flex-shrink: 0; }
+.sc-glyph .trig { stroke: var(--text-muted); stroke-dasharray: 3 3; stroke-width: 1; opacity: .7; }
+.sc-glyph .path { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke: var(--accent); }
+.sc-glyph.up .path { stroke: var(--up); }
+.sc-glyph.down .path { stroke: var(--down); }
+.sc-bar { height: 6px; border-radius: 999px; background: var(--hover); overflow: hidden; }
+.sc-bar span { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+.sc-bar span.up { background: var(--up); }
+.sc-bar span.down { background: var(--down); }
+.sc-what { font-size: 13.5px; color: var(--text-primary); font-weight: 550; line-height: 1.45; }
+.sc-do { font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; border-top: 1px dashed var(--grid); padding-top: 9px; margin-top: auto; }
+.sc-do span { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+.sc-tag { font-size: 11px; font-weight: 600; color: var(--accent-text); background: var(--accent-soft); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.sc-card.dim { opacity: .5; }
+.sc-card.dim:hover { opacity: .85; }
+.sc-card.hit, .sc-card.now { border-color: color-mix(in srgb, var(--status-good) 55%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--status-good) 35%, transparent), 0 10px 30px -16px var(--status-good); }
+.sc-card.now { border-color: color-mix(in srgb, var(--status-warning) 55%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--status-warning) 35%, transparent); }
+
+/* ---------- Game plan timeline ---------- */
+.gp { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: gp; }
+.gp li { position: relative; padding: 12px 14px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--hover); box-shadow: var(--highlight); }
+.gp li:not(:last-child)::after {
+  content: ''; position: absolute; top: 22px; right: -13px; width: 13px; height: 1px; background: var(--border-strong);
+}
+.gp-t { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
+.gp-t span { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text); }
+.gp-b { font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-top: 6px; }
+@media (max-width: 1100px) { .gp { grid-template-columns: repeat(2, minmax(0, 1fr)); } .gp li::after { display: none; } }
+@media (max-width: 640px) { .gp { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Strategy panels ---------- */
+.pay-mini { margin: 0 -4px; }
+.sp-out { font-size: 13px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--hover); color: var(--text-primary); line-height: 1.5; }
+.sp-out.win { border-color: color-mix(in srgb, var(--status-good) 40%, transparent); background: color-mix(in srgb, var(--status-good) 9%, transparent); }
+.sp-out.loss { border-color: color-mix(in srgb, var(--status-critical) 40%, transparent); background: color-mix(in srgb, var(--status-critical) 8%, transparent); }
+.sp-out.skip { color: var(--text-secondary); }
+.sp-note { font-size: 12px; color: var(--text-muted); line-height: 1.5; padding: 10px 18px 14px; border-top: 1px solid var(--grid); }
+
+/* ---------- Level map ---------- */
+.lmap { position: relative; width: 100%; min-height: 360px; }
+.lmap svg { display: block; cursor: crosshair; }
+.lmap-tt { position: absolute; pointer-events: none; z-index: 3; min-width: 190px; }
+
+table.lvl td { height: 38px; padding-top: 3px; padding-bottom: 3px; }
+table.lvl td small { display: block; font-size: 11px; color: var(--text-muted); line-height: 1.3; white-space: normal; }
+table.lvl td small.lvl-hit { color: var(--accent-text); font-weight: 600; }
+.lvl-p { font-weight: 650; color: var(--text-primary); font-size: 13.5px; }
+.lvl-kind { display: inline-block; width: 74px; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted); }
+.lvl-kind.k-res { color: var(--series-1); }
+.lvl-kind.k-sup { color: var(--series-2); }
+.lvl-kind.k-trig { color: var(--text-secondary); }
+.lvl-kind.k-spot { color: var(--accent-text); }
+table.lvl tr.k-spot td { background: var(--accent-soft); }
+table.lvl tr.k-trig td { background: color-mix(in srgb, var(--text-primary) 3%, transparent); }
+
+/* ---------- Context and review ---------- */
+.ctx-kv { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@container (max-width: 520px) { .ctx-kv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ctx-kv > div { background: var(--hover); border: 1px solid var(--border); border-radius: 12px; padding: 9px 12px; display: flex; flex-direction: column; gap: 1px; min-width: 0; box-shadow: var(--highlight); }
+.ctx-kv span { font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted); }
+.ctx-kv b { font-size: 17px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.ctx-kv small { font-size: 11px; color: var(--text-muted); }
+.rv-text { font-size: 13.5px; color: var(--text-primary); gap: 7px; }
+.sp-next { align-self: flex-start; margin-top: auto; }

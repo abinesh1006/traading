@@ -292,7 +292,7 @@ export function maxPain(chain: OptionChain): number | null {
 }
 
 /** Profit / loss per lot at expiry across a price range around the strikes. */
-export function payoff(plan: Plan, spot: number): Array<{ s: number; pnl: number }> {
+export function payoff(plan: Pick<Plan, 'legs' | 'lot'>, spot: number): Array<{ s: number; pnl: number }> {
   const ks = plan.legs.map((l) => l.strike)
   const lo = Math.min(spot, ...ks) * 0.975, hi = Math.max(spot, ...ks) * 1.025
   const lot = plan.lot ?? 1

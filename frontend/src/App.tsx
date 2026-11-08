@@ -12,6 +12,7 @@ import { EventsPage } from './pages/EventsPage'
 import { MarketPage } from './pages/MarketPage'
 import { ParticipantsPage } from './pages/ParticipantsPage'
 import { ResultsPage } from './pages/ResultsPage'
+import { SessionPage } from './pages/SessionPage'
 import { applyTheme, loadTheme, type ThemeChoice } from './theme'
 
 const NEXT: Record<ThemeChoice, ThemeChoice> = { dark: 'light', light: 'system', system: 'dark' }
@@ -33,6 +34,7 @@ const THEME_ICON: Record<ThemeChoice, ReactElement> = {
 
 const ICON: Record<string, ReactElement> = {
   '/market': <svg {...svg}><rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" /></svg>,
+  '/session': <svg {...svg}><path d="M3 18h18M6 14.5a6 6 0 0 1 12 0M12 4v3M5.2 7.4l1.6 1.6M18.8 7.4l-1.6 1.6M9 21h6" /></svg>,
   '/chain': <svg {...svg}><rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 10h18M3 15h18M12 4v16" /></svg>,
   '/positioning': <svg {...svg}><path d="M5 20V10M12 20V4M19 20v-7" /></svg>,
   '/events': <svg {...svg}><rect x="3" y="5" width="18" height="16" rx="1" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>,
@@ -42,6 +44,7 @@ const ICON: Record<string, ReactElement> = {
 
 const NAV = [
   { to: '/market', label: 'Market overview' },
+  { to: '/session', label: 'Pre / post market' },
   { to: '/chain', label: 'Option chain' },
   { to: '/positioning', label: 'Positioning' },
   { to: '/events', label: 'Events' },
@@ -164,6 +167,7 @@ export default function App() {
             <Route path="/" element={<Navigate to="/market" replace />} />
             <Route path="/market" element={<MarketPage />} />
             <Route path="/brief" element={<MarketPage />} />
+            <Route path="/session" element={<SessionPage />} />
             <Route path="/chain" element={<ChainPage />} />
             <Route path="/positioning" element={<ParticipantsPage />} />
             <Route path="/events" element={<EventsPage />} />

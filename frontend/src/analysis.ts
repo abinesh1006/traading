@@ -68,6 +68,17 @@ function verdictOf(score: number): Verdict {
   return score >= 3 ? 'Bullish' : score <= -3 ? 'Bearish' : 'Neutral'
 }
 
+/** The trend verdict at every session with a close (null until 200 sessions of history), keyed by date. */
+export function verdictSeries(daily: DailyMarket[]): Map<string, Verdict> {
+  const s = series(daily)
+  const out = new Map<string, Verdict>()
+  for (let i = 200; i < s.close.length; i++) {
+    const sig = priceSignals(s, i)
+    if (sig) out.set(s.dates[i], verdictOf(sig.reduce((t, x) => t + x.vote, 0)))
+  }
+  return out
+}
+
 export function trendView(daily: DailyMarket[], participants: ParticipantPosition[]): TrendView | null {
   const s = series(daily)
   const i = s.close.length - 1
