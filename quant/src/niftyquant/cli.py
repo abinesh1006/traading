@@ -61,9 +61,12 @@ def cmd_update(a) -> None:
         print("\nPostgres not configured (PG_DB/PG_USER in .env): skipping pg-load")
         return
     a.datasets, a.reload = list(PG_DATASETS), False
+    from .pgload import LoadBusy
     try:
         print()
         cmd_pg_load(a)
+    except LoadBusy as e:  # a long manual load is running; it or the next nightly run sends these days
+        print(f"pg-load skipped: {e}")
     except Exception as e:  # files and derived tables are updated; report the load failure
         logging.getLogger("niftyquant").error("pg-load failed: %s", e)
         raise SystemExit(1) from e
@@ -149,7 +152,13 @@ def _pg_settings():
 
 def cmd_pg_load(a) -> None:
     from . import pgload
-    for table, n in pgload.load_all(_pg_settings(), a.datasets, reload=a.reload).items():
+    try:
+        loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+    except pgload.LoadBusy as e:
+        if a.cmd != "pg-load":
+            raise  # `update` reports it as skipped
+        raise SystemExit(f"pg-load: {e}") from e
+    for table, n in loaded.items():
         per_day = table in pgload.TABLES.values() or table == pgload.GREEKS_TABLE
         print(f"{table}: {n} {'days loaded' if per_day else 'rows'}")
 

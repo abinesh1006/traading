@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.niftyquant.data.DataStatus;
+import com.niftyquant.live.LiveView;
 import com.niftyquant.market.DailyMarket;
 import com.niftyquant.market.EventImpact;
 import com.niftyquant.market.IvDaily;
@@ -102,6 +103,10 @@ public class QuantClient {
             }
             return b.build();
         }, new TypeReference<>() {});
+    }
+
+    public LiveView live() {
+        return get(b -> b.path("/live").build(), new TypeReference<>() {});
     }
 
     public DataStatus dataStatus() {

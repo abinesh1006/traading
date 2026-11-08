@@ -106,3 +106,25 @@ def test_stock_tables_match_parquet_columns():
 def test_cli_pg_datasets_match_loader():
     from niftyquant import cli
     assert set(cli.PG_DATASETS) == set(pgload.PG_DATASETS)
+
+
+def test_second_loader_is_refused_while_the_lock_is_held():
+    class Conn:  # stands in for psycopg: pg_try_advisory_lock returns whether the lock was free
+        def __init__(self, free):
+            self.free, self.sql = free, []
+
+        def execute(self, query, params):
+            self.sql.append((query, params))
+            free = self.free
+
+            class Cur:
+                def fetchone(self):
+                    return (free,)
+            return Cur()
+
+    first = Conn(True)
+    pgload.acquire_lock(first)
+    assert first.sql == [("select pg_try_advisory_lock(%s)", (pgload.LOCK_KEY,))]
+    import pytest
+    with pytest.raises(pgload.LoadBusy):
+        pgload.acquire_lock(Conn(False))

@@ -120,6 +120,31 @@ evening. An evening the PC is off is lost for good, and `quality` lists such day
   (two-expiry term structure), the actual gap, move and 3-day drift, the move beyond Nifty (beta),
   the IV crush, and the Nifty points it moved the index. No consensus estimates: those need a paid feed.
 
+## Live view (Fyers)
+
+`GET /live` (backend: `/api/live`, `live.py`) says whether NSE is open right now (pre-open 09:00,
+trading 09:15 to the 15:40 F&O close, weekends, `live.HOLIDAYS`, special sessions such as Diwali
+Muhurat) and gives Nifty 50, India VIX and the near-month Nifty future: live from Fyers when
+logged in, otherwise the last end-of-day close, marked `source: close`.
+
+One-time setup:
+
+1. Install the feed's dependencies, then the Fyers SDK without its own (it hard-pins old `requests`,
+   `aiohttp` and the obsolete `asyncio` backport, which break this environment):
+   `uv pip install --python .venv\Scripts\python.exe -e ".[live]"` and
+   `uv pip install --python .venv\Scripts\python.exe --no-deps fyers-apiv3==3.2.1`
+2. In the Fyers API dashboard, set the app's redirect URL to
+   `http://127.0.0.1:8001/live/fyers/callback` (or set `FYERS_REDIRECT_URI` in `.env` to whatever is
+   registered; it must point at this API's `/live/fyers/callback`).
+3. `FYERS_APP_ID` and `FYERS_SECRET_KEY` in `.env`.
+
+Every trading day: open `http://127.0.0.1:8001/live/fyers/login` (the dashboard's Connect button)
+and log in to Fyers. The access token is kept in `data/secrets/fyers_token.json` and expires at
+06:30 IST. Prices stream over Fyers' data WebSocket. The REST data API is not polled: the Standard
+plan allows 50 requests a minute and 5,000 a day, and going over the per-minute limit 3 times
+blocks the account for the day. Add next year's NSE holidays to `live.HOLIDAYS` each December;
+`/live` says so in `calendar_note` once the list runs out.
+
 ## Things that are easy to get wrong
 
 - **Units.** `volume_contracts` is contracts; `oi_units` is units, not contracts. `turnover_inr` for

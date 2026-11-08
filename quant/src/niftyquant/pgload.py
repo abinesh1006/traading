@@ -5,8 +5,8 @@ this module only writes rows. Each run sends days that are new or were re-fetche
 load (tracked in load_log), then replaces the small derived tables and the trading calendar.
 
 Postgres listens only on the server's localhost, so connections go through an SSH port-forward.
-If something already listens on the local port (the dev.ps1 tunnel window), that is reused;
-otherwise a tunnel is opened for the duration of the run.
+Each run opens its own on a free local port for its duration (see tunnel); the long-lived
+local_port tunnel from dev.ps1 is the backend's. One run at a time: see acquire_lock.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ import subprocess
 import time
 from collections.abc import Callable
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, datetime, timezone
 from itertools import groupby
 from pathlib import Path
@@ -27,7 +27,7 @@ import pandas as pd
 import psycopg
 from psycopg import sql
 
-from . import analytics, events, greeks, nifty_weights, premiums, results, stockiv, stocks, store
+from . import analytics, config, events, greeks, nifty_weights, premiums, results, stockiv, stocks, store
 from .store import Manifest
 
 log = logging.getLogger(__name__)
@@ -50,6 +50,20 @@ DERIVED = {"daily_market": analytics.DAILY_MARKET, "participants_daily": analyti
            "nifty_weight_fits": nifty_weights.FIT_FILE, "result_events": results.FILE,
            "result_summary": results.SUMMARY_FILE}
 COPY_CHUNK = 200_000
+# Postgres advisory-lock key held for a whole load run. A second run (the nightly update while a
+# long manual load is still going) would delete and re-insert the same months underneath the first.
+LOCK_KEY = 0x6E716C64  # "nqld"
+
+
+class LoadBusy(RuntimeError):
+    """Another pg-load run holds the loader lock."""
+
+
+def acquire_lock(conn: psycopg.Connection) -> None:
+    """Take the session-level loader lock, or raise LoadBusy. Postgres releases it when the
+    connection closes, so a crashed or killed run never leaves it stuck."""
+    if not conn.execute("select pg_try_advisory_lock(%s)", (LOCK_KEY,)).fetchone()[0]:
+        raise LoadBusy("another pg-load is running (it will send these days too, or the next run will)")
 
 
 @dataclass(frozen=True)
@@ -86,27 +100,42 @@ def _listening(port: int) -> bool:
         return s.connect_ex(("127.0.0.1", port)) == 0
 
 
+def _free_port() -> int:
+    with socket.socket() as sk:
+        sk.bind(("127.0.0.1", 0))
+        return sk.getsockname()[1]
+
+
 @contextmanager
 def tunnel(s: PgSettings, timeout: float = 20.0):
-    """SSH port-forward local_port -> host:port on ssh_host, unless one is already open."""
-    if not s.ssh_host or _listening(s.local_port):
-        yield
+    """A private SSH port-forward for this run, on a free local port; yields the settings to
+    connect with. Loads do not share the long-lived local_port tunnel (the backend's, from
+    dev.ps1): under hours of COPY traffic that one went stale while a fresh tunnel worked. ssh's
+    stderr goes to a log file, not a pipe nobody reads, which would stall ssh once full."""
+    if not s.ssh_host:
+        yield s
         return
+    port = _free_port()
     cmd = ["ssh", "-N", "-C", "-o", "BatchMode=yes", "-o", "ExitOnForwardFailure=yes",
-           "-o", "ServerAliveInterval=30", "-L", f"{s.local_port}:{s.host}:{s.port}", s.ssh_host]
-    proc = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                            stderr=subprocess.PIPE)
+           "-o", "ConnectTimeout=15", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
+           "-L", f"{port}:{s.host}:{s.port}", s.ssh_host]
+    log_path = config.DATA_DIR / "logs" / "pg_tunnel.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(log_path, "ab") as err:
+        err.write(f"--- {datetime.now():%Y-%m-%d %H:%M:%S} port {port}{os.linesep}".encode())
+        err.flush()
+        proc = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=err)
     try:
         deadline = time.monotonic() + timeout
-        while not _listening(s.local_port):
+        while not _listening(port):
             if proc.poll() is not None:
-                err = proc.stderr.read().decode(errors="replace").strip() if proc.stderr else ""
-                raise RuntimeError(f"SSH tunnel to {s.ssh_host} failed: {err}")
+                tail = log_path.read_text(errors="replace").strip().splitlines()[-3:]
+                raise RuntimeError(f"SSH tunnel to {s.ssh_host} failed: {' / '.join(tail)}")
             if time.monotonic() > deadline:
                 raise RuntimeError(f"SSH tunnel to {s.ssh_host} did not open within {timeout:.0f}s")
             time.sleep(0.2)
-        log.info("SSH tunnel open: 127.0.0.1:%d -> %s:%d via %s", s.local_port, s.host, s.port, s.ssh_host)
-        yield
+        log.info("SSH tunnel open: 127.0.0.1:%d -> %s:%d via %s", port, s.host, s.port, s.ssh_host)
+        yield replace(s, local_port=port)
     finally:
         proc.terminate()
         try:
@@ -206,8 +235,9 @@ def replace_table(conn: psycopg.Connection, table: str, df: pd.DataFrame) -> Non
 def load_all(s: PgSettings, datasets=PG_DATASETS, reload: bool = False) -> dict[str, int]:
     """Full loader run: per-day datasets (downloaded, then Greeks), then calendar and derived tables."""
     manifest = Manifest().frame()
-    with tunnel(s), connect(s) as conn:
+    with tunnel(s) as t, connect(t) as conn:
         require_schema(conn)
+        acquire_lock(conn)
         result = {}
         for ds in datasets:
             result[TABLES[ds]] = load_dataset(
@@ -225,7 +255,7 @@ def load_all(s: PgSettings, datasets=PG_DATASETS, reload: bool = False) -> dict[
 
 
 def status(s: PgSettings) -> pd.DataFrame:
-    with tunnel(s), connect(s) as conn:
+    with tunnel(s) as t, connect(t) as conn:
         require_schema(conn)
         cur = conn.execute(
             """select dataset, count(*) as days, sum(rows) as rows, min(trade_date) as first_day,

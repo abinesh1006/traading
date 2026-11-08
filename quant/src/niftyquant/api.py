@@ -3,6 +3,7 @@
 Run: niftyquant serve  (defaults to http://127.0.0.1:8001)
 """
 
+import html
 import json
 import math
 from datetime import date
@@ -10,8 +11,9 @@ from datetime import date
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse, RedirectResponse
 
-from . import analytics, config
+from . import analytics, config, live
 from .store import Manifest
 
 app = FastAPI(title="niftyquant research API", version="0.1.0")
@@ -176,3 +178,47 @@ def _latest_quality() -> dict | None:
     if summary is None:  # reports written before summaries were added
         summary = {name: len(rows) for name, rows in body.items()}
     return {"report": reports[-1].name, "checks": summary}
+
+
+# ---------------------------------------------------------------- live view (see live.py)
+
+@app.get("/live")
+def live_view() -> dict:
+    """Market clock (open / pre-open / closed), Fyers feed state and live quotes (else last close)."""
+    return live.view()
+
+
+@app.get("/live/fyers/login")
+def fyers_login():
+    """Opened in the browser: sends it to Fyers' login page, which comes back to the callback."""
+    s = live.FyersSettings.from_env()
+    if s is None:
+        raise HTTPException(503, "Fyers is not configured: set FYERS_APP_ID and FYERS_SECRET_KEY in .env")
+    return RedirectResponse(live.login_url(s))
+
+
+def _page(title: str, body: str) -> HTMLResponse:
+    return HTMLResponse(
+        "<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width'>"
+        f"<title>{html.escape(title)}</title><body style='font:16px system-ui;background:#0b0f17;color:#e6e9ef;"
+        f"max-width:36rem;margin:15vh auto;padding:0 16px'><h1 style='font-size:1.3rem'>{html.escape(title)}</h1>"
+        f"<p>{body}</p></body>")
+
+
+@app.get("/live/fyers/callback", response_class=HTMLResponse)
+def fyers_callback(auth_code: str | None = None, state: str | None = None, s: str | None = None,
+                   message: str | None = None):
+    """Fyers redirects here after login with an auth code, exchanged for today's access token."""
+    settings = live.FyersSettings.from_env()
+    if settings is None:
+        return _page("Fyers is not configured", "Set FYERS_APP_ID and FYERS_SECRET_KEY in .env.")
+    if not auth_code:
+        return _page("Fyers login failed", html.escape(message or s or "Fyers sent no auth code."))
+    if not live.take_login_state(state):
+        return _page("Login link expired", "Start the login again from the dashboard.")
+    try:
+        live.save_token(live.exchange_auth_code(settings, auth_code))
+    except (live.FyersError, OSError) as e:
+        return _page("Fyers login failed", html.escape(str(e)))
+    live.view()  # start the feed now rather than on the next dashboard poll
+    return _page("Fyers connected", "Live prices are streaming. You can close this tab and go back to the dashboard.")

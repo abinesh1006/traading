@@ -15,6 +15,11 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "httpx>=0.27"]
+# Live view (live.py): what the Fyers SDK's data WebSocket imports. The SDK itself is installed
+# without its dependencies, because it hard-pins requests 2.31, aiohttp 3.9.3 and the obsolete
+# asyncio backport, which would break this environment:
+#   uv pip install -e ".[live]"  &&  uv pip install --no-deps fyers-apiv3==3.2.1
+live = ["websocket-client>=1.8", "aws-lambda-powertools>=3", "setuptools<81"]
 
 [project.scripts]
 niftyquant = "niftyquant.cli:main"
