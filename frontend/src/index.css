@@ -615,3 +615,33 @@ table.legs tbody tr:hover td { background: transparent; }
 @media (max-width: 560px) { .rb-grid { grid-template-columns: 1fr; } }
 .sidenav-foot b.off::before { background: var(--status-critical); box-shadow: 0 0 0 3px var(--down-soft); }
 .sidenav-foot .foot-hint { display: block; margin-top: 6px; color: var(--status-warning); }
+
+/* ==========================================================================
+   Live: market status strip, live ticker tags, feed state
+   ========================================================================== */
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-good) 60%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
+.pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--status-good); animation: pulse-ring 1.6s ease-out infinite; flex-shrink: 0; }
+.mstrip {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; padding: 10px 16px; margin-bottom: 6px;
+  border: 1px solid var(--border); border-radius: 12px; background: var(--hover); font-size: 13px; box-shadow: var(--highlight);
+}
+.mstrip .mstate { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 3px 11px 3px 9px; border-radius: 999px; }
+.mstrip .mdot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); }
+.mstrip.st-open { border-color: color-mix(in srgb, var(--status-good) 35%, var(--border)); }
+.mstrip.st-open .mstate { color: var(--status-good); background: var(--up-soft); }
+.mstrip.st-open .mdot { background: var(--status-good); }
+.mstrip.st-pre_open .mstate { color: var(--status-warning); background: color-mix(in srgb, var(--status-warning) 12%, transparent); }
+.mstrip.st-pre_open .mdot { background: var(--status-warning); }
+.mstrip.st-closed .mstate { color: var(--text-secondary); background: var(--hover); box-shadow: inset 0 0 0 1px var(--border); }
+.mstrip .mreason { color: var(--text-secondary); }
+.mstrip .mnext { color: var(--text-primary); font-weight: 600; }
+.mstrip .mnote { color: var(--status-warning); }
+.mstrip .mspacer { flex: 1; }
+.feed { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--text-secondary); }
+.feed-live { color: var(--status-good); font-weight: 600; gap: 8px; }
+.feed-err { color: var(--status-critical); }
+.btn-accent { background: var(--brand); color: #fff; border-color: transparent; text-decoration: none; height: 30px; font-weight: 600; box-shadow: 0 6px 16px -6px rgba(99, 102, 241, .7); }
+.btn-accent:hover { background: var(--brand); filter: brightness(1.08); }
+.spinner.sm { width: 12px; height: 12px; border-width: 2px; }
+.tick.live-tag { color: var(--status-good); font-weight: 700; font-size: 11px; letter-spacing: .08em; gap: 7px; align-items: center; border-color: color-mix(in srgb, var(--status-good) 35%, var(--border)); }
+.tick.close-tag { color: var(--text-muted); font-size: 11.5px; font-weight: 600; }

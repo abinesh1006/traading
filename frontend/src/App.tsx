@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useState, type ReactElement } from 'react'
 import { NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { api } from './api'
+import { LiveTicker, MarketStrip } from './live'
+import { useLive } from './useLive'
 import { date, num, pct, signClass } from './format'
 import { ChainPage } from './pages/ChainPage'
 import { DataHealthPage } from './pages/DataHealthPage'
@@ -70,6 +72,12 @@ function todayIst(): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date())
 }
 
+/** Live quotes when /api/live answers; otherwise the end-of-day ticker. */
+function TopQuotes() {
+  const live = useLive()
+  return live.data ? <LiveTicker /> : <Ticker />
+}
+
 /** Nifty and VIX at the last close, always visible: the two numbers a trader checks first. */
 function Ticker() {
   const q = useQuery({ queryKey: ['daily'], queryFn: api.daily })
@@ -117,7 +125,7 @@ export default function App() {
           <span className="here">{here}</span>
         </nav>
         <div className="topbar-spacer" />
-        <Ticker />
+        <TopQuotes />
         <button className="icon-btn ghost" onClick={cycle} aria-label={THEME_LABEL[theme]} title={THEME_LABEL[theme]}>
           {THEME_ICON[theme]}
         </button>
@@ -129,6 +137,7 @@ export default function App() {
           <SideStatus />
         </nav>
         <main className="page">
+          <MarketStrip />
           <Routes>
             <Route path="/" element={<Navigate to="/market" replace />} />
             <Route path="/market" element={<MarketPage />} />

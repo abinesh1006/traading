@@ -11,6 +11,7 @@ import {
 } from '../components/ui'
 import { date, num, pct, signClass } from '../format'
 import { filterRange, RangeFilter, useRange } from '../range'
+import { IntradayRow } from '../live'
 import { useChartColors, type ChartColors } from '../theme'
 
 const signed = (v: number, digits: number) => `${v > 0 ? '+' : ''}${num(v, digits)}`
@@ -56,6 +57,7 @@ export function MarketPage() {
         {last ? (
           <>
             <MarketView daily={all} iv={ivq.data ?? []} participants={pq.data ?? []} chain={chain} />
+            <IntradayRow />
             <Overview daily={all} iv={ivq.data ?? []} />
             <PriceRow daily={all} rows={filterRange(all, range)} participants={pq.data ?? []} />
             <VolRow rows={filterRange(all, range)} ivRows={filterRange(ivq.data ?? [], range)} ivError={ivq.error} />

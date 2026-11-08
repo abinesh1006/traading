@@ -212,6 +212,64 @@ export interface ResultSummary {
   median_nifty_weight_pct: number | null
 }
 
+/* ---------- Live view (GET /api/live): market clock, feed status, quotes, today's 1-minute bars ---------- */
+
+export interface LiveMarket {
+  now: string
+  state: 'open' | 'pre_open' | 'closed'
+  label: string
+  reason: string
+  session_date: string | null
+  session_name: string | null
+  session_open: string | null
+  session_close: string | null
+  /** ISO time with the +05:30 offset. */
+  next_open: string | null
+  /** Non-null only once the holiday list runs out. */
+  calendar_note: string | null
+}
+
+export interface LiveFeed {
+  state: 'not_configured' | 'login_required' | 'connecting' | 'live' | 'disconnected' | 'error' | 'stopped'
+  message: string | null
+  login_url: string | null
+  last_tick_at: string | null
+}
+
+export interface LiveQuote {
+  key: 'nifty' | 'vix' | 'fut' | string
+  label: string
+  symbol: string
+  /** live: from the WebSocket feed; close: the last end-of-day close. */
+  source: 'live' | 'close'
+  /** ISO time when live, a date when close. */
+  as_of: string | null
+  ltp: number | null
+  prev_close: number | null
+  change: number | null
+  change_pct: number | null
+  open: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  oi: number | null
+}
+
+export interface IntradayBar {
+  time: string
+  open: number
+  high: number
+  low: number
+  close: number
+}
+
+export interface LiveView {
+  market: LiveMarket
+  feed: LiveFeed
+  quotes: LiveQuote[]
+  bars: IntradayBar[]
+}
+
 export class ApiError extends Error {
   readonly status: number
 
@@ -257,4 +315,5 @@ export const api = {
   chain: (date: string, expiry?: string) => getJson<OptionChain>('/api/market/chain', { date, expiry }),
   dataStatus: () => getJson<DataStatus>('/api/data/status'),
   postgres: () => getJson<PostgresStatus>('/api/data/postgres'),
+  live: () => getJson<LiveView>('/api/live'),
 }
