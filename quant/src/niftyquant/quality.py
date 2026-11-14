@@ -90,9 +90,10 @@ def run(start: date | None = None, end: date | None = None,
     results |= stocks.check(manifest.frame(), start, end)
     results |= nifty_weights.check(analytics.load_derived(nifty_weights.FIT_FILE))
     results |= result_study.check(analytics.load_derived(result_study.FILE))
-    from . import fiidii, macro, nsdl
+    from . import breadth, fiidii, macro, nsdl
     results |= macro.check(macro.read())
     sessions = idx["trade_date"].unique() if not idx.empty else None
     results |= nsdl.check(nsdl.read(), sessions)
     results |= fiidii.check(fiidii.read(start, end), sessions)
+    results |= breadth.check(breadth.read(start, end), sessions)
     return results

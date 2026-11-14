@@ -12,7 +12,9 @@ import { EventsPage } from './pages/EventsPage'
 import { MarketPage } from './pages/MarketPage'
 import { ParticipantsPage } from './pages/ParticipantsPage'
 import { ResultsPage } from './pages/ResultsPage'
+import { ScriptPage } from './pages/ScriptPage'
 import { SessionPage } from './pages/SessionPage'
+import { DISCLAIMER, isRecording, setRecording, useRecording } from './useRecording'
 import { applyTheme, loadTheme, type ThemeChoice } from './theme'
 
 const NEXT: Record<ThemeChoice, ThemeChoice> = { dark: 'light', light: 'system', system: 'dark' }
@@ -119,16 +121,21 @@ export default function App() {
     setBriefOpen(false)
     if (pathname === '/brief') navigate('/market')
   }
-  // "B" opens the Market Brief from anywhere (not while typing in a field).
+  const rec = useRecording()
+  // "B" opens the Market Brief, "R" toggles recording mode, from anywhere (not while typing in a field).
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null
       if (e.ctrlKey || e.metaKey || e.altKey || (t && /^(input|select|textarea)$/i.test(t.tagName))) return
-      if (e.key.toLowerCase() === 'b') { e.preventDefault(); setBriefOpen(true) }
+      const k = e.key.toLowerCase()
+      if (k === 'b') { e.preventDefault(); setBriefOpen(true) }
+      else if (k === 'r') { e.preventDefault(); setRecording(!isRecording()) }
     }
     window.addEventListener('keydown', key)
     return () => window.removeEventListener('keydown', key)
   }, [])
+  // The voiceover script is read on a phone: no dashboard chrome around it.
+  if (pathname === '/script') return <ScriptPage />
   const here = NAV.find((n) => pathname.startsWith(n.to))?.label ?? 'Market overview'
   const cycle = () => {
     const next = NEXT[theme]
@@ -151,6 +158,11 @@ export default function App() {
           <svg {...svg}><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4M7 12l3-3 2 2 4-4" /></svg>
           Brief
         </button>
+        <button className={`icon-btn rec-btn${rec ? ' on' : ''}`} aria-pressed={rec} onClick={() => setRecording(!rec)}
+                title={rec ? 'Recording mode on: trade ideas hidden (R to turn off)' : 'Recording mode: hide trade ideas for screen recording (R)'}>
+          <span className="rec-dot" aria-hidden="true" />
+          {rec ? 'Recording' : 'Rec'}
+        </button>
         <button className="icon-btn ghost" onClick={cycle} aria-label={THEME_LABEL[theme]} title={THEME_LABEL[theme]}>
           {THEME_ICON[theme]}
         </button>
@@ -163,6 +175,7 @@ export default function App() {
         </nav>
         <main className="page">
           <MarketStrip />
+          {rec && <div className="rec-note" role="note">{DISCLAIMER}</div>}
           <Routes>
             <Route path="/" element={<Navigate to="/market" replace />} />
             <Route path="/market" element={<MarketPage />} />

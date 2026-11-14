@@ -151,3 +151,18 @@
 .bf-keys kbd { font-family: var(--mono); font-size: 13px; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--hover); color: var(--text-secondary); margin: 0 2px; }
 .bf-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-secondary); }
 .bf-brand img { width: 26px; height: 26px; border-radius: 8px; }
+
+/* Recording mode: next session's four possibilities in place of the strategy card */
+.bf-next { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.bf-next-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 18px; color: var(--text-secondary); }
+.bf-next-head b { font-size: 24px; color: var(--text-primary); font-weight: 650; }
+.bf-next-head > span:last-child { margin-left: auto; font-variant-numeric: tabular-nums; }
+.bf-odds { display: flex; flex-direction: column; gap: 12px; }
+.bf-odd { display: grid; grid-template-columns: 150px minmax(0, 1fr) 70px; align-items: center; gap: 14px; }
+.bf-odd span { font-size: 19px; color: var(--text-primary); font-weight: 550; }
+.bf-odd b { font-size: 26px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.bf-odd-bar { height: 12px; border-radius: 999px; background: var(--hover); overflow: hidden; }
+.bf-odd-bar i { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+.bf-odd-bar i.up { background: var(--up); }
+.bf-odd-bar i.down { background: var(--down); }
+.bf-odd-note { margin-top: auto; font-size: 14px; color: var(--text-muted); line-height: 1.45; }

@@ -14,8 +14,11 @@ import {
   type Mood, type Period, type PosRow,
 } from './briefData'
 import { num, pct } from './format'
+import { closes, dayStats, nextWeekday, scenarioOdds, SCENARIO_NAME, SCENARIOS, sigmaOf, TRIGGER } from './sessionPlan'
 import { useChartColors } from './theme'
 import { useLive } from './useLive'
+import { DISCLAIMER, useRecording } from './useRecording'
+import { upcomingSession } from './useSessionModel'
 import { useStrategyChain } from './useStrategyChain'
 import './brief.css'
 
@@ -83,6 +86,8 @@ export function Brief(props: { onClose: () => void }) {
   const live = useLive()
   const all = daily.data ?? []
   const chain = useStrategyChain(all[all.length - 1]?.trade_date)
+  const rec = useRecording()
+  const nextSession = upcomingSession(live.data, all[all.length - 1]?.trade_date)
 
   const { onClose } = props
   useEffect(() => {
@@ -114,7 +119,8 @@ export function Brief(props: { onClose: () => void }) {
         ) : (
           <BriefCanvas key={period} period={period} setPeriod={setPeriod} onClose={onClose}
                        daily={all} iv={ivq.data ?? []} participants={pq.data ?? []} events={evq.data ?? []}
-                       chain={chain} marketLabel={live.data?.market.label} marketState={live.data?.market.state} />
+                       chain={chain} marketLabel={live.data?.market.label} marketState={live.data?.market.state}
+                       rec={rec} nextSession={nextSession} />
         )}
       </div>
     </div>
@@ -126,6 +132,7 @@ function BriefCanvas(props: {
   daily: Parameters<typeof slice>[0]; iv: Parameters<typeof volView>[0]
   participants: Parameters<typeof positioning>[0]; events: Parameters<typeof periodEvents>[0]
   chain?: Parameters<typeof suggest>[2]; marketLabel?: string; marketState?: string
+  rec: boolean; nextSession?: string
 }) {
   const { daily, iv, participants, events, chain } = props
   const s = slice(daily, props.period)!
@@ -239,16 +246,53 @@ function BriefCanvas(props: {
         <Card title={`Who's positioned · ${props.period === 'D' ? 'day' : props.period === 'W' ? 'week' : 'month'} change`} i={6}>
           <Positioning rows={pos} />
         </Card>
-        <Card title="Strategy idea" i={7} className="bf-strategy">
-          {plan ? <StrategyCard plan={plan} spot={last.spot_close} /> : <div className="muted">Loading option chain…</div>}
-        </Card>
+        {props.rec ? (
+          <Card title="Next session · 4 possibilities" i={7} className="bf-strategy">
+            <NextOdds daily={daily} events={events} next={props.nextSession} />
+          </Card>
+        ) : (
+          <Card title="Strategy idea" i={7} className="bf-strategy">
+            {plan ? <StrategyCard plan={plan} spot={last.spot_close} /> : <div className="muted">Loading option chain…</div>}
+          </Card>
+        )}
       </div>
 
       <footer className="bf-foot" style={delay(8)}>
-        <span>Data as of {dayLabel(last.trade_date)} {last.trade_date.slice(0, 4)} close · NSE end-of-day · rules-based, not investment advice</span>
+        <span>Data as of {dayLabel(last.trade_date)} {last.trade_date.slice(0, 4)} close · NSE end-of-day · {props.rec ? DISCLAIMER : 'rules-based, not investment advice'}</span>
         <span className="bf-keys"><kbd>D</kbd><kbd>W</kbd><kbd>M</kbd> period · <kbd>F</kbd> full screen · <kbd>Esc</kbd> close</span>
         <span className="bf-brand"><img src="/favicon.svg" alt="" />Nifty Quant</span>
       </footer>
+    </div>
+  )
+}
+
+/** Recording-mode stand-in for the strategy card: the next session's four outcomes and how often each happened. */
+function NextOdds(props: { daily: Parameters<typeof slice>[0]; events: Parameters<typeof periodEvents>[0]; next?: string }) {
+  const rows = closes(props.daily)
+  const prev = rows[rows.length - 1]
+  const sigma = prev ? sigmaOf(prev) : null
+  const next = props.next ?? (prev ? nextWeekday(prev.trade_date) : undefined)
+  const expiry = !!prev && !!next && prev.near_expiry === next
+  const odds = next ? scenarioOdds(dayStats(props.daily, props.events), expiry, next) : null
+  if (!prev || !sigma || !next || !odds) return <div className="muted">Not enough history</div>
+  const up = prev.spot_close + TRIGGER * sigma, down = prev.spot_close - TRIGGER * sigma
+  return (
+    <div className="bf-next">
+      <div className="bf-next-head">
+        <b>{dayLabel(next)}</b>
+        {expiry && <span className="bf-chip warning">Expiry</span>}
+        <span>Band {num(down)} – {num(up)}</span>
+      </div>
+      <div className="bf-odds">
+        {SCENARIOS.map((k) => (
+          <div key={k} className="bf-odd">
+            <span>{SCENARIO_NAME[k]}</span>
+            <div className="bf-odd-bar"><i className={k === 'breakout' ? 'up' : k === 'breakdown' ? 'down' : ''} style={{ width: `${odds.share[k]}%` }} /></div>
+            <b>{num(odds.share[k])}%</b>
+          </div>
+        ))}
+      </div>
+      <div className="bf-odd-note">Share of {num(odds.n)} past {expiry ? 'expiry days' : 'sessions'} since {odds.since.slice(0, 4)} · triggers ±0.5σ ({num(TRIGGER * sigma)} pts)</div>
     </div>
   )
 }

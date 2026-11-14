@@ -19,6 +19,7 @@ niftyquant update                                     # daily job: last 10 days 
 niftyquant macro                                      # Brent, WTI, USD/INR daily, full history (also run by update)
 niftyquant fpi                                        # FII/FPI equity cash flows from NSDL, monthly, resumable (also run by update)
 niftyquant fiidii                                     # save tonight's NSE provisional FII + DII (also run by update)
+niftyquant breadth                                    # NSE advances/declines and market activity, resumable (also run by update)
 niftyquant premiums [--date D] [--steps 5]            # ITM/ATM/OTM call and put premiums around spot, one day
 niftyquant status                                     # what is downloaded, what is pending/missing
 niftyquant quality                                    # data checks; report in data/reports/
@@ -45,17 +46,24 @@ Stored as `data/curated/nse/<dataset>/year=YYYY/YYYY-MM-DD.parquet` (one file pe
 Every fetch is logged in `data/manifest.sqlite` with status `ok`, `holiday`, `pending`, `missing` or `error`;
 everything except `ok` and `holiday` is retried on the next run.
 
-## Crude oil and rupee (FRED, free)
+## World markets, crude oil and rupee (FRED, free)
 
 `data/curated/fred/macro_daily.parquet`, long format (`obs_date, series, value, unit, fred_id`):
 
 | series | FRED id | Unit | Since |
 |---|---|---|---|
+| `sp500` | `SP500` | S&P 500 close (FRED serves only the last 10 years) | 2016 |
+| `nasdaq` | `NASDAQCOM` | Nasdaq Composite close | 1971 |
+| `us_vix` | `VIXCLS` | CBOE VIX close | 1990 |
+| `us_10y` | `DGS10` | US 10-year Treasury yield, % a year | 1962 |
+| `usd_index` | `DTWEXBGS` | Fed broad dollar index (weekly release) | 2006 |
+| `nikkei` | `NIKKEI225` | Nikkei 225 close | 1949 |
 | `brent` | `DCOILBRENTEU` | USD/barrel (EIA spot) | 1987 |
 | `wti` | `DCOILWTICO` | USD/barrel (EIA spot) | 1986 |
 | `usdinr` | `DEXINUS` | INR per USD (Fed noon New York rate); up means a weaker rupee | 1973 |
 
-The whole file is replaced on each run because past values get revised.
+Each run merges a full download into the store: new values replace old ones (sources revise),
+and dates the source no longer serves are kept, so S&P 500 history builds up beyond FRED's 10-year window.
 
 - **Timing.** A value dated D is set after NSE closes on D, so it can only explain Nifty from the
   next session. Join it with `macro.align_to_sessions(...)`, never on equal dates.
@@ -82,6 +90,14 @@ The whole file is replaced on each run because past values get revised.
 `data/curated/nse/fii_dii_provisional/`: NSE's same-evening FII and DII cash buy, sell and net (Rs crore).
 NSE serves only the latest day and keeps no history, so the 8 pm scheduled `update` saves it each
 evening. An evening the PC is off is lost for good, and `quality` lists such days as `fii_dii_missed_days`.
+
+## Market breadth (NSE Market Activity report, free)
+
+`data/curated/nse/market_breadth/`: one row per trading day for all NSE equities: `advances`,
+`declines`, `unchanged`, `price_band_hits` (stocks at their daily circuit limit), `traded_value_cr`,
+`traded_qty_lakh`, `trades` and `market_cap_cr`. Source: `archives/equities/mkt/MAddmmyy.csv`, since 2015.
+It is published the evening of each session, so use it from the next session. Only days with an
+`index_close` file are fetched, and missing days are retried each run.
 
 ## India VIX, IV and premiums by strike
 

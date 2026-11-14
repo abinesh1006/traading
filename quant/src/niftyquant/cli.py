@@ -1,4 +1,4 @@
-"""Command line: niftyquant backfill | update | premiums | fiidii | macro | fpi | status | quality | derive | stocks | results | pg-load | pg-status | serve"""
+"""Command line: niftyquant backfill | update | premiums | breadth | fiidii | macro | fpi | status | quality | derive | stocks | results | pg-load | pg-status | serve"""
 
 import argparse
 import json
@@ -34,6 +34,12 @@ def cmd_update(a) -> None:
         cmd_fiidii(a)
     except Exception as e:  # NSE serves only the latest day, so a miss here is lost for good
         logging.getLogger("niftyquant").error("NSE FII/DII provisional download failed: %s", e)
+    try:
+        print()
+        a.start, a.force = date.today() - timedelta(days=45), False
+        cmd_breadth(a)
+    except Exception as e:  # missing days are retried on the next run
+        logging.getLogger("niftyquant").error("NSE market breadth download failed: %s", e)
     try:
         print()
         cmd_macro(a)
@@ -103,7 +109,7 @@ def cmd_results(a) -> None:
 
 def cmd_macro(a) -> None:
     from . import macro
-    print("FRED daily series (crude oil, USD/INR):")
+    print("FRED daily series (world markets, crude oil, USD/INR):")
     print(macro.fetch().to_string())
 
 
@@ -121,6 +127,17 @@ def cmd_premiums(a) -> None:
     show = t[["ce_steps_itm", "ce_premium", "ce_intrinsic", "ce_time_value", "ce_iv_pct", "ce_delta",
               "strike", "pe_premium", "pe_intrinsic", "pe_time_value", "pe_iv_pct", "pe_delta", "pe_steps_itm"]]
     print(show.to_string(index=False, float_format=lambda v: f"{v:.2f}", na_rep="-"))
+
+
+def cmd_breadth(a) -> None:
+    from . import breadth
+    res = breadth.fetch(a.start, force=a.force)
+    print("NSE market breadth:", res["result"].value_counts().to_dict() if not res.empty else "nothing to do")
+    df = breadth.read()
+    if not df.empty:
+        last = df.sort_values("trade_date").iloc[-1]
+        print(f"stored: {len(df)} days, {df['trade_date'].min()} -> {last['trade_date']} "
+              f"(last: {last['advances']} up, {last['declines']} down, {last['unchanged']} unchanged)")
 
 
 def cmd_fiidii(a) -> None:
@@ -229,7 +246,7 @@ def main(argv: list[str] | None = None) -> None:
     u.add_argument("--datasets", nargs="+", default=list(ALL_DATASETS), choices=ALL_DATASETS)
     u.set_defaults(func=cmd_update)
 
-    mc = sub.add_parser("macro", help="download daily Brent, WTI and USD/INR from FRED (full history)")
+    mc = sub.add_parser("macro", help="download daily US/Japan markets, US VIX and yields, dollar, crude and USD/INR from FRED")
     mc.set_defaults(func=cmd_macro)
 
     pr = sub.add_parser("premiums", help="ITM/ATM/OTM premiums around spot for one day (end of day)")
@@ -237,6 +254,11 @@ def main(argv: list[str] | None = None) -> None:
     pr.add_argument("--steps", type=int, default=5, help="strikes each side of ATM")
     pr.add_argument("--expiry", type=_date, default=None, help="default: nearest expiry")
     pr.set_defaults(func=cmd_premiums)
+
+    br = sub.add_parser("breadth", help="download NSE daily market breadth: advances/declines, activity (resumable)")
+    br.add_argument("--start", type=_date, default=None, help="default: every trading day in the store")
+    br.add_argument("--force", action="store_true", help="re-download days already saved")
+    br.set_defaults(func=cmd_breadth)
 
     fd = sub.add_parser("fiidii", help="save today's NSE provisional FII/DII cash flows (latest day only)")
     fd.set_defaults(func=cmd_fiidii)

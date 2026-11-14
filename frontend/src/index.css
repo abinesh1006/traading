@@ -645,3 +645,10 @@ table.legs tbody tr:hover td { background: transparent; }
 .spinner.sm { width: 12px; height: 12px; border-width: 2px; }
 .tick.live-tag { color: var(--status-good); font-weight: 700; font-size: 11px; letter-spacing: .08em; gap: 7px; align-items: center; border-color: color-mix(in srgb, var(--status-good) 35%, var(--border)); }
 .tick.close-tag { color: var(--text-muted); font-size: 11.5px; font-weight: 600; }
+
+/* ---------- Recording mode (useRecording.ts) ---------- */
+.rec-btn { gap: 7px; }
+.rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+.rec-btn.on { color: var(--status-critical); border-color: color-mix(in srgb, var(--status-critical) 45%, transparent); background: color-mix(in srgb, var(--status-critical) 10%, transparent); }
+.rec-btn.on .rec-dot { background: var(--status-critical); box-shadow: 0 0 0 0 var(--status-critical); animation: pulse-ring 1.6s ease-out infinite; }
+.rec-note { margin: 0 0 12px; padding: 7px 14px; border-radius: 10px; font-size: 12.5px; font-weight: 600; letter-spacing: .02em; color: var(--text-secondary); background: var(--hover); border: 1px dashed var(--border-strong); text-align: center; }

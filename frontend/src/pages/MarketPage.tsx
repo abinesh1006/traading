@@ -12,6 +12,7 @@ import {
 import { date, num, pct, signClass } from '../format'
 import { filterRange, RangeFilter, useRange } from '../range'
 import { IntradayRow } from '../live'
+import { useRecording } from '../useRecording'
 import { useStrategyChain } from '../useStrategyChain'
 import { useChartColors, type ChartColors } from '../theme'
 
@@ -77,18 +78,19 @@ function MarketView(props: { daily: DailyMarket[]; iv: IvDaily[]; participants: 
   const dte = props.chain ? daysBetween(props.chain.trade_date, props.chain.expiry) : last.days_to_expiry
   const rg = last.spot_close != null && vv.iv != null ? ranges(last.spot_close, vv.iv, dte, last.atm_straddle) : null
   const plan = tv && props.chain && dte != null ? suggest(tv, vv, props.chain, dte) : null
+  const rec = useRecording()
 
   return (
     <DashRow title={`Market view · as of ${date(last.trade_date)} close`}>
       <Panel w={6} className="featured" title="Trend" info={<><p>Six price rules on the daily close, each voting bullish, bearish or neutral. Score ≥ +3 is bullish, ≤ −3 bearish, otherwise neutral.</p><p>Sentiment reads are shown for context and are not counted.</p></>}>
         {tv ? <TrendBody tv={tv} /> : <div className="muted">Needs 200 sessions of history.</div>}
       </Panel>
-      <Panel w={9} className="featured" title="Outlook · prediction" info={<><p>Ranges: one standard deviation from {vv.ivSource} ({pct(vv.iv, 1)} a year). About 68% of moves stay inside ±1σ, 95% inside ±2σ. These are the reliable part of a forecast.</p><p>Direction: how often Nifty rose the next session after the same trend verdict, 2016 onward, against all sessions. In-sample; an edge needs |z| ≥ 2.</p></>}>
+      <Panel w={rec ? 18 : 9} className="featured" title="Outlook · prediction" info={<><p>Ranges: one standard deviation from {vv.ivSource} ({pct(vv.iv, 1)} a year). About 68% of moves stay inside ±1σ, 95% inside ±2σ. These are the reliable part of a forecast.</p><p>Direction: how often Nifty rose the next session after the same trend verdict, 2016 onward, against all sessions. In-sample; an edge needs |z| ≥ 2.</p></>}>
         {rg ? <OutlookBody rg={rg} hist={hist} vv={vv} /> : <div className="muted">Waiting for volatility data…</div>}
       </Panel>
-      <Panel w={9} className="featured" title="Strategy · suggestion" info={<><p>Defined-risk Nifty options structure picked from the trend and the volatility regime: credit spreads when premium is rich, debit spreads when it is cheap, an iron condor when sideways.</p><p>Strikes by delta from the last close's chain. A research suggestion, not advice; these rules are not yet backtested.</p></>}>
+      {!rec && <Panel w={9} className="featured" title="Strategy · suggestion" info={<><p>Defined-risk Nifty options structure picked from the trend and the volatility regime: credit spreads when premium is rich, debit spreads when it is cheap, an iron condor when sideways.</p><p>Strikes by delta from the last close's chain. A research suggestion, not advice; these rules are not yet backtested.</p></>}>
         {plan ? <PlanBody plan={plan} /> : <div className="muted">Loading option chain…</div>}
-      </Panel>
+      </Panel>}
     </DashRow>
   )
 }

@@ -83,3 +83,15 @@ table.lvl tr.k-trig td { background: color-mix(in srgb, var(--text-primary) 3%, 
 .ctx-kv small { font-size: 11px; color: var(--text-muted); }
 .rv-text { font-size: 13.5px; color: var(--text-primary); gap: 7px; }
 .sp-next { align-self: flex-start; margin-top: auto; }
+
+/* ---------- Script link and the voiceover script page (pages/ScriptPage.tsx) ---------- */
+.sp-script { text-decoration: none; display: inline-flex; align-items: center; height: 36px; }
+.scr { min-height: 100vh; padding: 16px clamp(16px, 4vw, 48px) 64px; font-family: Inter, 'Noto Sans Tamil', 'Nirmala UI', system-ui, sans-serif; }
+.scr-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid var(--grid); }
+.scr-bar select { height: 36px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-1); color: var(--text-primary); font: inherit; font-size: 13px; padding: 0 8px; }
+.scr-back { color: var(--accent-text); text-decoration: none; font-size: 13px; font-weight: 600; margin-right: auto; }
+.scr-meta { margin: 18px auto 0; max-width: 980px; font-size: 13px; color: var(--text-muted); }
+.scr-text { max-width: 980px; margin: 14px auto 0; line-height: 1.55; color: var(--text-primary); font-weight: 500; }
+.scr-text p { margin: 0 0 .75em; }
+.scr-text p.hook { color: var(--accent-text); font-weight: 650; }
+.scr-text[lang="ta"] { line-height: 1.7; }
