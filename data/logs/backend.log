@@ -1,0 +1,148 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-08T16:02:34.210+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : Starting BackendApplication using Java 21.0.7 with PID 2416 (F:\trading\backend\target\classes started by abine in F:\trading\backend)
+2026-11-08T16:02:34.217+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-11-08T16:02:37.043+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-11-08T16:02:37.076+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-08T16:02:37.077+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-08T16:02:37.216+05:30  INFO 2416 --- [niftyquant-backend] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2855 ms
+2026-11-08T16:02:38.810+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-08T16:02:42.340+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1cc41b77
+2026-11-08T16:02:42.344+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-08T16:02:42.664+05:30  INFO 2416 --- [niftyquant-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://127.0.0.1:15432/niftyquant?sslmode=prefer&ApplicationName=niftyquant-backend (PostgreSQL 16.15)
+2026-11-08T16:02:50.455+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:02.456s)
+2026-11-08T16:02:57.649+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 7
+2026-11-08T16:02:58.207+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-11-08T16:03:01.410+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-11-08T16:03:01.554+05:30  INFO 2416 --- [niftyquant-backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-11-08T16:03:01.570+05:30  INFO 2416 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : Started BackendApplication in 28.657 seconds (process running for 29.645)
+2026-11-08T16:03:01.894+05:30  INFO 2416 --- [niftyquant-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-08T16:03:01.895+05:30  INFO 2416 --- [niftyquant-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-08T16:03:01.898+05:30  INFO 2416 --- [niftyquant-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-11-08T16:11:14.521+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@3532ef38 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T16:11:42.697+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@1cc41b77 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T16:11:55.290+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@610071a1 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T16:12:34.890+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@8fb5bc3 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T16:12:38.886+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@255806f9 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T16:12:40.290+05:30  WARN 2416 --- [niftyquant-backend] [onnection-adder] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Pool is empty, failed to create/setup connection (4cf5e331-fb52-4c48-a639-ffe13a4b935d)
+
+org.postgresql.util.PSQLException: Connection to 127.0.0.1:15432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:427) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.makeConnection(Driver.java:437) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.connect(Driver.java:305) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:752) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:731) ~[HikariCP-7.0.2.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:270) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.PGStream.<init>(PGStream.java:131) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:221) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367) ~[postgresql-42.7.14.jar:42.7.14]
+	... 14 common frames omitted
+
+2026-11-08T16:13:45.545+05:30  WARN 2416 --- [niftyquant-backend] [onnection-adder] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Pool is empty, failed to create/setup connection (51dfb93c-b22d-49bb-af92-d22bef7ef16a)
+
+org.postgresql.util.PSQLException: Connection to 127.0.0.1:15432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:427) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.makeConnection(Driver.java:437) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.connect(Driver.java:305) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:752) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:731) ~[HikariCP-7.0.2.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:270) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.PGStream.<init>(PGStream.java:131) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:221) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367) ~[postgresql-42.7.14.jar:42.7.14]
+	... 14 common frames omitted
+
+2026-11-08T21:10:30.128+05:30  WARN 2416 --- [niftyquant-backend] [onnection-adder] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Pool is empty, failed to create/setup connection (ba88171e-5b3e-480b-a37c-fdfe5c4b2583)
+
+org.postgresql.util.PSQLException: Connection to 127.0.0.1:15432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:427) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.makeConnection(Driver.java:437) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.Driver.connect(Driver.java:305) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:752) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:731) ~[HikariCP-7.0.2.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:270) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.PGStream.<init>(PGStream.java:131) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:221) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367) ~[postgresql-42.7.14.jar:42.7.14]
+	... 14 common frames omitted
+
+2026-11-08T21:10:49.122+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4h57m4s561ms534µs600ns).
+2026-11-08T22:02:59.021+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@70511bcb (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T22:02:59.022+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m39s708ms745µs701ns).
+2026-11-08T22:02:59.025+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@7cbd64dc (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T22:02:59.027+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@4caa7c3 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T22:02:59.029+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@4d795b98 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-08T22:02:59.032+05:30  WARN 2416 --- [niftyquant-backend] [l-1:housekeeper] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@3471751b (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-09T02:22:52.211+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:52.369+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:52.684+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.043+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.236+05:30  WARN 2416 --- [niftyquant-backend] [io-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.421+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.609+05:30  WARN 2416 --- [niftyquant-backend] [io-8080-exec-12] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.675+05:30  WARN 2416 --- [niftyquant-backend] [io-8080-exec-11] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:22:53.747+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:23:07.421+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:23:07.551+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:23:07.557+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:23:07.734+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+2026-11-09T02:23:07.831+05:30  WARN 2416 --- [niftyquant-backend] [nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine

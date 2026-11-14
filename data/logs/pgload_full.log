@@ -1,0 +1,595 @@
+2026-11-07 22:54:56,355 INFO niftyquant.pgload: stock_eod: 2018-01: loaded 22 days, 35716 rows
+2026-11-07 22:56:52,776 INFO niftyquant.pgload: stock_eod: 2018-02: loaded 19 days, 30863 rows
+2026-11-07 22:58:48,746 INFO niftyquant.pgload: stock_eod: 2018-03: loaded 19 days, 30809 rows
+2026-11-07 23:01:12,956 INFO niftyquant.pgload: stock_eod: 2018-04: loaded 21 days, 34346 rows
+2026-11-07 23:02:50,215 INFO niftyquant.pgload: stock_eod: 2018-05: loaded 22 days, 36057 rows
+2026-11-07 23:04:31,714 INFO niftyquant.pgload: stock_eod: 2018-06: loaded 21 days, 34355 rows
+2026-11-07 23:05:49,494 INFO niftyquant.pgload: stock_eod: 2018-07: loaded 22 days, 36100 rows
+2026-11-07 23:07:14,410 INFO niftyquant.pgload: stock_eod: 2018-08: loaded 21 days, 34602 rows
+2026-11-07 23:07:51,598 INFO niftyquant.pgload: stock_eod: 2018-09: loaded 18 days, 29576 rows
+2026-11-07 23:08:50,895 INFO niftyquant.pgload: stock_eod: 2018-10: loaded 21 days, 34205 rows
+2026-11-07 23:09:52,711 INFO niftyquant.pgload: stock_eod: 2018-11: loaded 20 days, 32602 rows
+2026-11-07 23:10:39,639 INFO niftyquant.pgload: stock_eod: 2018-12: loaded 20 days, 32544 rows
+2026-11-07 23:11:30,874 INFO niftyquant.pgload: stock_eod: 2019-01: loaded 23 days, 37413 rows
+2026-11-07 23:12:27,679 INFO niftyquant.pgload: stock_eod: 2019-02: loaded 20 days, 32531 rows
+2026-11-07 23:13:10,255 INFO niftyquant.pgload: stock_eod: 2019-03: loaded 19 days, 31029 rows
+2026-11-07 23:13:51,900 INFO niftyquant.pgload: stock_eod: 2019-04: loaded 19 days, 30982 rows
+2026-11-07 23:14:16,840 INFO niftyquant.pgload: stock_eod: 2019-05: loaded 22 days, 36112 rows
+2026-11-07 23:21:43,999 INFO niftyquant.pgload: stock_eod: 2019-06: loaded 19 days, 31033 rows
+2026-11-07 23:32:15,280 INFO niftyquant.pgload: stock_eod: 2019-07: loaded 23 days, 37608 rows
+2026-11-07 23:41:47,770 INFO niftyquant.pgload: stock_eod: 2019-08: loaded 20 days, 32991 rows
+2026-11-07 23:50:31,654 INFO niftyquant.pgload: stock_eod: 2019-09: loaded 19 days, 31417 rows
+2026-11-08 00:00:14,611 INFO niftyquant.pgload: stock_eod: 2019-10: loaded 20 days, 32882 rows
+2026-11-08 00:09:33,692 INFO niftyquant.pgload: stock_eod: 2019-11: loaded 20 days, 33120 rows
+2026-11-08 00:23:17,632 INFO niftyquant.pgload: stock_eod: 2019-12: loaded 21 days, 34677 rows
+2026-11-08 00:33:50,436 INFO niftyquant.pgload: stock_eod: 2020-01: loaded 23 days, 38018 rows
+2026-11-08 00:42:57,612 INFO niftyquant.pgload: stock_eod: 2020-02: loaded 20 days, 33088 rows
+2026-11-08 00:52:32,176 INFO niftyquant.pgload: stock_eod: 2020-03: loaded 21 days, 34440 rows
+2026-11-08 01:00:43,303 INFO niftyquant.pgload: stock_eod: 2020-04: loaded 18 days, 29487 rows
+2026-11-08 01:09:09,133 INFO niftyquant.pgload: stock_eod: 2020-05: loaded 19 days, 31023 rows
+2026-11-08 01:19:51,697 INFO niftyquant.pgload: stock_eod: 2020-06: loaded 22 days, 36190 rows
+2026-11-08 01:30:22,633 INFO niftyquant.pgload: stock_eod: 2020-07: loaded 23 days, 37870 rows
+2026-11-08 01:40:12,939 INFO niftyquant.pgload: stock_eod: 2020-08: loaded 21 days, 34927 rows
+2026-11-08 01:50:29,575 INFO niftyquant.pgload: stock_eod: 2020-09: loaded 22 days, 36643 rows
+2026-11-08 02:00:25,179 INFO niftyquant.pgload: stock_eod: 2020-10: loaded 21 days, 35325 rows
+2026-11-08 02:09:56,760 INFO niftyquant.pgload: stock_eod: 2020-11: loaded 20 days, 33908 rows
+2026-11-08 02:20:23,619 INFO niftyquant.pgload: stock_eod: 2020-12: loaded 22 days, 37341 rows
+2026-11-08 02:27:01,800 INFO niftyquant.pgload: stock_eod: 2021-01: loaded 20 days, 33804 rows
+2026-11-08 02:27:09,078 INFO niftyquant.pgload: stock_eod: 2021-02: loaded 20 days, 34008 rows
+2026-11-08 02:27:13,819 INFO niftyquant.pgload: stock_eod: 2021-03: loaded 21 days, 36118 rows
+2026-11-08 02:27:17,285 INFO niftyquant.pgload: stock_eod: 2021-04: loaded 19 days, 32860 rows
+2026-11-08 02:27:20,495 INFO niftyquant.pgload: stock_eod: 2021-05: loaded 20 days, 34801 rows
+2026-11-08 02:27:23,800 INFO niftyquant.pgload: stock_eod: 2021-06: loaded 22 days, 38338 rows
+2026-11-08 02:27:26,818 INFO niftyquant.pgload: stock_eod: 2021-07: loaded 21 days, 36747 rows
+2026-11-08 02:27:30,152 INFO niftyquant.pgload: stock_eod: 2021-08: loaded 21 days, 37084 rows
+2026-11-08 02:27:33,380 INFO niftyquant.pgload: stock_eod: 2021-09: loaded 21 days, 37556 rows
+2026-11-08 02:27:36,354 INFO niftyquant.pgload: stock_eod: 2021-10: loaded 20 days, 36066 rows
+2026-11-08 02:27:39,339 INFO niftyquant.pgload: stock_eod: 2021-11: loaded 20 days, 36358 rows
+2026-11-08 02:27:42,969 INFO niftyquant.pgload: stock_eod: 2021-12: loaded 23 days, 42195 rows
+2026-11-08 02:27:46,349 INFO niftyquant.pgload: stock_eod: 2022-01: loaded 20 days, 36955 rows
+2026-11-08 02:27:49,372 INFO niftyquant.pgload: stock_eod: 2022-02: loaded 20 days, 37170 rows
+2026-11-08 02:27:52,953 INFO niftyquant.pgload: stock_eod: 2022-03: loaded 21 days, 39426 rows
+2026-11-08 02:27:56,405 INFO niftyquant.pgload: stock_eod: 2022-04: loaded 19 days, 35995 rows
+2026-11-08 02:27:59,984 INFO niftyquant.pgload: stock_eod: 2022-05: loaded 21 days, 40030 rows
+2026-11-08 02:28:03,878 INFO niftyquant.pgload: stock_eod: 2022-06: loaded 22 days, 42112 rows
+2026-11-08 02:28:08,509 INFO niftyquant.pgload: stock_eod: 2022-07: loaded 21 days, 40330 rows
+2026-11-08 02:28:12,789 INFO niftyquant.pgload: stock_eod: 2022-08: loaded 20 days, 38629 rows
+2026-11-08 02:28:17,763 INFO niftyquant.pgload: stock_eod: 2022-09: loaded 22 days, 42709 rows
+2026-11-08 02:28:21,745 INFO niftyquant.pgload: stock_eod: 2022-10: loaded 19 days, 37131 rows
+2026-11-08 02:28:26,365 INFO niftyquant.pgload: stock_eod: 2022-11: loaded 21 days, 41117 rows
+2026-11-08 02:28:31,044 INFO niftyquant.pgload: stock_eod: 2022-12: loaded 22 days, 43445 rows
+2026-11-08 02:28:35,633 INFO niftyquant.pgload: stock_eod: 2023-01: loaded 21 days, 41750 rows
+2026-11-08 02:28:39,700 INFO niftyquant.pgload: stock_eod: 2023-02: loaded 20 days, 39866 rows
+2026-11-08 02:28:44,053 INFO niftyquant.pgload: stock_eod: 2023-03: loaded 21 days, 41994 rows
+2026-11-08 02:28:48,025 INFO niftyquant.pgload: stock_eod: 2023-04: loaded 17 days, 34030 rows
+2026-11-08 02:28:52,699 INFO niftyquant.pgload: stock_eod: 2023-05: loaded 22 days, 44077 rows
+2026-11-08 02:28:57,214 INFO niftyquant.pgload: stock_eod: 2023-06: loaded 21 days, 42328 rows
+2026-11-08 02:29:01,599 INFO niftyquant.pgload: stock_eod: 2023-07: loaded 21 days, 42239 rows
+2026-11-08 02:29:07,202 INFO niftyquant.pgload: stock_eod: 2023-08: loaded 22 days, 44993 rows
+2026-11-08 02:29:12,378 INFO niftyquant.pgload: stock_eod: 2023-09: loaded 20 days, 41232 rows
+2026-11-08 02:29:17,539 INFO niftyquant.pgload: stock_eod: 2023-10: loaded 20 days, 41554 rows
+2026-11-08 02:29:22,444 INFO niftyquant.pgload: stock_eod: 2023-11: loaded 21 days, 43621 rows
+2026-11-08 02:29:27,584 INFO niftyquant.pgload: stock_eod: 2023-12: loaded 20 days, 41816 rows
+2026-11-08 02:29:32,524 INFO niftyquant.pgload: stock_eod: 2024-01: loaded 22 days, 46290 rows
+2026-11-08 02:29:37,695 INFO niftyquant.pgload: stock_eod: 2024-02: loaded 21 days, 44477 rows
+2026-11-08 02:29:42,533 INFO niftyquant.pgload: stock_eod: 2024-03: loaded 19 days, 40552 rows
+2026-11-08 02:29:47,624 INFO niftyquant.pgload: stock_eod: 2024-04: loaded 20 days, 42953 rows
+2026-11-08 02:29:52,824 INFO niftyquant.pgload: stock_eod: 2024-05: loaded 22 days, 47306 rows
+2026-11-08 02:29:57,429 INFO niftyquant.pgload: stock_eod: 2024-06: loaded 19 days, 41148 rows
+2026-11-08 02:30:02,724 INFO niftyquant.pgload: stock_eod: 2024-07: loaded 22 days, 47864 rows
+2026-11-08 02:30:07,968 INFO niftyquant.pgload: stock_eod: 2024-08: loaded 21 days, 45946 rows
+2026-11-08 02:30:14,299 INFO niftyquant.pgload: stock_eod: 2024-09: loaded 21 days, 46438 rows
+2026-11-08 02:30:22,354 INFO niftyquant.pgload: stock_eod: 2024-10: loaded 22 days, 48939 rows
+2026-11-08 02:30:29,699 INFO niftyquant.pgload: stock_eod: 2024-11: loaded 19 days, 42439 rows
+2026-11-08 02:30:37,144 INFO niftyquant.pgload: stock_eod: 2024-12: loaded 21 days, 47188 rows
+2026-11-08 02:30:45,099 INFO niftyquant.pgload: stock_eod: 2025-01: loaded 23 days, 52046 rows
+2026-11-08 02:30:52,154 INFO niftyquant.pgload: stock_eod: 2025-02: loaded 20 days, 45550 rows
+2026-11-08 02:31:00,674 INFO niftyquant.pgload: stock_eod: 2025-03: loaded 19 days, 43644 rows
+2026-11-08 02:31:11,119 INFO niftyquant.pgload: stock_eod: 2025-04: loaded 19 days, 43890 rows
+2026-11-08 02:31:22,254 INFO niftyquant.pgload: stock_eod: 2025-05: loaded 21 days, 48637 rows
+2026-11-08 02:31:32,597 INFO niftyquant.pgload: stock_eod: 2025-06: loaded 21 days, 48920 rows
+2026-11-08 02:31:45,514 INFO niftyquant.pgload: stock_eod: 2025-07: loaded 23 days, 54086 rows
+2026-11-08 02:31:56,398 INFO niftyquant.pgload: stock_eod: 2025-08: loaded 19 days, 45253 rows
+2026-11-08 02:33:47,620 INFO niftyquant.pgload: stock_eod: 2025-09: loaded 22 days, 52805 rows
+2026-11-08 02:48:34,243 INFO niftyquant.pgload: stock_eod: 2025-10: loaded 21 days, 51068 rows
+2026-11-08 03:01:48,501 INFO niftyquant.pgload: stock_eod: 2025-11: loaded 19 days, 46493 rows
+2026-11-08 03:17:23,303 INFO niftyquant.pgload: stock_eod: 2025-12: loaded 22 days, 54606 rows
+2026-11-08 03:32:05,299 INFO niftyquant.pgload: stock_eod: 2026-01: loaded 20 days, 49973 rows
+2026-11-08 03:49:00,326 INFO niftyquant.pgload: stock_eod: 2026-02: loaded 21 days, 52751 rows
+2026-11-08 04:03:19,540 INFO niftyquant.pgload: stock_eod: 2026-03: loaded 19 days, 48186 rows
+2026-11-08 04:21:49,381 INFO niftyquant.pgload: stock_eod: 2026-04: loaded 20 days, 51946 rows
+2026-11-08 04:37:08,822 INFO niftyquant.pgload: stock_eod: 2026-05: loaded 19 days, 50477 rows
+2026-11-08 04:53:38,486 INFO niftyquant.pgload: stock_eod: 2026-06: loaded 21 days, 56012 rows
+2026-11-08 05:11:37,689 INFO niftyquant.pgload: stock_eod: 2026-07: loaded 23 days, 61732 rows
+2026-11-08 05:12:42,761 INFO niftyquant.pgload: stock_eod: 2026-08: loaded 21 days, 58584 rows
+2026-11-08 05:13:09,323 INFO niftyquant.pgload: stock_eod: 2026-09: loaded 21 days, 60736 rows
+2026-11-08 05:30:54,322 INFO niftyquant.pgload: stock_eod: 2026-10: loaded 20 days, 58362 rows
+2026-11-08 05:36:22,860 INFO niftyquant.pgload: stock_eod: 2026-11: loaded 5 days, 14695 rows
+2026-11-08 05:56:53,848 INFO niftyquant.pgload: stock_fo_eod: 2018-01: loaded 22 days, 62720 rows
+2026-11-08 06:14:40,623 INFO niftyquant.pgload: stock_fo_eod: 2018-02: loaded 19 days, 53773 rows
+2026-11-08 06:33:15,514 INFO niftyquant.pgload: stock_fo_eod: 2018-03: loaded 19 days, 50851 rows
+2026-11-08 06:53:38,277 INFO niftyquant.pgload: stock_fo_eod: 2018-04: loaded 21 days, 60165 rows
+2026-11-08 07:18:45,025 INFO niftyquant.pgload: stock_fo_eod: 2018-05: loaded 22 days, 64452 rows
+2026-11-08 07:40:09,305 INFO niftyquant.pgload: stock_fo_eod: 2018-06: loaded 21 days, 60617 rows
+2026-11-08 08:04:04,462 INFO niftyquant.pgload: stock_fo_eod: 2018-07: loaded 22 days, 66608 rows
+2026-11-08 08:29:04,286 INFO niftyquant.pgload: stock_fo_eod: 2018-08: loaded 21 days, 64509 rows
+2026-11-08 08:51:28,578 INFO niftyquant.pgload: stock_fo_eod: 2018-09: loaded 18 days, 54722 rows
+2026-11-08 09:17:38,727 INFO niftyquant.pgload: stock_fo_eod: 2018-10: loaded 21 days, 71185 rows
+2026-11-08 09:42:20,884 INFO niftyquant.pgload: stock_fo_eod: 2018-11: loaded 20 days, 65526 rows
+2026-11-08 10:07:47,102 INFO niftyquant.pgload: stock_fo_eod: 2018-12: loaded 20 days, 62282 rows
+2026-11-08 10:42:15,037 INFO niftyquant.pgload: stock_fo_eod: 2019-01: loaded 23 days, 68555 rows
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 303, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 169, in cmd_pg_load
+    for table, n in pgload.load_all(_pg_settings(), a.datasets, reload=a.reload).items():
+                    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 213, in load_all
+    result[TABLES[ds]] = load_dataset(
+                         ~~~~~~~~~~~~^
+        conn, ds, TABLES[ds], manifest_versions(manifest, ds),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        lambda d, ds=ds: pd.read_parquet(store.day_path(ds, d)), reload)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 176, in load_dataset
+    copy_frame(conn, table, df)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 140, in copy_frame
+    with conn.cursor() as cur, cur.copy(stmt) as cp:
+                               ~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\cursor.py", line 330, in copy
+    raise ex.with_traceback(None)
+psycopg.OperationalError: flushing failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+exit=1
+attempt 1 2026-11-08 10:54:06
+2026-11-08 11:22:09,220 INFO niftyquant.pgload: stock_fo_eod: 2019-02: loaded 20 days, 55994 rows
+2026-11-08 11:57:39,727 INFO niftyquant.pgload: stock_fo_eod: 2019-03: loaded 19 days, 50085 rows
+2026-11-08 12:21:32,112 INFO niftyquant.pgload: stock_fo_eod: 2019-04: loaded 19 days, 63419 rows
+2026-11-08 12:49:56,698 INFO niftyquant.pgload: stock_fo_eod: 2019-05: loaded 22 days, 75646 rows
+2026-11-08 13:16:49,459 INFO niftyquant.pgload: stock_fo_eod: 2019-06: loaded 19 days, 62655 rows
+2026-11-08 13:39:31,130 INFO niftyquant.pgload: stock_fo_eod: 2019-07: loaded 23 days, 72147 rows
+2026-11-08 13:42:51,877 INFO niftyquant.pgload: stock_fo_eod: 2019-08: loaded 20 days, 63704 rows
+2026-11-08 13:43:24,754 INFO niftyquant.pgload: stock_fo_eod: 2019-09: loaded 19 days, 60829 rows
+2026-11-08 13:44:27,451 INFO niftyquant.pgload: stock_fo_eod: 2019-10: loaded 20 days, 67000 rows
+2026-11-08 13:45:58,119 INFO niftyquant.pgload: stock_fo_eod: 2019-11: loaded 20 days, 65162 rows
+2026-11-08 13:48:40,589 INFO niftyquant.pgload: stock_fo_eod: 2019-12: loaded 21 days, 66675 rows
+2026-11-08 13:51:26,319 INFO niftyquant.pgload: stock_fo_eod: 2020-01: loaded 23 days, 70063 rows
+2026-11-08 13:53:46,359 INFO niftyquant.pgload: stock_fo_eod: 2020-02: loaded 20 days, 57778 rows
+2026-11-08 13:56:42,481 INFO niftyquant.pgload: stock_fo_eod: 2020-03: loaded 21 days, 73643 rows
+2026-11-08 13:59:03,019 INFO niftyquant.pgload: stock_fo_eod: 2020-04: loaded 18 days, 73468 rows
+2026-11-08 14:01:40,208 INFO niftyquant.pgload: stock_fo_eod: 2020-05: loaded 19 days, 68821 rows
+2026-11-08 14:05:28,134 INFO niftyquant.pgload: stock_fo_eod: 2020-06: loaded 22 days, 93134 rows
+2026-11-08 14:10:10,280 INFO niftyquant.pgload: stock_fo_eod: 2020-07: loaded 23 days, 99905 rows
+2026-11-08 14:13:56,266 INFO niftyquant.pgload: stock_fo_eod: 2020-08: loaded 21 days, 80217 rows
+2026-11-08 14:18:16,157 INFO niftyquant.pgload: stock_fo_eod: 2020-09: loaded 22 days, 76878 rows
+2026-11-08 14:22:18,780 INFO niftyquant.pgload: stock_fo_eod: 2020-10: loaded 21 days, 72709 rows
+2026-11-08 14:24:58,884 INFO niftyquant.pgload: stock_fo_eod: 2020-11: loaded 20 days, 71244 rows
+2026-11-08 14:32:47,740 INFO niftyquant.pgload: stock_fo_eod: 2020-12: loaded 22 days, 78552 rows
+2026-11-08 14:35:42,340 INFO niftyquant.pgload: stock_fo_eod: 2021-01: loaded 20 days, 93182 rows
+2026-11-08 14:39:43,715 INFO niftyquant.pgload: stock_fo_eod: 2021-02: loaded 20 days, 99660 rows
+2026-11-08 14:42:27,734 INFO niftyquant.pgload: stock_fo_eod: 2021-03: loaded 20 days, 97452 rows
+2026-11-08 14:44:49,894 INFO niftyquant.pgload: stock_fo_eod: 2021-04: loaded 19 days, 90393 rows
+2026-11-08 14:47:33,869 INFO niftyquant.pgload: stock_fo_eod: 2021-05: loaded 20 days, 89192 rows
+2026-11-08 14:50:18,099 INFO niftyquant.pgload: stock_fo_eod: 2021-06: loaded 22 days, 96270 rows
+2026-11-08 14:53:31,468 INFO niftyquant.pgload: stock_fo_eod: 2021-07: loaded 21 days, 99845 rows
+2026-11-08 15:01:13,266 INFO niftyquant.pgload: stock_fo_eod: 2021-08: loaded 21 days, 102713 rows
+2026-11-08 15:13:52,021 INFO niftyquant.pgload: stock_fo_eod: 2021-09: loaded 21 days, 111087 rows
+2026-11-08 15:17:20,893 INFO niftyquant.pgload: stock_fo_eod: 2021-10: loaded 20 days, 122664 rows
+2026-11-08 15:20:25,711 INFO niftyquant.pgload: stock_fo_eod: 2021-11: loaded 20 days, 118090 rows
+2026-11-08 15:24:59,447 INFO niftyquant.pgload: stock_fo_eod: 2021-12: loaded 23 days, 125763 rows
+2026-11-08 15:28:30,106 INFO niftyquant.pgload: stock_fo_eod: 2022-01: loaded 20 days, 112616 rows
+2026-11-08 15:32:53,344 INFO niftyquant.pgload: stock_fo_eod: 2022-02: loaded 20 days, 111606 rows
+attempt 1 2026-11-08 15:37:47 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 2 2026-11-08 15:38:38 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 3 2026-11-08 15:39:29 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 4 2026-11-08 15:40:21 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 5 2026-11-08 15:41:14 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 6 2026-11-08 15:42:04 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 7 2026-11-08 15:42:55 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 8 2026-11-08 15:43:45 (lock-holding code)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 223, in load_all
+    with tunnel(s), connect(s) as conn:
+                    ~~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 136, in connect
+    return psycopg.connect(host=host, port=port, dbname=s.db, user=s.user, password=s.password,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           sslmode=s.sslmode, connect_timeout=15, application_name="niftyquant-loader",
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           autocommit=True)
+                           ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\connection.py", line 126, in connect
+    raise last_ex.with_traceback(None)
+psycopg.errors.ConnectionTimeout: connection timeout expired
+attempt 1 2026-11-08 15:46:21 (fresh tunnel)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 228, in load_all
+    with conn.transaction():
+    
+        conn.execute(sql.SQL("delete from {}").format(sql.Identifier(table)))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        if not df.empty:
+        ^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 190, in load_dataset
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 154, in copy_frame
+  File "C:\Python313\Lib\contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\cursor.py", line 330, in copy
+    raise ex.with_traceback(None)
+psycopg.OperationalError: flushing failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+attempt 2 2026-11-08 15:59:43 (fresh tunnel)
+2026-11-08 15:59:50,792 INFO niftyquant.pgload: SSH tunnel open: 127.0.0.1:52348 -> localhost:5432 via ubuntu@api.refinepoint.com
+2026-11-08 16:05:15,297 INFO niftyquant.pgload: stock_fo_eod: 2022-03: loaded 21 days, 116681 rows
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 243, in load_all
+    result[TABLES[ds]] = load_dataset(
+                         ~~~~~~~~~~~~^
+        conn, ds, TABLES[ds], manifest_versions(manifest, ds),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        lambda d, ds=ds: pd.read_parquet(store.day_path(ds, d)), reload)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 205, in load_dataset
+    copy_frame(conn, table, df)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 169, in copy_frame
+    with conn.cursor() as cur, cur.copy(stmt) as cp:
+                               ~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\cursor.py", line 330, in copy
+    raise ex.with_traceback(None)
+psycopg.OperationalError: flushing failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+attempt 3 2026-11-08 16:12:08 (fresh tunnel)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 238, in load_all
+    with tunnel(s) as t, connect(t) as conn:
+         ~~~~~~^^^
+  File "C:\Python313\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 133, in tunnel
+    raise RuntimeError(f"SSH tunnel to {s.ssh_host} failed: {' / '.join(tail)}")
+RuntimeError: SSH tunnel to ubuntu@api.refinepoint.com failed: client_loop: send disconnect: Connection reset by peer / --- 2026-11-08 16:12:12 port 60067 / ssh: Could not resolve hostname api.refinepoint.com: Name or service not known
+attempt 4 2026-11-08 16:13:13 (fresh tunnel)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 312, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 173, in cmd_pg_load
+    loaded = pgload.load_all(_pg_settings(), a.datasets, reload=a.reload)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 238, in load_all
+    with tunnel(s) as t, connect(t) as conn:
+         ~~~~~~^^^
+  File "C:\Python313\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 133, in tunnel
+    raise RuntimeError(f"SSH tunnel to {s.ssh_host} failed: {' / '.join(tail)}")
+RuntimeError: SSH tunnel to ubuntu@api.refinepoint.com failed: ssh: Could not resolve hostname api.refinepoint.com: Name or service not known / --- 2026-11-08 16:13:17 port 60084 / ssh: Could not resolve hostname api.refinepoint.com: Name or service not known
+attempt 5 2026-11-08 21:10:53 (fresh tunnel)
+2026-11-08 21:11:03,903 INFO niftyquant.pgload: SSH tunnel open: 127.0.0.1:59288 -> localhost:5432 via ubuntu@api.refinepoint.com
+2026-11-08 21:11:23,077 INFO niftyquant.pgload: stock_fo_eod: 2022-04: loaded 19 days, 103855 rows
+2026-11-08 21:11:30,736 INFO niftyquant.pgload: stock_fo_eod: 2022-05: loaded 21 days, 109691 rows
+2026-11-08 21:11:37,179 INFO niftyquant.pgload: stock_fo_eod: 2022-06: loaded 22 days, 111740 rows
+2026-11-08 21:11:43,602 INFO niftyquant.pgload: stock_fo_eod: 2022-07: loaded 21 days, 113135 rows
+2026-11-08 21:11:49,764 INFO niftyquant.pgload: stock_fo_eod: 2022-08: loaded 20 days, 106094 rows
+2026-11-08 21:11:56,359 INFO niftyquant.pgload: stock_fo_eod: 2022-09: loaded 22 days, 115170 rows
+2026-11-08 21:12:02,060 INFO niftyquant.pgload: stock_fo_eod: 2022-10: loaded 19 days, 99337 rows
+2026-11-08 21:12:09,309 INFO niftyquant.pgload: stock_fo_eod: 2022-11: loaded 21 days, 109579 rows
+2026-11-08 21:12:15,723 INFO niftyquant.pgload: stock_fo_eod: 2022-12: loaded 22 days, 103620 rows
+2026-11-08 21:12:22,643 INFO niftyquant.pgload: stock_fo_eod: 2023-01: loaded 21 days, 90701 rows
+2026-11-08 21:12:30,232 INFO niftyquant.pgload: stock_fo_eod: 2023-02: loaded 20 days, 81720 rows
+2026-11-08 21:12:35,760 INFO niftyquant.pgload: stock_fo_eod: 2023-03: loaded 21 days, 84201 rows
+2026-11-08 21:12:40,929 INFO niftyquant.pgload: stock_fo_eod: 2023-04: loaded 17 days, 68867 rows
+2026-11-08 21:12:46,930 INFO niftyquant.pgload: stock_fo_eod: 2023-05: loaded 22 days, 89050 rows
+2026-11-08 21:12:52,495 INFO niftyquant.pgload: stock_fo_eod: 2023-06: loaded 21 days, 90499 rows
+2026-11-08 21:12:58,084 INFO niftyquant.pgload: stock_fo_eod: 2023-07: loaded 21 days, 90900 rows
+2026-11-08 21:13:03,601 INFO niftyquant.pgload: stock_fo_eod: 2023-08: loaded 22 days, 89814 rows
+2026-11-08 21:13:08,541 INFO niftyquant.pgload: stock_fo_eod: 2023-09: loaded 20 days, 77722 rows
+2026-11-08 21:13:14,161 INFO niftyquant.pgload: stock_fo_eod: 2023-10: loaded 20 days, 82924 rows
+2026-11-08 21:13:19,833 INFO niftyquant.pgload: stock_fo_eod: 2023-11: loaded 21 days, 86468 rows
+2026-11-08 21:13:26,734 INFO niftyquant.pgload: stock_fo_eod: 2023-12: loaded 20 days, 88294 rows
+2026-11-08 21:13:34,361 INFO niftyquant.pgload: stock_fo_eod: 2024-01: loaded 22 days, 96802 rows
+2026-11-08 21:13:41,593 INFO niftyquant.pgload: stock_fo_eod: 2024-02: loaded 21 days, 83638 rows
+2026-11-08 21:13:46,810 INFO niftyquant.pgload: stock_fo_eod: 2024-03: loaded 19 days, 56894 rows
+2026-11-08 21:13:51,843 INFO niftyquant.pgload: stock_fo_eod: 2024-04: loaded 20 days, 54742 rows
+2026-11-08 21:13:57,061 INFO niftyquant.pgload: stock_fo_eod: 2024-05: loaded 22 days, 65858 rows
+2026-11-08 21:14:02,226 INFO niftyquant.pgload: stock_fo_eod: 2024-06: loaded 19 days, 69256 rows
+2026-11-08 21:14:07,571 INFO niftyquant.pgload: stock_fo_eod: 2024-07: loaded 22 days, 54211 rows
+2026-11-08 21:14:12,759 INFO niftyquant.pgload: stock_fo_eod: 2024-08: loaded 21 days, 47641 rows
+2026-11-08 21:14:21,751 INFO niftyquant.pgload: stock_fo_eod: 2024-09: loaded 21 days, 46595 rows
+2026-11-08 21:14:27,759 INFO niftyquant.pgload: stock_fo_eod: 2024-10: loaded 22 days, 55884 rows
+2026-11-08 21:14:32,464 INFO niftyquant.pgload: stock_fo_eod: 2024-11: loaded 19 days, 44820 rows
+2026-11-08 21:14:38,164 INFO niftyquant.pgload: stock_fo_eod: 2024-12: loaded 21 days, 47263 rows
+2026-11-08 21:14:43,516 INFO niftyquant.pgload: stock_fo_eod: 2025-01: loaded 23 days, 53601 rows
+2026-11-08 21:14:48,175 INFO niftyquant.pgload: stock_fo_eod: 2025-02: loaded 20 days, 46996 rows
+2026-11-08 21:14:52,419 INFO niftyquant.pgload: stock_fo_eod: 2025-03: loaded 19 days, 43931 rows
+2026-11-08 21:14:57,277 INFO niftyquant.pgload: stock_fo_eod: 2025-04: loaded 19 days, 49757 rows
+2026-11-08 21:15:02,372 INFO niftyquant.pgload: stock_fo_eod: 2025-05: loaded 21 days, 53286 rows
+2026-11-08 21:15:07,201 INFO niftyquant.pgload: stock_fo_eod: 2025-06: loaded 21 days, 47186 rows
+2026-11-08 21:15:12,305 INFO niftyquant.pgload: stock_fo_eod: 2025-07: loaded 23 days, 55679 rows
+2026-11-08 21:15:16,466 INFO niftyquant.pgload: stock_fo_eod: 2025-08: loaded 19 days, 44595 rows
+2026-11-08 21:15:21,625 INFO niftyquant.pgload: stock_fo_eod: 2025-09: loaded 22 days, 50730 rows
+2026-11-08 21:15:26,675 INFO niftyquant.pgload: stock_fo_eod: 2025-10: loaded 21 days, 56234 rows
+2026-11-08 21:15:31,667 INFO niftyquant.pgload: stock_fo_eod: 2025-11: loaded 19 days, 50844 rows
+2026-11-08 21:15:36,706 INFO niftyquant.pgload: stock_fo_eod: 2025-12: loaded 22 days, 58053 rows
+2026-11-08 21:15:41,809 INFO niftyquant.pgload: stock_fo_eod: 2026-01: loaded 20 days, 59117 rows
+2026-11-08 21:15:48,421 INFO niftyquant.pgload: stock_fo_eod: 2026-02: loaded 21 days, 74805 rows
+2026-11-08 21:15:54,624 INFO niftyquant.pgload: stock_fo_eod: 2026-03: loaded 19 days, 70306 rows
+2026-11-08 21:16:00,707 INFO niftyquant.pgload: stock_fo_eod: 2026-04: loaded 20 days, 66449 rows
+2026-11-08 21:16:06,096 INFO niftyquant.pgload: stock_fo_eod: 2026-05: loaded 19 days, 57473 rows
+2026-11-08 21:16:11,939 INFO niftyquant.pgload: stock_fo_eod: 2026-06: loaded 21 days, 68321 rows
+2026-11-08 21:16:16,841 INFO niftyquant.pgload: stock_fo_eod: 2026-07: loaded 23 days, 59088 rows
+2026-11-08 21:16:21,563 INFO niftyquant.pgload: stock_fo_eod: 2026-08: loaded 21 days, 47470 rows
+2026-11-08 21:16:26,054 INFO niftyquant.pgload: stock_fo_eod: 2026-09: loaded 21 days, 48480 rows
+2026-11-08 21:16:30,402 INFO niftyquant.pgload: stock_fo_eod: 2026-10: loaded 20 days, 46342 rows
+2026-11-08 21:16:32,552 INFO niftyquant.pgload: stock_fo_eod: 2026-11: loaded 5 days, 12002 rows
+2026-11-08 21:16:37,785 INFO niftyquant.pgload: option_greeks: 2026-11: loaded 1 days, 2218 rows
+2026-11-08 21:16:39,275 INFO niftyquant.pgload: trading_calendar: replaced, 4328 rows
+2026-11-08 21:16:40,931 INFO niftyquant.pgload: daily_market: replaced, 2936 rows
+2026-11-08 21:16:42,502 INFO niftyquant.pgload: participants_daily: replaced, 11744 rows
+2026-11-08 21:16:44,075 INFO niftyquant.pgload: iv_daily: replaced, 2936 rows
+2026-11-08 21:16:54,332 INFO niftyquant.pgload: moneyness_daily: replaced, 122934 rows
+2026-11-08 21:16:55,864 INFO niftyquant.pgload: market_events: replaced, 857 rows
+2026-11-08 21:16:57,023 INFO niftyquant.pgload: event_impact: replaced, 9 rows
+2026-11-08 21:17:03,074 INFO niftyquant.pgload: stock_iv: replaced, 94660 rows
+2026-11-08 21:17:05,170 INFO niftyquant.pgload: nifty_weights: replaced, 32085 rows
+2026-11-08 21:17:06,325 INFO niftyquant.pgload: nifty_weight_fits: replaced, 20 rows
+2026-11-08 21:17:07,839 INFO niftyquant.pgload: result_events: replaced, 526 rows
+2026-11-08 21:17:08,993 INFO niftyquant.pgload: result_summary: replaced, 16 rows
+index_eod: 0 days loaded
+fo_eod: 0 days loaded
+participant_oi: 0 days loaded
+participant_vol: 0 days loaded
+stock_eod: 0 days loaded
+stock_fo_eod: 1141 days loaded
+option_greeks: 1 days loaded
+daily_market: 2936 rows
+participants_daily: 11744 rows
+iv_daily: 2936 rows
+moneyness_daily: 122934 rows
+market_events: 857 rows
+event_impact: 9 rows
+stock_iv: 94660 rows
+nifty_weights: 32085 rows
+nifty_weight_fits: 20 rows
+result_events: 526 rows
+result_summary: 16 rows
+SUCCESS 2026-11-08 21:17:09

@@ -1,0 +1,157 @@
+﻿[2026-11-09T20:00:04] niftyquant update starting
+2026-11-09 20:00:17,163 INFO niftyquant.ingest: progress 11/11 days (at 2026-11-09)
+2026-11-09 20:00:17,878 INFO niftyquant.fiidii: FII/DII provisional for 2026-11-09 saved
+2026-11-09 20:01:28,482 INFO niftyquant.macro: macro: 98687 rows written to F:\trading\data\curated\fred\macro_daily.parquet
+2026-11-09 20:01:39,463 INFO niftyquant.nsdl: NSDL 2026-10: 20 reporting days
+2026-11-09 20:01:40,520 INFO niftyquant.nsdl: NSDL 2026-11: 6 reporting days
+2026-11-09 20:01:43,771 INFO niftyquant.stocks: cm_bhavcopy: 1 sessions to fetch
+2026-11-09 20:01:44,771 INFO niftyquant.stocks: fo_stock: 1 sessions to fetch
+2026-11-09 20:01:54,850 INFO niftyquant.analytics: wrote daily_market.parquet (2937 rows)
+2026-11-09 20:03:00,254 INFO niftyquant.analytics: wrote participants_daily.parquet (11748 rows)
+2026-11-09 20:03:02,125 INFO niftyquant.analytics: IV and Greeks computed for 1 days
+2026-11-09 20:03:02,198 INFO niftyquant.analytics: wrote iv_daily.parquet (2937 rows)
+2026-11-09 20:03:02,324 INFO niftyquant.analytics: wrote market_events.parquet (857 rows)
+2026-11-09 20:03:02,509 INFO niftyquant.analytics: wrote event_impact.parquet (9 rows)
+2026-11-09 20:03:03,682 INFO niftyquant.analytics: wrote moneyness_daily.parquet (122976 rows)
+2026-11-09 20:03:05,602 INFO niftyquant.stockiv: stock IV: 1 days to compute
+2026-11-09 20:03:06,998 INFO niftyquant.analytics: wrote stock_iv.parquet (94702 rows)
+2026-11-09 20:03:09,465 INFO niftyquant.nifty_weights: nifty weights 2018-01-01 - 2018-03-31: residual 0.2 points/day, weights sum 98.8%
+2026-11-09 20:03:12,970 INFO niftyquant.nifty_weights: nifty weights 2018-04-01 - 2018-09-30: residual 0.2 points/day, weights sum 100.2%
+2026-11-09 20:03:16,605 INFO niftyquant.nifty_weights: nifty weights 2018-10-01 - 2019-03-31: residual 1.0 points/day, weights sum 101.7%
+2026-11-09 20:03:20,013 INFO niftyquant.nifty_weights: nifty weights 2019-04-01 - 2019-09-30: residual 0.4 points/day, weights sum 101.6%
+2026-11-09 20:03:23,472 INFO niftyquant.nifty_weights: nifty weights 2019-10-01 - 2020-03-31: residual 0.5 points/day, weights sum 100.5%
+2026-11-09 20:03:27,512 INFO niftyquant.nifty_weights: nifty weights 2020-04-01 - 2020-09-30: residual 1.3 points/day, weights sum 100.4%
+2026-11-09 20:03:31,075 INFO niftyquant.nifty_weights: nifty weights 2020-10-01 - 2021-03-31: residual 0.2 points/day, weights sum 100.1%
+2026-11-09 20:03:34,600 INFO niftyquant.nifty_weights: nifty weights 2021-04-01 - 2021-09-30: residual 0.7 points/day, weights sum 99.4%
+2026-11-09 20:03:38,239 INFO niftyquant.nifty_weights: nifty weights 2021-10-01 - 2022-03-31: residual 0.6 points/day, weights sum 99.8%
+2026-11-09 20:03:41,732 INFO niftyquant.nifty_weights: nifty weights 2022-04-01 - 2022-09-30: residual 0.1 points/day, weights sum 100.0%
+2026-11-09 20:03:45,472 INFO niftyquant.nifty_weights: nifty weights 2022-10-01 - 2023-03-31: residual 0.9 points/day, weights sum 101.2%
+2026-11-09 20:03:47,511 INFO niftyquant.nifty_weights: nifty weights 2023-04-01 - 2023-07-12: residual 0.6 points/day, weights sum 99.1%
+2026-11-09 20:03:52,629 INFO niftyquant.nifty_weights: nifty weights 2023-07-13 - 2024-03-31: residual 2.6 points/day, weights sum 99.3%
+2026-11-09 20:03:56,241 INFO niftyquant.nifty_weights: nifty weights 2024-04-01 - 2024-09-30: residual 1.3 points/day, weights sum 100.0%
+2026-11-09 20:03:58,606 INFO niftyquant.nifty_weights: nifty weights 2024-10-01 - 2025-01-05: residual 0.3 points/day, weights sum 100.0%
+2026-11-09 20:04:00,476 INFO niftyquant.nifty_weights: nifty weights 2025-01-06 - 2025-03-31: residual 0.8 points/day, weights sum 97.9%
+2026-11-09 20:04:04,764 INFO niftyquant.nifty_weights: nifty weights 2025-04-01 - 2025-09-30: residual 0.8 points/day, weights sum 100.6%
+2026-11-09 20:04:08,689 INFO niftyquant.nifty_weights: nifty weights 2025-10-01 - 2026-03-31: residual 1.3 points/day, weights sum 99.9%
+2026-11-09 20:04:12,954 INFO niftyquant.nifty_weights: nifty weights 2026-04-01 - 2026-09-30: residual 0.8 points/day, weights sum 100.6%
+2026-11-09 20:04:15,738 INFO niftyquant.nifty_weights: nifty weights 2026-10-01 - 2026-11-09: carried from the window starting 2026-04-01
+2026-11-09 20:04:15,753 INFO niftyquant.nifty_weights: nifty weights 2026-10-01 - 2026-11-09: residual 8.1 points/day, weights sum 100.3%
+2026-11-09 20:04:15,798 INFO niftyquant.analytics: wrote nifty_weight_fits.parquet (20 rows)
+2026-11-09 20:04:15,844 INFO niftyquant.analytics: wrote nifty_weights.parquet (32099 rows)
+2026-11-09 20:04:49,178 INFO niftyquant.analytics: wrote result_events.parquet (526 rows)
+2026-11-09 20:04:49,341 INFO niftyquant.analytics: wrote result_summary.parquet (16 rows)
+2026-11-09 20:08:06,307 INFO niftyquant.pgload: SSH tunnel open: 127.0.0.1:63003 -> localhost:5432 via ubuntu@api.refinepoint.com
+2026-11-09 20:08:24,191 INFO niftyquant.pgload: index_eod: 2026-11: loaded 1 days, 146 rows
+2026-11-09 20:08:28,378 INFO niftyquant.pgload: fo_eod: 2026-11: loaded 1 days, 2221 rows
+2026-11-09 20:08:31,795 INFO niftyquant.pgload: participant_oi: 2026-11: loaded 1 days, 5 rows
+2026-11-09 20:08:35,022 INFO niftyquant.pgload: participant_vol: 2026-11: loaded 1 days, 5 rows
+2026-11-09 20:08:38,453 INFO niftyquant.pgload: stock_eod: 2026-11: loaded 1 days, 2946 rows
+2026-11-09 20:08:42,468 INFO niftyquant.pgload: stock_fo_eod: 2026-11: loaded 1 days, 2735 rows
+2026-11-09 20:08:46,320 INFO niftyquant.pgload: option_greeks: 2026-11: loaded 1 days, 1924 rows
+2026-11-09 20:08:48,511 INFO niftyquant.pgload: trading_calendar: replaced, 4330 rows
+2026-11-09 20:08:50,918 INFO niftyquant.pgload: daily_market: replaced, 2937 rows
+2026-11-09 20:08:53,242 INFO niftyquant.pgload: participants_daily: replaced, 11748 rows
+2026-11-09 20:08:55,568 INFO niftyquant.pgload: iv_daily: replaced, 2937 rows
+2026-11-09 20:09:05,074 INFO niftyquant.pgload: moneyness_daily: replaced, 122976 rows
+2026-11-09 20:09:07,365 INFO niftyquant.pgload: market_events: replaced, 857 rows
+2026-11-09 20:09:09,256 INFO niftyquant.pgload: event_impact: replaced, 9 rows
+2026-11-09 20:09:15,432 INFO niftyquant.pgload: stock_iv: replaced, 94702 rows
+2026-11-09 20:09:18,300 INFO niftyquant.pgload: nifty_weights: replaced, 32099 rows
+2026-11-09 20:09:20,237 INFO niftyquant.pgload: nifty_weight_fits: replaced, 20 rows
+2026-11-09 20:09:22,458 INFO niftyquant.pgload: result_events: replaced, 526 rows
+2026-11-09 20:09:24,378 INFO niftyquant.pgload: result_summary: replaced, 16 rows
+result           ok  pending  skip
+dataset                           
+fo_bhavcopy       1        1     9
+index_close       1        1     9
+participant_oi    1        1     9
+participant_vol   1        1     9
+
+NSE provisional FII/DII for 2026-11-09 (Rs crore):
+category   buy_cr  sell_cr   net_cr
+     DII 12764.97 19937.50 -7172.53
+     FII 20310.99 13098.77  7212.22
+
+NSE market breadth: {'ok': 1}
+stored: 2913 days, 2015-01-01 -> 2026-11-09 (last: 1804 up, 2105 down, 108 unchanged)
+
+FRED daily series (world markets, crude oil, USD/INR):
+                     unit       first        last   rows  last_value
+series                                                              
+brent      usd_per_barrel  1987-05-20  2026-11-03   9122    107.0300
+nasdaq       index_points  1971-02-05  2026-11-06  14058  24579.4200
+nikkei       index_points  1949-05-16  2026-11-09  19235  58775.5000
+sp500        index_points  2016-11-07  2026-11-05   2513   7353.7300
+us_10y     percent_a_year  1962-01-02  2026-11-05  16197      4.8400
+us_vix       index_points  1990-01-02  2026-11-05   9311     28.1800
+usd_index    index_points  2006-01-02  2026-10-30   5222    121.6656
+usdinr        inr_per_usd  1973-01-02  2026-10-30  13492     94.9400
+wti        usd_per_barrel  1986-01-02  2026-11-03   9537     99.6400
+
+NSDL FPI equity flows: {'ok': 2, 'skip': 1}
+stored: 2864 reporting days, 2015-01-01 -> 2026-11-09
+
+result       ok
+dataset        
+cm_bhavcopy   1
+fo_stock      1
+daily_market.parquet: 2937 rows
+participants_daily.parquet: 11748 rows
+iv_daily.parquet: 2937 rows
+market_events.parquet: 857 rows
+event_impact.parquet: 9 rows
+moneyness_daily.parquet: 122976 rows
+stock_iv.parquet: 94702 rows
+nifty_weights.parquet: 32099 rows
+result_events.parquet: 526 rows
+result_summary.parquet: 16 rows
+calendar_gaps                  13 rows
+duplicate_contracts            PASS
+ohlc_inconsistent              PASS
+negative_values                PASS
+expiry_before_trade_date       PASS
+lot_size_missing               PASS
+near_future_basis_gt_3pct      PASS
+no_spot_for_trade_date         9 rows
+underlying_vs_index_gt_0_1pct  PASS
+spot_daily_move_gt_8pct        3 rows
+participant_oi_long_ne_short   5 rows
+greeks_missing_days            PASS
+iv_atm_missing                 PASS
+iv_30d_vs_vix_gap              6 rows
+iv_smile_implausible           1 rows
+stock_days_missing             1 rows
+nifty_weight_fit_poor          1 rows
+result_dates_to_confirm        10 rows
+macro_series_absent            PASS
+macro_duplicates               PASS
+macro_stale_series             PASS
+macro_non_positive             PASS
+fpi_duplicates                 PASS
+fpi_subtotal_mismatch          PASS
+fpi_stale                      PASS
+fpi_months_without_data        PASS
+fii_dii_missed_days            PASS
+breadth_missing_days           16 rows
+
+Details (first 200 rows per check): F:\trading\data\reports\quality_20261109_200801.json
+
+index_eod: 1 days loaded
+fo_eod: 1 days loaded
+participant_oi: 1 days loaded
+participant_vol: 1 days loaded
+stock_eod: 1 days loaded
+stock_fo_eod: 1 days loaded
+option_greeks: 1 days loaded
+daily_market: 2937 rows
+participants_daily: 11748 rows
+iv_daily: 2937 rows
+moneyness_daily: 122976 rows
+market_events: 857 rows
+event_impact: 9 rows
+stock_iv: 94702 rows
+nifty_weights: 32099 rows
+nifty_weight_fits: 20 rows
+result_events: 526 rows
+result_summary: 16 rows
+[2026-11-09T20:09:24] finished with exit code 0

@@ -1,0 +1,93 @@
+﻿[2026-11-07T20:00:03] niftyquant update starting
+2026-11-07 20:00:07,629 INFO niftyquant.ingest: progress 11/11 days (at 2026-11-07)
+2026-11-07 20:00:10,249 INFO niftyquant.fiidii: FII/DII provisional for 2026-11-06 refreshed
+2026-11-07 20:00:42,291 INFO niftyquant.macro: macro: 98686 rows written to F:\trading\data\curated\fred\macro_daily.parquet
+2026-11-07 20:01:06,400 INFO niftyquant.nsdl: NSDL 2026-10: 20 reporting days
+2026-11-07 20:01:08,196 INFO niftyquant.nsdl: NSDL 2026-11: 5 reporting days
+2026-11-07 20:01:09,375 INFO niftyquant.stocks: cm_bhavcopy: 0 sessions to fetch
+2026-11-07 20:01:09,434 INFO niftyquant.stocks: fo_stock: 3 sessions to fetch
+2026-11-07 20:01:16,732 INFO niftyquant.analytics: wrote daily_market.parquet (2935 rows)
+2026-11-07 20:01:56,430 INFO niftyquant.analytics: wrote participants_daily.parquet (11740 rows)
+2026-11-07 20:01:58,042 INFO niftyquant.analytics: wrote iv_daily.parquet (2935 rows)
+2026-11-07 20:01:58,164 INFO niftyquant.analytics: wrote market_events.parquet (857 rows)
+2026-11-07 20:01:58,328 INFO niftyquant.analytics: wrote event_impact.parquet (9 rows)
+2026-11-07 20:01:59,402 INFO niftyquant.analytics: wrote moneyness_daily.parquet (122892 rows)
+2026-11-07 20:05:40,078 INFO niftyquant.pgload: trading_calendar: replaced, 4328 rows
+2026-11-07 20:09:53,315 INFO niftyquant.pgload: daily_market: replaced, 2935 rows
+2026-11-07 20:11:30,235 INFO niftyquant.pgload: participants_daily: replaced, 11740 rows
+2026-11-07 20:11:48,197 INFO niftyquant.pgload: iv_daily: replaced, 2935 rows
+2026-11-07 20:12:26,480 ERROR niftyquant: pg-load failed: flushing failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+result           pending  skip
+dataset                       
+fo_bhavcopy            1    10
+index_close            1    10
+participant_oi         1    10
+participant_vol        1    10
+
+NSE provisional FII/DII for 2026-11-06 (Rs crore):
+category   buy_cr  sell_cr   net_cr
+     DII 18084.32 24053.02 -5968.70
+     FII 30455.63 16705.81 13749.82
+
+NSE market breadth: nothing to do
+stored: 2911 days, 2015-01-01 -> 2026-11-06 (last: 1550 up, 2283 down, 110 unchanged)
+
+FRED daily series (world markets, crude oil, USD/INR):
+                     unit       first        last   rows  last_value
+series                                                              
+brent      usd_per_barrel  1987-05-20  2026-11-03   9122    107.0300
+nasdaq       index_points  1971-02-05  2026-11-06  14058  24579.4200
+nikkei       index_points  1949-05-16  2026-11-06  19234  57434.7700
+sp500        index_points  2016-11-07  2026-11-05   2513   7353.7300
+us_10y     percent_a_year  1962-01-02  2026-11-05  16197      4.8400
+us_vix       index_points  1990-01-02  2026-11-05   9311     28.1800
+usd_index    index_points  2006-01-02  2026-10-30   5222    121.6656
+usdinr        inr_per_usd  1973-01-02  2026-10-30  13492     94.9400
+wti        usd_per_barrel  1986-01-02  2026-11-03   9537     99.6400
+
+NSDL FPI equity flows: {'ok': 2, 'skip': 1}
+stored: 2863 reporting days, 2015-01-01 -> 2026-11-06
+
+result    ok
+dataset     
+fo_stock   3
+daily_market.parquet: 2935 rows
+participants_daily.parquet: 11740 rows
+iv_daily.parquet: 2935 rows
+market_events.parquet: 857 rows
+event_impact.parquet: 9 rows
+moneyness_daily.parquet: 122892 rows
+calendar_gaps                  13 rows
+duplicate_contracts            PASS
+ohlc_inconsistent              PASS
+negative_values                PASS
+expiry_before_trade_date       PASS
+lot_size_missing               PASS
+near_future_basis_gt_3pct      PASS
+no_spot_for_trade_date         9 rows
+underlying_vs_index_gt_0_1pct  PASS
+spot_daily_move_gt_8pct        3 rows
+participant_oi_long_ne_short   5 rows
+greeks_missing_days            PASS
+iv_atm_missing                 PASS
+iv_30d_vs_vix_gap              6 rows
+iv_smile_implausible           1 rows
+macro_series_absent            PASS
+macro_duplicates               PASS
+macro_stale_series             PASS
+macro_non_positive             PASS
+fpi_duplicates                 PASS
+fpi_subtotal_mismatch          PASS
+fpi_stale                      PASS
+fpi_months_without_data        PASS
+fii_dii_missed_days            PASS
+breadth_missing_days           16 rows
+
+Details (first 200 rows per check): F:\trading\data\reports\quality_20261107_200455.json
+
+[2026-11-07T20:12:27] finished with exit code 1

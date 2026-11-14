@@ -1,0 +1,58 @@
+2026-11-07 13:40:24,355 INFO niftyquant.pgload: index_eod: 2015: loaded 240 days, 11901 rows
+2026-11-07 13:40:28,656 INFO niftyquant.pgload: index_eod: 2016: loaded 246 days, 16049 rows
+2026-11-07 13:40:32,279 INFO niftyquant.pgload: index_eod: 2017: loaded 248 days, 17799 rows
+2026-11-07 13:40:36,011 INFO niftyquant.pgload: index_eod: 2018: loaded 246 days, 18912 rows
+2026-11-07 13:40:39,546 INFO niftyquant.pgload: index_eod: 2019: loaded 245 days, 19232 rows
+2026-11-07 13:40:43,397 INFO niftyquant.pgload: index_eod: 2020: loaded 252 days, 20849 rows
+2026-11-07 13:40:47,530 INFO niftyquant.pgload: index_eod: 2021: loaded 248 days, 22013 rows
+2026-11-07 13:40:52,180 INFO niftyquant.pgload: index_eod: 2022: loaded 248 days, 24752 rows
+2026-11-07 13:40:57,031 INFO niftyquant.pgload: index_eod: 2023: loaded 246 days, 26145 rows
+2026-11-07 13:41:01,399 INFO niftyquant.pgload: index_eod: 2024: loaded 249 days, 29080 rows
+2026-11-07 13:41:06,223 INFO niftyquant.pgload: index_eod: 2025: loaded 249 days, 34648 rows
+2026-11-07 13:41:11,052 INFO niftyquant.pgload: index_eod: 2026: loaded 210 days, 32449 rows
+2026-11-07 13:41:38,970 INFO niftyquant.pgload: fo_eod: 2015: loaded 248 days, 535976 rows
+2026-11-07 13:42:05,839 INFO niftyquant.pgload: fo_eod: 2016: loaded 247 days, 517035 rows
+2026-11-07 13:42:31,628 INFO niftyquant.pgload: fo_eod: 2017: loaded 248 days, 528158 rows
+2026-11-07 13:43:01,637 INFO niftyquant.pgload: fo_eod: 2018: loaded 246 days, 567188 rows
+2026-11-07 13:43:37,113 INFO niftyquant.pgload: fo_eod: 2019: loaded 245 days, 774099 rows
+2026-11-07 13:44:12,956 INFO niftyquant.pgload: fo_eod: 2020: loaded 252 days, 737752 rows
+2026-11-07 13:44:41,578 INFO niftyquant.pgload: fo_eod: 2021: loaded 247 days, 511306 rows
+2026-11-07 13:45:11,832 INFO niftyquant.pgload: fo_eod: 2022: loaded 248 days, 562785 rows
+2026-11-07 13:45:31,781 INFO niftyquant.pgload: fo_eod: 2023: loaded 246 days, 341161 rows
+2026-11-07 13:45:56,137 INFO niftyquant.pgload: fo_eod: 2024: loaded 249 days, 399486 rows
+2026-11-07 13:46:20,911 INFO niftyquant.pgload: fo_eod: 2025: loaded 249 days, 396613 rows
+2026-11-07 13:46:44,420 INFO niftyquant.pgload: fo_eod: 2026: loaded 210 days, 374820 rows
+2026-11-07 13:46:47,940 INFO niftyquant.pgload: participant_oi: 2015: loaded 248 days, 1240 rows
+2026-11-07 13:46:51,290 INFO niftyquant.pgload: participant_oi: 2016: loaded 246 days, 1230 rows
+2026-11-07 13:46:54,537 INFO niftyquant.pgload: participant_oi: 2017: loaded 248 days, 1240 rows
+2026-11-07 13:46:57,988 INFO niftyquant.pgload: participant_oi: 2018: loaded 246 days, 1230 rows
+2026-11-07 13:47:01,214 INFO niftyquant.pgload: participant_oi: 2019: loaded 245 days, 1225 rows
+2026-11-07 13:47:04,707 INFO niftyquant.pgload: participant_oi: 2020: loaded 252 days, 1260 rows
+2026-11-07 13:47:08,210 INFO niftyquant.pgload: participant_oi: 2021: loaded 248 days, 1240 rows
+2026-11-07 13:47:11,456 INFO niftyquant.pgload: participant_oi: 2022: loaded 248 days, 1240 rows
+2026-11-07 13:47:14,602 INFO niftyquant.pgload: participant_oi: 2023: loaded 246 days, 1230 rows
+2026-11-07 13:47:17,733 INFO niftyquant.pgload: participant_oi: 2024: loaded 249 days, 1245 rows
+2026-11-07 13:47:21,003 INFO niftyquant.pgload: participant_oi: 2025: loaded 249 days, 1245 rows
+2026-11-07 13:47:24,194 INFO niftyquant.pgload: participant_oi: 2026: loaded 210 days, 1050 rows
+2026-11-07 13:47:27,620 INFO niftyquant.pgload: participant_vol: 2015: loaded 248 days, 1240 rows
+2026-11-07 13:47:30,879 INFO niftyquant.pgload: participant_vol: 2016: loaded 247 days, 1235 rows
+2026-11-07 13:47:34,502 INFO niftyquant.pgload: participant_vol: 2017: loaded 248 days, 1240 rows
+2026-11-07 13:47:38,203 INFO niftyquant.pgload: participant_vol: 2018: loaded 246 days, 1230 rows
+2026-11-07 13:47:41,527 INFO niftyquant.pgload: participant_vol: 2019: loaded 245 days, 1225 rows
+2026-11-07 13:47:45,463 INFO niftyquant.pgload: participant_vol: 2020: loaded 252 days, 1260 rows
+2026-11-07 13:47:48,645 INFO niftyquant.pgload: participant_vol: 2021: loaded 248 days, 1240 rows
+2026-11-07 13:47:51,852 INFO niftyquant.pgload: participant_vol: 2022: loaded 248 days, 1240 rows
+2026-11-07 13:47:55,083 INFO niftyquant.pgload: participant_vol: 2023: loaded 246 days, 1230 rows
+2026-11-07 13:47:58,267 INFO niftyquant.pgload: participant_vol: 2024: loaded 249 days, 1245 rows
+2026-11-07 13:48:01,582 INFO niftyquant.pgload: participant_vol: 2025: loaded 248 days, 1240 rows
+2026-11-07 13:48:04,599 INFO niftyquant.pgload: participant_vol: 2026: loaded 210 days, 1050 rows
+2026-11-07 13:48:06,062 INFO niftyquant.pgload: trading_calendar: replaced, 4328 rows
+2026-11-07 13:48:07,667 INFO niftyquant.pgload: daily_market: replaced, 2935 rows
+2026-11-07 13:48:09,197 INFO niftyquant.pgload: participants_daily: replaced, 11740 rows
+index_eod: 2927 days loaded
+fo_eod: 2935 days loaded
+participant_oi: 2935 days loaded
+participant_vol: 2935 days loaded
+daily_market: 2935 rows
+participants_daily: 11740 rows
+exit=0

@@ -1,0 +1,36 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-07T13:40:59.968+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : Starting BackendApplication using Java 21.0.7 with PID 22716 (F:\trading\backend\target\classes started by abine in F:\trading\backend)
+2026-11-07T13:40:59.975+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-11-07T13:41:02.530+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-11-07T13:41:02.566+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-07T13:41:02.567+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-07T13:41:02.723+05:30  INFO 22716 --- [niftyquant-backend] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2623 ms
+2026-11-07T13:41:04.005+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-07T13:41:07.297+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@38f502fc
+2026-11-07T13:41:07.301+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-07T13:41:07.596+05:30  INFO 22716 --- [niftyquant-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://127.0.0.1:15432/niftyquant?sslmode=prefer&ApplicationName=niftyquant-backend (PostgreSQL 16.15)
+2026-11-07T13:41:13.957+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:01.968s)
+2026-11-07T13:41:19.991+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2026-11-07T13:41:20.507+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-11-07T13:41:23.474+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-11-07T13:41:23.627+05:30  INFO 22716 --- [niftyquant-backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-11-07T13:41:23.650+05:30  INFO 22716 --- [niftyquant-backend] [           main] com.niftyquant.BackendApplication        : Started BackendApplication in 24.651 seconds (process running for 25.485)
+2026-11-07T13:41:25.419+05:30  INFO 22716 --- [niftyquant-backend] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-07T13:41:25.419+05:30  INFO 22716 --- [niftyquant-backend] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-07T13:41:25.421+05:30  INFO 22716 --- [niftyquant-backend] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.1.2:run (default-cli) on project backend: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

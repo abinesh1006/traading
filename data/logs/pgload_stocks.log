@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 278, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 148, in cmd_pg_load
+    for table, n in pgload.load_all(_pg_settings(), a.datasets, reload=a.reload).items():
+                    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 209, in load_all
+    result[TABLES[ds]] = load_dataset(
+                         ~~~~~~~~~~~~^
+        conn, ds, TABLES[ds], manifest_versions(manifest, ds),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        lambda d, ds=ds: pd.read_parquet(store.day_path(ds, d)), reload)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 172, in load_dataset
+    copy_frame(conn, table, df)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 137, in copy_frame
+    with conn.cursor() as cur, cur.copy(stmt) as cp:
+                               ~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\cursor.py", line 330, in copy
+    raise ex.with_traceback(None)
+psycopg.OperationalError: flushing failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+exit=1

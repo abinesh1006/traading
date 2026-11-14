@@ -1,0 +1,13 @@
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-08 22:06:52,876+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":"Connection to remote host was lost.","timestamp":"2026-11-08 23:47:03,526+0530","service":"FyersDataSocket"}
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-08 23:47:11,282+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":"Connection to remote host was lost.","timestamp":"2026-11-09 01:27:21,857+0530","service":"FyersDataSocket"}
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-09 01:27:29,668+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":"Connection to remote host was lost.","timestamp":"2026-11-09 03:07:40,236+0530","service":"FyersDataSocket"}
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-09 03:07:47,900+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":"Connection to remote host was lost.","timestamp":"2026-11-09 04:47:58,469+0530","service":"FyersDataSocket"}
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-09 04:48:06,084+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":"Connection to remote host was lost.","timestamp":"2026-11-09 06:28:16,646+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":{"type":"cn","code":-99,"message":"Token is expired","s":"error"},"timestamp":"2026-11-09 06:28:21,647+0530","service":"FyersDataSocket"}
+{"level":"INFO","location":"[symbol_to_hsmtoken:93] data_ws","message":"Successfully loaded index_hsm_mapping from public API","timestamp":"2026-11-09 06:28:24,286+0530","service":"FyersDataSocket"}
+{"level":"ERROR","location":"[On_error:1602] data_ws","message":{"code":-300,"message":"Please provide valid token","s":"error","type":"sub"},"timestamp":"2026-11-09 06:28:24,288+0530","service":"FyersDataSocket"}

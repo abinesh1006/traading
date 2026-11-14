@@ -1,0 +1,47 @@
+﻿[2026-11-07T13:51:50] niftyquant update starting
+2026-11-07 13:52:01,583 INFO niftyquant.ingest: progress 11/11 days (at 2026-11-07)
+2026-11-07 13:52:21,508 WARNING niftyquant.nse.http: retry 1 for https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU after 1.7s: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2026-11-07 13:52:53,822 WARNING niftyquant.nse.http: retry 2 for https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU after 2.0s: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)
+2026-11-07 13:53:26,545 WARNING niftyquant.nse.http: retry 3 for https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU after 4.1s: HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=30)
+2026-11-07 13:53:50,485 WARNING niftyquant.nse.http: retry 4 for https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU after 8.4s: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2026-11-07 13:54:18,805 WARNING niftyquant.nse.http: retry 5 for https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU after 16.5s: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2026-11-07 13:54:35,264 ERROR niftyquant: crude download failed: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2026-11-07 13:54:36,068 INFO niftyquant.analytics: wrote daily_market.parquet (2935 rows)
+2026-11-07 13:55:51,495 INFO niftyquant.analytics: wrote participants_daily.parquet (11740 rows)
+2026-11-07 13:57:35,577 INFO niftyquant.pgload: trading_calendar: replaced, 4328 rows
+2026-11-07 13:57:37,205 INFO niftyquant.pgload: daily_market: replaced, 2935 rows
+2026-11-07 13:57:38,817 INFO niftyquant.pgload: participants_daily: replaced, 11740 rows
+result           pending  skip
+dataset                       
+fo_bhavcopy            1    10
+index_close            1    10
+participant_oi         1    10
+participant_vol        1    10
+
+crude oil (FRED, USD/barrel):
+daily_market.parquet: 2935 rows
+participants_daily.parquet: 11740 rows
+calendar_gaps                  12 rows
+duplicate_contracts            PASS
+ohlc_inconsistent              PASS
+negative_values                PASS
+expiry_before_trade_date       PASS
+lot_size_missing               PASS
+near_future_basis_gt_3pct      PASS
+no_spot_for_trade_date         9 rows
+underlying_vs_index_gt_0_1pct  PASS
+spot_daily_move_gt_8pct        3 rows
+participant_oi_long_ne_short   5 rows
+crude_duplicates               PASS
+crude_stale_series             PASS
+crude_brent_non_positive       PASS
+
+Details (first 200 rows per check): F:\trading\data\reports\quality_20261107_135726.json
+
+index_eod: 0 days loaded
+fo_eod: 0 days loaded
+participant_oi: 0 days loaded
+participant_vol: 0 days loaded
+daily_market: 2935 rows
+participants_daily: 11740 rows
+[2026-11-07T13:57:39] finished with exit code 0

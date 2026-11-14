@@ -1,0 +1,6 @@
+2026-11-07 22:46:11,918 INFO niftyquant.stocks: cm_bhavcopy: 2 sessions to fetch
+2026-11-07 22:46:14,628 INFO niftyquant.stocks: fo_stock: 16 sessions to fetch
+result       missing  ok
+dataset                 
+cm_bhavcopy        0   2
+fo_stock           1  15

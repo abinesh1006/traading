@@ -1,0 +1,8 @@
+2026-11-07 21:13:54,282 INFO niftyquant.stockiv: stock IV: 1723 days to compute
+2026-11-07 21:15:40,623 INFO niftyquant.stockiv: stock IV: 250/1723
+2026-11-07 21:16:49,403 INFO niftyquant.stockiv: stock IV: 500/1723
+2026-11-07 21:18:04,829 INFO niftyquant.stockiv: stock IV: 750/1723
+2026-11-07 21:19:16,272 INFO niftyquant.stockiv: stock IV: 1000/1723
+2026-11-07 21:20:29,493 INFO niftyquant.stockiv: stock IV: 1250/1723
+2026-11-07 21:21:37,598 INFO niftyquant.stockiv: stock IV: 1500/1723
+75239 rows, 1723 days, 520 s

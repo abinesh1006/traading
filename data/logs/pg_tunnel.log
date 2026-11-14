@@ -1,0 +1,16 @@
+--- 2026-11-08 15:58:21 port 62977
+--- 2026-11-08 15:59:47 port 52348
+Read from remote host api.refinepoint.com: Connection reset by peer
+client_loop: send disconnect: Connection reset by peer
+--- 2026-11-08 16:12:12 port 60067
+ssh: Could not resolve hostname api.refinepoint.com: Name or service not known
+--- 2026-11-08 16:13:17 port 60084
+ssh: Could not resolve hostname api.refinepoint.com: Name or service not known
+--- 2026-11-08 21:11:00 port 59288
+--- 2026-11-08 21:17:31 port 57911
+--- 2026-11-08 21:17:33 port 57918
+--- 2026-11-09 20:08:03 port 63003
+--- 2026-11-10 20:07:59 port 56055
+--- 2026-11-12 10:36:47 port 52246
+--- 2026-11-12 20:07:53 port 53151
+--- 2026-11-13 20:07:51 port 55924

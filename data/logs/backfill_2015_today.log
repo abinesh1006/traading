@@ -1,0 +1,539 @@
+2026-11-07 01:50:06,484 INFO niftyquant.ingest: progress 50/4329 days (at 2015-02-19)
+2026-11-07 01:50:42,809 ERROR niftyquant.ingest: index_close 2015-03-24 failed: time data "24/03/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:44,299 ERROR niftyquant.ingest: index_close 2015-03-25 failed: time data "25/03/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:45,766 ERROR niftyquant.ingest: index_close 2015-03-26 failed: time data "26/03/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:47,250 ERROR niftyquant.ingest: index_close 2015-03-27 failed: time data "27/03/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:49,618 ERROR niftyquant.ingest: index_close 2015-03-30 failed: time data "30/03/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:56,971 ERROR niftyquant.ingest: index_close 2015-04-06 failed: time data "06/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:50:58,492 ERROR niftyquant.ingest: index_close 2015-04-07 failed: time data "07/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:00,016 ERROR niftyquant.ingest: index_close 2015-04-08 failed: time data "08/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:01,515 ERROR niftyquant.ingest: index_close 2015-04-09 failed: time data "09/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:03,063 ERROR niftyquant.ingest: index_close 2015-04-10 failed: time data "10/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:04,378 INFO niftyquant.ingest: progress 100/4329 days (at 2015-04-10)
+2026-11-07 01:51:05,415 ERROR niftyquant.ingest: index_close 2015-04-13 failed: time data "13/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:07,997 ERROR niftyquant.ingest: index_close 2015-04-15 failed: time data "15/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:09,548 ERROR niftyquant.ingest: index_close 2015-04-16 failed: time data "16/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:11,101 ERROR niftyquant.ingest: index_close 2015-04-17 failed: time data "17/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:13,521 ERROR niftyquant.ingest: index_close 2015-04-20 failed: time data "20/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:14,927 ERROR niftyquant.ingest: index_close 2015-04-21 failed: time data "21/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:16,507 ERROR niftyquant.ingest: index_close 2015-04-22 failed: time data "22/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:18,424 ERROR niftyquant.ingest: index_close 2015-04-23 failed: time data "23/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:19,922 ERROR niftyquant.ingest: index_close 2015-04-24 failed: time data "24/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:22,185 ERROR niftyquant.ingest: index_close 2015-04-27 failed: time data "27/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:23,565 ERROR niftyquant.ingest: index_close 2015-04-28 failed: time data "28/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:25,084 ERROR niftyquant.ingest: index_close 2015-04-29 failed: time data "29/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:26,502 ERROR niftyquant.ingest: index_close 2015-04-30 failed: time data "30/04/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:31,286 ERROR niftyquant.ingest: index_close 2015-05-05 failed: time data "05/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:32,731 ERROR niftyquant.ingest: index_close 2015-05-06 failed: time data "06/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:34,212 ERROR niftyquant.ingest: index_close 2015-05-07 failed: time data "07/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:35,616 ERROR niftyquant.ingest: index_close 2015-05-08 failed: time data "08/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:37,761 ERROR niftyquant.ingest: index_close 2015-05-11 failed: time data "11/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:39,233 ERROR niftyquant.ingest: index_close 2015-05-12 failed: time data "12/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:45,685 ERROR niftyquant.ingest: index_close 2015-05-18 failed: time data "18/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:48,628 ERROR niftyquant.ingest: index_close 2015-05-20 failed: time data "20/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:50,115 ERROR niftyquant.ingest: index_close 2015-05-21 failed: time data "21/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:51,618 ERROR niftyquant.ingest: index_close 2015-05-22 failed: time data "22/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:53,780 ERROR niftyquant.ingest: index_close 2015-05-25 failed: time data "25/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:55,255 ERROR niftyquant.ingest: index_close 2015-05-26 failed: time data "26/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:56,731 ERROR niftyquant.ingest: index_close 2015-05-27 failed: time data "27/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:58,211 ERROR niftyquant.ingest: index_close 2015-05-28 failed: time data "28/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:51:59,700 ERROR niftyquant.ingest: index_close 2015-05-29 failed: time data "29/05/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:01,224 INFO niftyquant.ingest: progress 150/4329 days (at 2015-05-30)
+2026-11-07 01:52:01,892 ERROR niftyquant.ingest: index_close 2015-06-01 failed: time data "01/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:03,366 ERROR niftyquant.ingest: index_close 2015-06-02 failed: time data "02/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:04,864 ERROR niftyquant.ingest: index_close 2015-06-03 failed: time data "03/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:06,314 ERROR niftyquant.ingest: index_close 2015-06-04 failed: time data "04/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:07,789 ERROR niftyquant.ingest: index_close 2015-06-05 failed: time data "05/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:09,994 ERROR niftyquant.ingest: index_close 2015-06-08 failed: time data "08/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:11,448 ERROR niftyquant.ingest: index_close 2015-06-09 failed: time data "09/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:52:12,875 ERROR niftyquant.ingest: index_close 2015-06-10 failed: time data "10/06/2015" doesn't match format "%d-%m-%Y". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-11-07 01:53:00,455 INFO niftyquant.ingest: progress 200/4329 days (at 2015-07-19)
+2026-11-07 01:53:59,469 INFO niftyquant.ingest: progress 250/4329 days (at 2015-09-07)
+2026-11-07 01:54:53,776 INFO niftyquant.ingest: progress 300/4329 days (at 2015-10-27)
+2026-11-07 01:55:50,707 INFO niftyquant.ingest: progress 350/4329 days (at 2015-12-16)
+2026-11-07 01:56:47,520 INFO niftyquant.ingest: progress 400/4329 days (at 2016-02-04)
+2026-11-07 01:57:44,678 INFO niftyquant.ingest: progress 450/4329 days (at 2016-03-25)
+2026-11-07 01:58:43,664 INFO niftyquant.ingest: progress 500/4329 days (at 2016-05-14)
+2026-11-07 01:59:39,342 INFO niftyquant.ingest: progress 550/4329 days (at 2016-07-03)
+2026-11-07 02:01:11,697 INFO niftyquant.ingest: progress 600/4329 days (at 2016-08-22)
+2026-11-07 02:02:10,758 INFO niftyquant.ingest: progress 650/4329 days (at 2016-10-11)
+2026-11-07 02:03:07,971 INFO niftyquant.ingest: progress 700/4329 days (at 2016-11-30)
+2026-11-07 02:04:05,721 INFO niftyquant.ingest: progress 750/4329 days (at 2017-01-19)
+2026-11-07 02:05:03,303 INFO niftyquant.ingest: progress 800/4329 days (at 2017-03-10)
+2026-11-07 02:06:02,926 INFO niftyquant.ingest: progress 850/4329 days (at 2017-04-29)
+2026-11-07 02:07:08,163 INFO niftyquant.ingest: progress 900/4329 days (at 2017-06-18)
+2026-11-07 02:08:13,167 INFO niftyquant.ingest: progress 950/4329 days (at 2017-08-07)
+2026-11-07 02:09:11,711 INFO niftyquant.ingest: progress 1000/4329 days (at 2017-09-26)
+2026-11-07 02:10:11,630 INFO niftyquant.ingest: progress 1050/4329 days (at 2017-11-15)
+2026-11-07 02:11:17,466 INFO niftyquant.ingest: progress 1100/4329 days (at 2018-01-04)
+2026-11-07 02:12:18,169 INFO niftyquant.ingest: progress 1150/4329 days (at 2018-02-23)
+2026-11-07 02:13:13,198 INFO niftyquant.ingest: progress 1200/4329 days (at 2018-04-14)
+2026-11-07 02:14:11,391 INFO niftyquant.ingest: progress 1250/4329 days (at 2018-06-03)
+2026-11-07 02:14:23,912 ERROR niftyquant.ingest: participant_oi 2018-06-13 failed: no 'as on <date>' in title: ['Client Type,Future Index Long,Future Index Short,Future Stock Long,Future Stock Short,Option Index Call Long,Option Index Put Long,Option Index Call Short,Option Index Put Short,Option Stock Call Long,Option Stock Put Long,Option Stock Call Short,Option Stock Put Short,Total Long Contracts,Total Short Contracts']
+2026-11-07 02:15:10,544 INFO niftyquant.ingest: progress 1300/4329 days (at 2018-07-23)
+2026-11-07 02:16:07,686 INFO niftyquant.ingest: progress 1350/4329 days (at 2018-09-11)
+2026-11-07 02:17:10,460 INFO niftyquant.ingest: progress 1400/4329 days (at 2018-10-31)
+2026-11-07 02:18:14,232 INFO niftyquant.ingest: progress 1450/4329 days (at 2018-12-20)
+2026-11-07 02:19:14,917 INFO niftyquant.ingest: progress 1500/4329 days (at 2019-02-08)
+2026-11-07 02:20:03,543 INFO niftyquant.ingest: progress 1550/4329 days (at 2019-03-30)
+2026-11-07 02:21:01,384 INFO niftyquant.ingest: progress 1600/4329 days (at 2019-05-19)
+2026-11-07 02:22:08,395 INFO niftyquant.ingest: progress 1650/4329 days (at 2019-07-08)
+2026-11-07 02:22:44,520 ERROR niftyquant.ingest: participant_oi 2019-08-05 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Aug 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:22:44,857 ERROR niftyquant.ingest: participant_vol 2019-08-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Aug 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:22:46,094 ERROR niftyquant.ingest: participant_oi 2019-08-06 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Aug 06 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:03,229 ERROR niftyquant.ingest: participant_oi 2019-08-20 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Aug 20,"2019""""",,,,,,,,,,,,,']
+2026-11-07 02:23:12,619 INFO niftyquant.ingest: progress 1700/4329 days (at 2019-08-27)
+2026-11-07 02:23:21,907 ERROR niftyquant.ingest: participant_oi 2019-09-04 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:22,264 ERROR niftyquant.ingest: participant_vol 2019-09-04 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:23,855 ERROR niftyquant.ingest: participant_vol 2019-09-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:25,114 ERROR niftyquant.ingest: participant_oi 2019-09-06 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 06 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:25,485 ERROR niftyquant.ingest: participant_vol 2019-09-06 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 06 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:27,341 ERROR niftyquant.ingest: participant_oi 2019-09-09 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 09 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:27,721 ERROR niftyquant.ingest: participant_vol 2019-09-09 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 09 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:30,063 ERROR niftyquant.ingest: participant_oi 2019-09-11 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 11 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:30,418 ERROR niftyquant.ingest: participant_vol 2019-09-11 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 11 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:31,930 ERROR niftyquant.ingest: participant_vol 2019-09-12 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 12 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:33,127 ERROR niftyquant.ingest: participant_oi 2019-09-13 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 13 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:33,474 ERROR niftyquant.ingest: participant_vol 2019-09-13 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 13 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:35,374 ERROR niftyquant.ingest: participant_oi 2019-09-16 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:35,729 ERROR niftyquant.ingest: participant_vol 2019-09-16 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:37,263 ERROR niftyquant.ingest: participant_oi 2019-09-17 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 17 2019,"2019""""",,,,,,,,,,,,,']
+2026-11-07 02:23:37,617 ERROR niftyquant.ingest: participant_vol 2019-09-17 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 17 2019,"2019""""",,,,,,,,,,,,,']
+2026-11-07 02:23:41,936 ERROR niftyquant.ingest: participant_oi 2019-09-20 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 20 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:42,289 ERROR niftyquant.ingest: participant_vol 2019-09-20 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 20 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:44,110 ERROR niftyquant.ingest: participant_oi 2019-09-23 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:44,479 ERROR niftyquant.ingest: participant_vol 2019-09-23 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:45,676 ERROR niftyquant.ingest: participant_oi 2019-09-24 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:46,016 ERROR niftyquant.ingest: participant_vol 2019-09-24 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:47,159 ERROR niftyquant.ingest: participant_oi 2019-09-25 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:47,529 ERROR niftyquant.ingest: participant_vol 2019-09-25 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:48,737 ERROR niftyquant.ingest: participant_oi 2019-09-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:49,070 ERROR niftyquant.ingest: participant_vol 2019-09-26 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:50,447 ERROR niftyquant.ingest: participant_oi 2019-09-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Sep 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:50,785 ERROR niftyquant.ingest: participant_vol 2019-09-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:53,027 ERROR niftyquant.ingest: participant_vol 2019-09-30 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 30 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:54,451 ERROR niftyquant.ingest: participant_oi 2019-10-01 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 01 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:54,760 ERROR niftyquant.ingest: participant_vol 2019-10-01 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 01 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:57,005 ERROR niftyquant.ingest: participant_oi 2019-10-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 03 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:57,370 ERROR niftyquant.ingest: participant_vol 2019-10-03 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 03 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:58,600 ERROR niftyquant.ingest: participant_oi 2019-10-04 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:23:58,923 ERROR niftyquant.ingest: participant_vol 2019-10-04 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:05,409 ERROR niftyquant.ingest: participant_oi 2019-10-10 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 10 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:05,725 ERROR niftyquant.ingest: participant_vol 2019-10-10 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 10 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:07,002 ERROR niftyquant.ingest: participant_oi 2019-10-11 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 11 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:07,354 ERROR niftyquant.ingest: participant_vol 2019-10-11 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 11 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:10,702 ERROR niftyquant.ingest: participant_oi 2019-10-15 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 15 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:11,031 ERROR niftyquant.ingest: participant_vol 2019-10-15 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 15 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:12,203 ERROR niftyquant.ingest: participant_oi 2019-10-16 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:12,539 ERROR niftyquant.ingest: participant_vol 2019-10-16 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:12,550 INFO niftyquant.ingest: progress 1750/4329 days (at 2019-10-16)
+2026-11-07 02:24:13,818 ERROR niftyquant.ingest: participant_oi 2019-10-17 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 17 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:14,142 ERROR niftyquant.ingest: participant_vol 2019-10-17 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 17 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:15,357 ERROR niftyquant.ingest: participant_oi 2019-10-18 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 18 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:15,705 ERROR niftyquant.ingest: participant_vol 2019-10-18 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 18 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:18,680 ERROR niftyquant.ingest: participant_oi 2019-10-22 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 22 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:19,016 ERROR niftyquant.ingest: participant_vol 2019-10-22 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 22 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:20,189 ERROR niftyquant.ingest: participant_oi 2019-10-23 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:20,560 ERROR niftyquant.ingest: participant_vol 2019-10-23 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:21,748 ERROR niftyquant.ingest: participant_oi 2019-10-24 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:22,083 ERROR niftyquant.ingest: participant_vol 2019-10-24 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:23,289 ERROR niftyquant.ingest: participant_oi 2019-10-25 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:23,659 ERROR niftyquant.ingest: participant_vol 2019-10-25 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:25,159 ERROR niftyquant.ingest: participant_oi 2019-10-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:25,567 ERROR niftyquant.ingest: participant_vol 2019-10-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:27,826 ERROR niftyquant.ingest: participant_oi 2019-10-29 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 29 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:28,131 ERROR niftyquant.ingest: participant_vol 2019-10-29 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 29 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:29,313 ERROR niftyquant.ingest: participant_oi 2019-10-30 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 30 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:29,688 ERROR niftyquant.ingest: participant_vol 2019-10-30 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 30 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:31,032 ERROR niftyquant.ingest: participant_oi 2019-10-31 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Oct 31 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:31,368 ERROR niftyquant.ingest: participant_vol 2019-10-31 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 31 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:32,515 ERROR niftyquant.ingest: participant_oi 2019-11-01 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 01 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:32,848 ERROR niftyquant.ingest: participant_vol 2019-11-01 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 01 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:34,720 ERROR niftyquant.ingest: participant_oi 2019-11-04 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:35,054 ERROR niftyquant.ingest: participant_vol 2019-11-04 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:36,222 ERROR niftyquant.ingest: participant_oi 2019-11-05 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:36,575 ERROR niftyquant.ingest: participant_vol 2019-11-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:39,186 ERROR niftyquant.ingest: participant_oi 2019-11-07 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 07 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:39,530 ERROR niftyquant.ingest: participant_vol 2019-11-07 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 07 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:40,611 ERROR niftyquant.ingest: participant_oi 2019-11-08 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 08 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:40,986 ERROR niftyquant.ingest: participant_vol 2019-11-08 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 08 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:42,741 ERROR niftyquant.ingest: participant_oi 2019-11-11 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 11 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:43,104 ERROR niftyquant.ingest: participant_vol 2019-11-11 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 11 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:45,322 ERROR niftyquant.ingest: participant_oi 2019-11-13 failed: no 'as on <date>' in title: ['"""Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 13 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:45,693 ERROR niftyquant.ingest: participant_vol 2019-11-13 failed: no 'as on <date>' in title: ['"\'Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 13 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:46,832 ERROR niftyquant.ingest: participant_oi 2019-11-14 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 14 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:47,167 ERROR niftyquant.ingest: participant_vol 2019-11-14 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 14 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:48,307 ERROR niftyquant.ingest: participant_oi 2019-11-15 failed: no 'as on <date>' in title: ['"\'Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 15 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:48,646 ERROR niftyquant.ingest: participant_vol 2019-11-15 failed: no 'as on <date>' in title: ['"\'Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 15 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:50,464 ERROR niftyquant.ingest: participant_oi 2019-11-18 failed: no 'as on <date>' in title: ['"\'Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 18 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:50,813 ERROR niftyquant.ingest: participant_vol 2019-11-18 failed: no 'as on <date>' in title: ['"\'Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 18 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:51,996 ERROR niftyquant.ingest: participant_oi 2019-11-19 failed: no 'as on <date>' in title: ['"\'Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 19 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:52,344 ERROR niftyquant.ingest: participant_vol 2019-11-19 failed: no 'as on <date>' in title: ['"\'Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 19 2019""",,,,,,,,,,,,,,']
+2026-11-07 02:24:56,418 ERROR niftyquant.ingest: participant_oi 2019-11-22 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 22 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:56,764 ERROR niftyquant.ingest: participant_vol 2019-11-22 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 22 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:58,544 ERROR niftyquant.ingest: participant_oi 2019-11-25 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:24:58,902 ERROR niftyquant.ingest: participant_vol 2019-11-25 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 25 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:00,015 ERROR niftyquant.ingest: participant_oi 2019-11-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:00,390 ERROR niftyquant.ingest: participant_vol 2019-11-26 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:01,486 ERROR niftyquant.ingest: participant_oi 2019-11-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:01,836 ERROR niftyquant.ingest: participant_vol 2019-11-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:02,974 ERROR niftyquant.ingest: participant_oi 2019-11-28 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 28 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:03,329 ERROR niftyquant.ingest: participant_vol 2019-11-28 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 28 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:04,458 ERROR niftyquant.ingest: participant_oi 2019-11-29 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Nov 29 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:04,808 ERROR niftyquant.ingest: participant_vol 2019-11-29 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Nov 29 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:06,623 ERROR niftyquant.ingest: participant_oi 2019-12-02 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 02 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:07,018 ERROR niftyquant.ingest: participant_vol 2019-12-02 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 02 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:08,138 ERROR niftyquant.ingest: participant_oi 2019-12-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 03 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:08,451 ERROR niftyquant.ingest: participant_vol 2019-12-03 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 03 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:09,639 ERROR niftyquant.ingest: participant_oi 2019-12-04 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:09,992 ERROR niftyquant.ingest: participant_vol 2019-12-04 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 04 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:11,261 ERROR niftyquant.ingest: participant_oi 2019-12-05 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:11,615 ERROR niftyquant.ingest: participant_vol 2019-12-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 05 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:11,625 INFO niftyquant.ingest: progress 1800/4329 days (at 2019-12-05)
+2026-11-07 02:25:13,096 ERROR niftyquant.ingest: participant_oi 2019-12-06 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 06 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:13,481 ERROR niftyquant.ingest: participant_vol 2019-12-06 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 06 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:15,290 ERROR niftyquant.ingest: participant_oi 2019-12-09 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 09 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:15,648 ERROR niftyquant.ingest: participant_vol 2019-12-09 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 09 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:20,036 ERROR niftyquant.ingest: participant_oi 2019-12-12 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 12 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:20,361 ERROR niftyquant.ingest: participant_vol 2019-12-12 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 12 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:23,791 ERROR niftyquant.ingest: participant_oi 2019-12-16 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:24,140 ERROR niftyquant.ingest: participant_vol 2019-12-16 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 16 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:27,186 ERROR niftyquant.ingest: participant_oi 2019-12-18 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 18 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:27,552 ERROR niftyquant.ingest: participant_vol 2019-12-18 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 18 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:28,850 ERROR niftyquant.ingest: participant_oi 2019-12-19 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 19 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:29,190 ERROR niftyquant.ingest: participant_vol 2019-12-19 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 19 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:30,438 ERROR niftyquant.ingest: participant_oi 2019-12-20 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 20 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:30,794 ERROR niftyquant.ingest: participant_vol 2019-12-20 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 20 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:32,802 ERROR niftyquant.ingest: participant_oi 2019-12-23 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:33,156 ERROR niftyquant.ingest: participant_vol 2019-12-23 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 23 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:34,557 ERROR niftyquant.ingest: participant_oi 2019-12-24 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:34,907 ERROR niftyquant.ingest: participant_vol 2019-12-24 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 24 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:37,184 ERROR niftyquant.ingest: participant_oi 2019-12-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:37,533 ERROR niftyquant.ingest: participant_vol 2019-12-26 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 26 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:38,872 ERROR niftyquant.ingest: participant_oi 2019-12-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:39,204 ERROR niftyquant.ingest: participant_vol 2019-12-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 27 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:41,139 ERROR niftyquant.ingest: participant_oi 2019-12-30 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 30 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:41,508 ERROR niftyquant.ingest: participant_vol 2019-12-30 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 30 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:42,585 ERROR niftyquant.ingest: participant_oi 2019-12-31 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Dec 31 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:42,943 ERROR niftyquant.ingest: participant_vol 2019-12-31 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Dec 31 2019,,,,,,,,,,,,,,']
+2026-11-07 02:25:44,068 ERROR niftyquant.ingest: participant_oi 2020-01-01 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 01 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:44,429 ERROR niftyquant.ingest: participant_vol 2020-01-01 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 01 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:45,555 ERROR niftyquant.ingest: participant_oi 2020-01-02 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 02 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:45,917 ERROR niftyquant.ingest: participant_vol 2020-01-02 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 02 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:47,106 ERROR niftyquant.ingest: participant_oi 2020-01-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:47,445 ERROR niftyquant.ingest: participant_vol 2020-01-03 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:52,223 ERROR niftyquant.ingest: participant_oi 2020-01-08 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 08 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:52,564 ERROR niftyquant.ingest: participant_vol 2020-01-08 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 08 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:53,782 ERROR niftyquant.ingest: participant_oi 2020-01-09 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 09 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:54,162 ERROR niftyquant.ingest: participant_vol 2020-01-09 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 09 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:55,302 ERROR niftyquant.ingest: participant_oi 2020-01-10 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 10 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:55,677 ERROR niftyquant.ingest: participant_vol 2020-01-10 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 10 2020,,,,,,,,,,,,,,']
+2026-11-07 02:25:59,769 ERROR niftyquant.ingest: participant_oi 2020-01-14 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 14 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:00,131 ERROR niftyquant.ingest: participant_vol 2020-01-14 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 14 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:07,068 ERROR niftyquant.ingest: participant_oi 2020-01-20 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 20 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:07,428 ERROR niftyquant.ingest: participant_vol 2020-01-20 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 20 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:08,644 ERROR niftyquant.ingest: participant_oi 2020-01-21 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 21 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:08,931 ERROR niftyquant.ingest: participant_vol 2020-01-21 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 21 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:12,003 ERROR niftyquant.ingest: participant_oi 2020-01-23 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 23 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:12,337 ERROR niftyquant.ingest: participant_vol 2020-01-23 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 23 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:13,490 ERROR niftyquant.ingest: participant_oi 2020-01-24 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 24 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:13,816 ERROR niftyquant.ingest: participant_vol 2020-01-24 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 24 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:13,826 INFO niftyquant.ingest: progress 1850/4329 days (at 2020-01-24)
+2026-11-07 02:26:19,523 ERROR niftyquant.ingest: participant_oi 2020-01-29 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 29 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:19,855 ERROR niftyquant.ingest: participant_vol 2020-01-29 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jan 29 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:24,408 ERROR niftyquant.ingest: participant_oi 2020-02-01 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 01 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:24,776 ERROR niftyquant.ingest: participant_vol 2020-02-01 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 01 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:26:26,455 ERROR niftyquant.ingest: participant_oi 2020-02-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:26,836 ERROR niftyquant.ingest: participant_vol 2020-02-03 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:28,113 ERROR niftyquant.ingest: participant_oi 2020-02-04 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 04 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:28,468 ERROR niftyquant.ingest: participant_vol 2020-02-04 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 04 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:29,550 ERROR niftyquant.ingest: participant_oi 2020-02-05 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 05 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:29,882 ERROR niftyquant.ingest: participant_vol 2020-02-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 05 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:31,052 ERROR niftyquant.ingest: participant_oi 2020-02-06 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 06 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:31,423 ERROR niftyquant.ingest: participant_vol 2020-02-06 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 06 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:32,512 ERROR niftyquant.ingest: participant_oi 2020-02-07 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 07 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:32,851 ERROR niftyquant.ingest: participant_vol 2020-02-07 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 07 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:34,645 ERROR niftyquant.ingest: participant_oi 2020-02-10 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 10 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:35,016 ERROR niftyquant.ingest: participant_vol 2020-02-10 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 10 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:36,081 ERROR niftyquant.ingest: participant_oi 2020-02-11 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 11 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:36,412 ERROR niftyquant.ingest: participant_vol 2020-02-11 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 11 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:37,507 ERROR niftyquant.ingest: participant_oi 2020-02-12 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 12 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:37,882 ERROR niftyquant.ingest: participant_vol 2020-02-12 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 12 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:39,027 ERROR niftyquant.ingest: participant_oi 2020-02-13 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 13 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:39,399 ERROR niftyquant.ingest: participant_vol 2020-02-13 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 13 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:40,481 ERROR niftyquant.ingest: participant_oi 2020-02-14 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 14 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:40,814 ERROR niftyquant.ingest: participant_vol 2020-02-14 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 14 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:42,594 ERROR niftyquant.ingest: participant_oi 2020-02-17 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 17 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:42,925 ERROR niftyquant.ingest: participant_vol 2020-02-17 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 17 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:44,032 ERROR niftyquant.ingest: participant_oi 2020-02-18 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 18 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:44,402 ERROR niftyquant.ingest: participant_vol 2020-02-18 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 18 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:45,435 ERROR niftyquant.ingest: participant_oi 2020-02-19 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 19 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:45,769 ERROR niftyquant.ingest: participant_vol 2020-02-19 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 19 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:46,868 ERROR niftyquant.ingest: participant_oi 2020-02-20 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 20 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:47,232 ERROR niftyquant.ingest: participant_vol 2020-02-20 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 20 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:50,110 ERROR niftyquant.ingest: participant_oi 2020-02-24 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 24 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:50,445 ERROR niftyquant.ingest: participant_vol 2020-02-24 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 24 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:51,522 ERROR niftyquant.ingest: participant_oi 2020-02-25 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 25 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:51,897 ERROR niftyquant.ingest: participant_vol 2020-02-25 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 25 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:53,008 ERROR niftyquant.ingest: participant_oi 2020-02-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 26 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:53,335 ERROR niftyquant.ingest: participant_vol 2020-02-26 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 26 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:54,451 ERROR niftyquant.ingest: participant_oi 2020-02-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 27 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:54,812 ERROR niftyquant.ingest: participant_vol 2020-02-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Feb 27 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:57,972 ERROR niftyquant.ingest: participant_oi 2020-03-02 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 02 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:58,325 ERROR niftyquant.ingest: participant_vol 2020-03-02 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 02 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:59,402 ERROR niftyquant.ingest: participant_oi 2020-03-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:26:59,783 ERROR niftyquant.ingest: participant_vol 2020-03-03 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 03 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:02,259 ERROR niftyquant.ingest: participant_oi 2020-03-05 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 05 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:02,612 ERROR niftyquant.ingest: participant_vol 2020-03-05 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 05 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:09,460 WARNING niftyquant.nse.http: retry 1 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo12MAR2020bhav.csv.zip after 1.9s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo12MAR2020bhav.csv.zip
+2026-11-07 02:27:11,455 WARNING niftyquant.nse.http: retry 2 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo12MAR2020bhav.csv.zip after 2.9s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo12MAR2020bhav.csv.zip
+2026-11-07 02:27:15,814 WARNING niftyquant.nse.http: retry 1 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo13MAR2020bhav.csv.zip after 1.3s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo13MAR2020bhav.csv.zip
+2026-11-07 02:27:18,331 INFO niftyquant.ingest: progress 1900/4329 days (at 2020-03-14)
+2026-11-07 02:27:19,359 WARNING niftyquant.nse.http: retry 1 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo16MAR2020bhav.csv.zip after 1.5s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo16MAR2020bhav.csv.zip
+2026-11-07 02:27:22,384 WARNING niftyquant.nse.http: retry 1 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo17MAR2020bhav.csv.zip after 1.5s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo17MAR2020bhav.csv.zip
+2026-11-07 02:27:24,327 ERROR niftyquant.ingest: participant_oi 2020-03-17 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 17 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:24,682 ERROR niftyquant.ingest: participant_vol 2020-03-17 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 17 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:25,833 ERROR niftyquant.ingest: participant_oi 2020-03-18 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 18 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:26,184 ERROR niftyquant.ingest: participant_vol 2020-03-18 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 18 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:26,900 WARNING niftyquant.nse.http: retry 1 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo19MAR2020bhav.csv.zip after 1.1s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo19MAR2020bhav.csv.zip
+2026-11-07 02:27:28,069 WARNING niftyquant.nse.http: retry 2 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo19MAR2020bhav.csv.zip after 2.4s: HTTP 503 for https://nsearchives.nseindia.com/content/historical/DERIVATIVES/2020/MAR/fo19MAR2020bhav.csv.zip
+2026-11-07 02:27:31,143 ERROR niftyquant.ingest: participant_oi 2020-03-19 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 19 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:31,432 ERROR niftyquant.ingest: participant_vol 2020-03-19 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 19 2020 ,,,,,,,,,,,,,,']
+2026-11-07 02:27:32,802 ERROR niftyquant.ingest: participant_oi 2020-03-20 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 20 2020 ,,,,,,,,,,,,,,']
+2026-11-07 02:27:33,158 ERROR niftyquant.ingest: participant_vol 2020-03-20 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 20 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:40,263 ERROR niftyquant.ingest: participant_oi 2020-03-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 26 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:40,616 ERROR niftyquant.ingest: participant_vol 2020-03-26 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 26 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:46,275 ERROR niftyquant.ingest: participant_oi 2020-03-31 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 31 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:46,624 ERROR niftyquant.ingest: participant_vol 2020-03-31 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 31 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:47,937 ERROR niftyquant.ingest: participant_oi 2020-04-01 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 01 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:48,293 ERROR niftyquant.ingest: participant_vol 2020-04-01 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 01 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:50,920 ERROR niftyquant.ingest: participant_oi 2020-04-03 failed: no 'as on <date>' in title: ['"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 03 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:51,256 ERROR niftyquant.ingest: participant_vol 2020-04-03 failed: no 'as on <date>' in title: ['"Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 03 2020""""",,,,,,,,,,,,,,']
+2026-11-07 02:27:54,371 ERROR niftyquant.ingest: participant_oi 2020-04-07 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 07 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:54,699 ERROR niftyquant.ingest: participant_vol 2020-04-07 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 07 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:56,016 ERROR niftyquant.ingest: participant_oi 2020-04-08 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 08 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:56,358 ERROR niftyquant.ingest: participant_vol 2020-04-08 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 08 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:57,641 ERROR niftyquant.ingest: participant_oi 2020-04-09 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 09 2020,,,,,,,,,,,,,,']
+2026-11-07 02:27:57,996 ERROR niftyquant.ingest: participant_vol 2020-04-09 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 09 2020,,,,,,,,,,,,,,']
+2026-11-07 02:28:20,155 ERROR niftyquant.ingest: participant_oi 2020-04-27 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 27 2020,,,,,,,,,,,,,,']
+2026-11-07 02:28:20,496 ERROR niftyquant.ingest: participant_vol 2020-04-27 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 27 2020,,,,,,,,,,,,,,']
+2026-11-07 02:28:22,044 ERROR niftyquant.ingest: participant_oi 2020-04-28 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 28 2020,,,,,,,,,,,,,,']
+2026-11-07 02:28:22,398 ERROR niftyquant.ingest: participant_vol 2020-04-28 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 28 2020,,,,,,,,,,,,,,']
+2026-11-07 02:28:27,931 INFO niftyquant.ingest: progress 1950/4329 days (at 2020-05-03)
+2026-11-07 02:29:31,641 INFO niftyquant.ingest: progress 2000/4329 days (at 2020-06-22)
+2026-11-07 02:30:29,952 INFO niftyquant.ingest: progress 2050/4329 days (at 2020-08-11)
+2026-11-07 02:31:30,836 INFO niftyquant.ingest: progress 2100/4329 days (at 2020-09-30)
+2026-11-07 02:32:32,250 INFO niftyquant.ingest: progress 2150/4329 days (at 2020-11-19)
+2026-11-07 02:33:31,797 INFO niftyquant.ingest: progress 2200/4329 days (at 2021-01-08)
+2026-11-07 02:34:37,153 INFO niftyquant.ingest: progress 2250/4329 days (at 2021-02-27)
+2026-11-07 02:35:15,076 ERROR niftyquant.ingest: participant_oi 2021-03-30 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 30,"2021""""",,,,,,,,,,,,,']
+2026-11-07 02:35:15,441 ERROR niftyquant.ingest: participant_vol 2021-03-30 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 30,"2021""",,,,,,,,,,,,,']
+2026-11-07 02:35:38,382 INFO niftyquant.ingest: progress 2300/4329 days (at 2021-04-18)
+2026-11-07 02:36:41,691 INFO niftyquant.ingest: progress 2350/4329 days (at 2021-06-07)
+2026-11-07 02:36:42,812 ERROR niftyquant.ingest: participant_oi 2021-06-08 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jun 08,,,,,,,,,,,,,,']
+2026-11-07 02:36:46,343 ERROR niftyquant.ingest: participant_vol 2021-06-10 failed: no 'as on <date>' in title: ['",2021Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Jun 10",,,,,,,,,,,,,,']
+2026-11-07 02:37:47,211 INFO niftyquant.ingest: progress 2400/4329 days (at 2021-07-27)
+2026-11-07 02:38:47,716 ERROR niftyquant.ingest: participant_vol 2021-09-15 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 15,"2021""""",,,,,,,,,,,,,']
+2026-11-07 02:38:47,725 INFO niftyquant.ingest: progress 2450/4329 days (at 2021-09-15)
+2026-11-07 02:39:56,111 INFO niftyquant.ingest: progress 2500/4329 days (at 2021-11-04)
+2026-11-07 02:41:09,187 INFO niftyquant.ingest: progress 2550/4329 days (at 2021-12-24)
+2026-11-07 02:42:21,650 INFO niftyquant.ingest: progress 2600/4329 days (at 2022-02-12)
+2026-11-07 02:43:33,085 INFO niftyquant.ingest: progress 2650/4329 days (at 2022-04-03)
+2026-11-07 02:44:45,513 INFO niftyquant.ingest: progress 2700/4329 days (at 2022-05-23)
+2026-11-07 02:45:57,733 INFO niftyquant.ingest: progress 2750/4329 days (at 2022-07-12)
+2026-11-07 02:47:06,688 INFO niftyquant.ingest: progress 2800/4329 days (at 2022-08-31)
+2026-11-07 02:48:05,695 ERROR niftyquant.ingest: participant_vol 2022-10-14 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 14,"2022""""",,,,,,,,,,,,,']
+2026-11-07 02:48:09,678 ERROR niftyquant.ingest: participant_vol 2022-10-18 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Oct 18,"2022""""",,,,,,,,,,,,,']
+2026-11-07 02:48:13,731 INFO niftyquant.ingest: progress 2850/4329 days (at 2022-10-20)
+2026-11-07 02:49:21,533 INFO niftyquant.ingest: progress 2900/4329 days (at 2022-12-09)
+2026-11-07 02:49:51,898 ERROR niftyquant.ingest: participant_oi 2023-01-03 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jan 03,"2023""""",,,,,,,,,,,,,']
+2026-11-07 02:50:21,390 INFO niftyquant.ingest: progress 2950/4329 days (at 2023-01-28)
+2026-11-07 02:51:21,508 INFO niftyquant.ingest: progress 3000/4329 days (at 2023-03-19)
+2026-11-07 02:51:44,730 ERROR niftyquant.ingest: index_close 2023-04-06 failed: index file dates {datetime.date(2023, 6, 4)} != requested 2023-04-06
+2026-11-07 02:51:48,156 ERROR niftyquant.ingest: index_close 2023-04-10 failed: index file dates {datetime.date(2023, 10, 4)} != requested 2023-04-10
+2026-11-07 02:51:49,772 ERROR niftyquant.ingest: index_close 2023-04-11 failed: index file dates {datetime.date(2023, 11, 4)} != requested 2023-04-11
+2026-11-07 02:52:25,573 INFO niftyquant.ingest: progress 3050/4329 days (at 2023-05-08)
+2026-11-07 02:53:29,794 INFO niftyquant.ingest: progress 3100/4329 days (at 2023-06-27)
+2026-11-07 02:54:41,407 INFO niftyquant.ingest: progress 3150/4329 days (at 2023-08-16)
+2026-11-07 02:56:01,200 INFO niftyquant.ingest: progress 3200/4329 days (at 2023-10-05)
+2026-11-07 02:57:19,628 INFO niftyquant.ingest: progress 3250/4329 days (at 2023-11-24)
+2026-11-07 02:58:36,217 INFO niftyquant.ingest: progress 3300/4329 days (at 2024-01-13)
+2026-11-07 02:59:30,350 ERROR niftyquant.ingest: participant_oi 2024-02-22 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Feb 22,"2024""""",,,,,,,,,,,,,,']
+2026-11-07 02:59:40,854 ERROR niftyquant.ingest: participant_oi 2024-03-01 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 01,"2024""""",,,,,,,,,,,,,']
+2026-11-07 02:59:43,030 INFO niftyquant.ingest: progress 3350/4329 days (at 2024-03-03)
+2026-11-07 03:00:06,102 ERROR niftyquant.ingest: participant_oi 2024-03-21 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 21,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:07,913 ERROR niftyquant.ingest: participant_oi 2024-03-22 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 22,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:11,606 ERROR niftyquant.ingest: participant_oi 2024-03-26 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Mar 26,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:15,400 ERROR niftyquant.ingest: participant_vol 2024-03-28 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Mar 28,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:18,562 ERROR niftyquant.ingest: participant_oi 2024-04-01 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 01,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:20,546 ERROR niftyquant.ingest: participant_oi 2024-04-02 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Apr 02,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:45,119 ERROR niftyquant.ingest: participant_vol 2024-04-22 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Apr 22,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:00:45,131 INFO niftyquant.ingest: progress 3400/4329 days (at 2024-04-22)
+2026-11-07 03:01:07,337 ERROR niftyquant.ingest: participant_oi 2024-05-09 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on May 09,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:01:13,283 ERROR niftyquant.ingest: participant_oi 2024-05-14 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on May 14,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:01:56,816 INFO niftyquant.ingest: progress 3450/4329 days (at 2024-06-11)
+2026-11-07 03:02:27,351 ERROR niftyquant.ingest: participant_oi 2024-07-15 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Jul 15,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:02:51,773 INFO niftyquant.ingest: progress 3500/4329 days (at 2024-07-31)
+2026-11-07 03:03:17,827 ERROR niftyquant.ingest: participant_oi 2024-08-19 failed: no 'as on <date>' in title: ['Participant wise Open Interest (no. of contracts) in Equity Derivatives as on Aug 19,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:03:45,753 ERROR niftyquant.ingest: participant_vol 2024-09-06 failed: no 'as on <date>' in title: ['Participant wise Trading Volume (no. of contracts) in Equity Derivatives as on Sep 06,"2024""""",,,,,,,,,,,,,']
+2026-11-07 03:04:03,114 INFO niftyquant.ingest: progress 3550/4329 days (at 2024-09-19)
+2026-11-07 03:05:16,070 INFO niftyquant.ingest: progress 3600/4329 days (at 2024-11-08)
+2026-11-07 03:06:26,466 INFO niftyquant.ingest: progress 3650/4329 days (at 2024-12-28)
+2026-11-07 03:07:46,404 INFO niftyquant.ingest: progress 3700/4329 days (at 2025-02-16)
+2026-11-07 03:08:56,507 INFO niftyquant.ingest: progress 3750/4329 days (at 2025-04-07)
+2026-11-07 03:10:13,025 INFO niftyquant.ingest: progress 3800/4329 days (at 2025-05-27)
+2026-11-07 03:11:28,209 INFO niftyquant.ingest: progress 3850/4329 days (at 2025-07-16)
+2026-11-07 03:12:30,701 INFO niftyquant.ingest: progress 3900/4329 days (at 2025-09-04)
+2026-11-07 03:13:32,563 INFO niftyquant.ingest: progress 3950/4329 days (at 2025-10-24)
+2026-11-07 03:14:34,534 INFO niftyquant.ingest: progress 4000/4329 days (at 2025-12-13)
+2026-11-07 03:15:39,496 INFO niftyquant.ingest: progress 4050/4329 days (at 2026-02-01)
+2026-11-07 03:16:50,344 INFO niftyquant.ingest: progress 4100/4329 days (at 2026-03-23)
+2026-11-07 03:18:04,890 INFO niftyquant.ingest: progress 4150/4329 days (at 2026-05-12)
+2026-11-07 03:19:11,354 INFO niftyquant.ingest: progress 4200/4329 days (at 2026-07-01)
+2026-11-07 03:20:14,917 INFO niftyquant.ingest: progress 4250/4329 days (at 2026-08-20)
+2026-11-07 03:21:17,895 INFO niftyquant.ingest: progress 4300/4329 days (at 2026-10-09)
+2026-11-07 03:21:36,447 INFO niftyquant.ingest: progress 4329/4329 days (at 2026-11-07)
+result           error  holiday  missing    ok  pending  skip
+dataset                                                      
+fo_bhavcopy          0     1387        1  2905        1    35
+index_close         49     1387        9  2848        1    35
+participant_oi     129     1387        2  2775        1    35
+participant_vol    123     1387        1  2782        1    35

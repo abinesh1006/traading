@@ -1,0 +1,40 @@
+2026-11-07 15:16:34,926 INFO niftyquant.pgload: option_greeks: 2015: loaded 248 days, 533052 rows
+2026-11-07 15:16:56,371 INFO niftyquant.pgload: option_greeks: 2016: loaded 247 days, 514136 rows
+2026-11-07 15:17:18,615 INFO niftyquant.pgload: option_greeks: 2017: loaded 248 days, 525282 rows
+2026-11-07 15:17:42,772 INFO niftyquant.pgload: option_greeks: 2018: loaded 246 days, 564118 rows
+2026-11-07 15:18:17,813 INFO niftyquant.pgload: option_greeks: 2019: loaded 245 days, 765496 rows
+2026-11-07 15:18:53,612 INFO niftyquant.pgload: option_greeks: 2020: loaded 252 days, 726121 rows
+2026-11-07 15:19:17,828 INFO niftyquant.pgload: option_greeks: 2021: loaded 247 days, 500885 rows
+2026-11-07 15:19:46,726 INFO niftyquant.pgload: option_greeks: 2022: loaded 248 days, 551031 rows
+2026-11-07 15:20:05,780 INFO niftyquant.pgload: option_greeks: 2023: loaded 246 days, 331594 rows
+2026-11-07 15:20:28,013 INFO niftyquant.pgload: option_greeks: 2024: loaded 249 days, 388370 rows
+2026-11-07 15:20:50,284 INFO niftyquant.pgload: option_greeks: 2025: loaded 249 days, 385460 rows
+2026-11-07 15:21:11,623 INFO niftyquant.pgload: option_greeks: 2026: loaded 210 days, 364265 rows
+2026-11-07 15:21:12,843 INFO niftyquant.pgload: trading_calendar: replaced, 4328 rows
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "F:\trading\quant\.venv\Scripts\niftyquant.exe\__main__.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 229, in main
+    a.func(a)
+    ~~~~~~^^^
+  File "F:\trading\quant\src\niftyquant\cli.py", line 113, in cmd_pg_load
+    for table, n in pgload.load_all(_pg_settings(), a.datasets, reload=a.reload).items():
+                    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 214, in load_all
+    replace_table(conn, table, df)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 194, in replace_table
+    copy_frame(conn, table, df)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "F:\trading\quant\src\niftyquant\pgload.py", line 133, in copy_frame
+    with conn.cursor() as cur, cur.copy(stmt) as cp:
+                               ~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "F:\trading\quant\.venv\Lib\site-packages\psycopg\cursor.py", line 330, in copy
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "vix_open" of relation "daily_market" does not exist
+exit=1

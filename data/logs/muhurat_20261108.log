@@ -1,0 +1,33 @@
+[15:38:26] probing NSE for 2026-11-08
+2026-11-08 15:38:30,575 INFO niftyquant.ingest: progress 1/1 days (at 2026-11-08)
+result           pending
+dataset                 
+fo_bhavcopy            1
+index_close            1
+participant_oi         1
+participant_vol        1
+[15:48:30] probing NSE for 2026-11-08
+2026-11-08 15:48:34,262 INFO niftyquant.ingest: progress 1/1 days (at 2026-11-08)
+result           pending
+dataset                 
+fo_bhavcopy            1
+index_close            1
+participant_oi         1
+participant_vol        1
+[15:58:34] probing NSE for 2026-11-08
+2026-11-08 15:58:39,300 INFO niftyquant.ingest: progress 1/1 days (at 2026-11-08)
+result           pending
+dataset                 
+fo_bhavcopy            1
+index_close            1
+participant_oi         1
+participant_vol        1
+[16:08:39] probing NSE for 2026-11-08
+2026-11-08 16:08:43,242 INFO niftyquant.ingest: progress 1/1 days (at 2026-11-08)
+result           pending
+dataset                 
+fo_bhavcopy            1
+index_close            1
+participant_oi         1
+participant_vol        1
+[21:15:18] not published by 19:15; the 20:00 nightly update will fetch it
